@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 void showToast(context,String text,) =>
@@ -10,6 +11,7 @@ void showToast(context,String text,) =>
         duration: Duration(seconds: 5),
         backgroundColor: Colors.grey,
 
-      ),);
+      ),
+    );
 
 
