@@ -1,8 +1,10 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:fixer_system/screens/bills_page/bills_page.dart';
+import 'package:fixer_system/screens/cars_in_garage_page/cars_in_garage_page.dart';
+import 'package:fixer_system/screens/cars_page/cars_page.dart';
 import 'package:fixer_system/screens/clients_page/clients_page.dart';
 import 'package:fixer_system/screens/inventory_page/inventory_page.dart';
-import 'package:fixer_system/screens/monthly_profite_page/monthly_profit_page.dart';
+import 'package:fixer_system/screens/monthly_profit_page/monthly_profit_page.dart';
 import 'package:fixer_system/screens/team_page/team_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -184,15 +186,15 @@ class _MainNavWidgetState extends State<MainNavWidget>
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    /*Navigator.push(
+                    Navigator.push(
                       context,
                       PageTransition(
                         type: PageTransitionType.fade,
-                        duration: Duration(milliseconds: 0),
-                        reverseDuration: Duration(milliseconds: 0),
-                        child: HomePageWidget(),
+                        duration: const Duration(milliseconds: 0),
+                        reverseDuration: const Duration(milliseconds: 0),
+                        child: const CarsPage(),
                       ),
-                    );*/
+                    );
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
@@ -228,39 +230,6 @@ class _MainNavWidgetState extends State<MainNavWidget>
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
-                child:Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
-                      child: Icon(
-                        Icons.car_repair,
-                        color: widget.navThree,
-                        size: 24,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
-                      child: Text(
-                        'Cars in Grage',
-                        style: FlutterFlowTheme.of(context)
-                            .bodyMedium
-                            .override(
-                          fontFamily: FlutterFlowTheme.of(context)
-                              .bodyMediumFamily,
-                          color: widget.navThree,
-                          letterSpacing: 0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context)
-                                  .bodyMediumFamily),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
@@ -277,7 +246,7 @@ class _MainNavWidgetState extends State<MainNavWidget>
                       ),
                     );
                   },
-                  child:Row(
+                  child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
@@ -305,7 +274,56 @@ class _MainNavWidgetState extends State<MainNavWidget>
                       ),
                     ],
                   ),
-
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.fade,
+                        duration: const Duration(milliseconds: 0),
+                        reverseDuration: const Duration(milliseconds: 0),
+                        child: const CarsInGaragePage(),
+                      ),
+                    );
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
+                        child: Icon(
+                          Icons.car_repair,
+                          color: widget.navThree,
+                          size: 24,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                        child: Text(
+                          'Cars in Garage',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                            fontFamily: FlutterFlowTheme.of(context)
+                                .bodyMediumFamily,
+                            color: widget.navThree,
+                            letterSpacing: 0,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context)
+                                    .bodyMediumFamily),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Padding(
@@ -735,6 +753,33 @@ class _MainNavWidgetState extends State<MainNavWidget>
                           ],
                         ),
                       ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
+                            child: Text(
+                              'Powered by',
+                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                color: FlutterFlowTheme.of(context).secondaryText,
+                                letterSpacing: 0,
+                                useGoogleFonts: GoogleFonts.asMap()
+                                    .containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                              ),
+                            ),
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.asset(
+                              'assets/images/ei_1693592425619-removebg-preview.png',
+                              width: 35,
+                              height: 35,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),

@@ -10,6 +10,8 @@ import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:http/http.dart';
 
 import '../components/show_toast_function/show_toast_function.dart';
+import '../models/get_all_cars_model.dart';
+import '../models/get_repairing_cars_model.dart';
 import '../models/get_services_model.dart';
 
 class AppCubit extends Cubit<AppCubitStates> {
@@ -19,6 +21,8 @@ class AppCubit extends Cubit<AppCubitStates> {
   GetServicesModel? getServicesModel = null;
   ChangeServiceStateModel? changeServiceStateModel = null;
   GetWorkersModel? getWorkersModel = null;
+  GetCarsModel?getAllCarsModel=null;
+
   var time=DateTime.now();
   void changDatePicker(value)
   {
@@ -148,7 +152,7 @@ class AppCubit extends Cubit<AppCubitStates> {
       Uri.parse(url),
       headers: headers,
     ).then((value) {
-      getWorkersModel = GetWorkersModel.formJson(jsonDecode(value));
+      getWorkersModel = GetWorkersModel.fromJson(jsonDecode(value));
       if (getWorkersModel?.results != null) {
         emit(AppGetWorkersSuccessState());
       } else {
@@ -193,6 +197,52 @@ class AppCubit extends Cubit<AppCubitStates> {
     });
   }
 
+
+  void getCars() {
+    const url = 'https://fixer-backend-1.onrender.com/api/V1/Garage';
+    final headers = {
+      'Content-Type': 'application/json',
+    };
+    emit(AppGetAllCarsLoadingState());
+    read(
+      Uri.parse(url),
+      headers: headers,
+    ).then((value) {
+      getAllCarsModel = GetCarsModel.fromJson(jsonDecode(value));
+
+      if (getAllCarsModel?.results != null) {
+        emit(AppGetAllCarsSuccessState());
+      } else {
+        emit(AppGetAllCarsErrorState());
+      }
+    });
+  }
+
+  void getRepairingCars() {
+    const url = 'https://fixer-backend-1.onrender.com/api/V1/Garage/repairing';
+    final headers = {
+      'Content-Type': 'application/json',
+    };
+    emit(AppGetRepairingCarsLoadingState());
+    read(
+      Uri.parse(url),
+      headers: headers,
+    ).then((value) {
+
+
+      if (false) {
+        emit(AppGetRepairingCarsSuccessState());
+      } else {
+        emit(AppGetRepairingCarsErrorState());
+      }
+
+      print('a7aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+    }).catchError((onError)
+      {
+        print(onError.toString());
+      }
+    );
+  }
 
 
 }

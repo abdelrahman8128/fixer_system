@@ -334,7 +334,7 @@ class _ClientsPageState extends State<ClientsPage> {
                                                   ))
                                                     Expanded(
                                                       child: Text(
-                                                        'Car',
+                                                        'User ID',
                                                         style:
                                                         FlutterFlowTheme.of(
                                                             context)
@@ -353,53 +353,8 @@ class _ClientsPageState extends State<ClientsPage> {
                                                         ),
                                                       ),
                                                     ),
-                                                  if (responsiveVisibility(
-                                                    context: context,
-                                                    phone: false,
-                                                  ))
-                                                    Expanded(
-                                                      child: Text(
-                                                        'Car ID',
-                                                        style:
-                                                        FlutterFlowTheme.of(
-                                                            context)
-                                                            .bodySmall
-                                                            .override(
-                                                          fontFamily: FlutterFlowTheme.of(
-                                                              context)
-                                                              .bodySmallFamily,
-                                                          letterSpacing:
-                                                          0,
-                                                          useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                              .containsKey(
-                                                              FlutterFlowTheme.of(context)
-                                                                  .bodySmallFamily),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  Expanded(
-                                                    child: Text(
-                                                      'Operations',
-                                                      textAlign: TextAlign.end,
-                                                      style:
-                                                      FlutterFlowTheme.of(
-                                                          context)
-                                                          .bodySmall
-                                                          .override(
-                                                        fontFamily: FlutterFlowTheme.of(
-                                                            context)
-                                                            .bodySmallFamily,
-                                                        letterSpacing:
-                                                        0,
-                                                        useGoogleFonts: GoogleFonts
-                                                            .asMap()
-                                                            .containsKey(
-                                                            FlutterFlowTheme.of(context)
-                                                                .bodySmallFamily),
-                                                      ),
-                                                    ),
-                                                  ),
+
+
                                                 ],
                                               ),
                                             ),

@@ -36,3 +36,13 @@ class AppDatePickerChangeState extends AppCubitStates{}
 class AppAddWorkerLoadingState extends AppCubitStates{}
 class AppAddWorkerSuccessState extends AppCubitStates{}
 class AppAddWorkerErrorState extends AppCubitStates{}
+
+
+class AppGetAllCarsLoadingState extends AppCubitStates{}
+class AppGetAllCarsSuccessState extends AppCubitStates{}
+class AppGetAllCarsErrorState extends AppCubitStates{}
+
+
+class AppGetRepairingCarsLoadingState extends AppCubitStates{}
+class AppGetRepairingCarsSuccessState extends AppCubitStates{}
+class AppGetRepairingCarsErrorState extends AppCubitStates{}
