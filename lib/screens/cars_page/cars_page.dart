@@ -38,6 +38,7 @@ class _CarsPageState extends State<CarsPage> {
     super.dispose();
   }
 
+  var searchController=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit,AppCubitStates>(
@@ -177,6 +178,81 @@ class _CarsPageState extends State<CarsPage> {
                                                   phone: false,
                                                 ))
                                                   Padding(
+                                                    padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                        0, 0, 12, 0),
+                                                    child: Container(
+                                                      width: 250,
+                                                      height: 50,
+                                                      child:TextFormField(
+                                                        controller: searchController,
+                                                        obscureText: false,
+                                                        decoration: InputDecoration(
+                                                          labelText: 'Search',
+                                                          labelStyle: FlutterFlowTheme.of(context)
+                                                              .bodySmall
+                                                              .override(
+                                                            fontFamily: 'Outfit',
+                                                            color: Color(0xFFF68B1E),
+                                                          ),
+                                                          hintStyle:
+                                                          FlutterFlowTheme.of(context).bodySmall,
+                                                          enabledBorder: OutlineInputBorder(
+                                                            borderSide: BorderSide(
+                                                              color: Color(0xFFDBE2E7),
+                                                              width: 2,
+                                                            ),
+                                                            borderRadius: BorderRadius.circular(8),
+                                                          ),
+                                                          focusedBorder: OutlineInputBorder(
+                                                            borderSide: BorderSide(
+                                                              color: Color(0xFFF68B1E),
+                                                              width: 2,
+                                                            ),
+                                                            borderRadius: BorderRadius.circular(8),
+                                                          ),
+                                                          errorBorder: OutlineInputBorder(
+                                                            borderSide: BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                            borderRadius: BorderRadius.circular(8),
+                                                          ),
+                                                          focusedErrorBorder: OutlineInputBorder(
+                                                            borderSide: BorderSide(
+                                                              color: Colors.red,
+                                                              width: 2,
+                                                            ),
+                                                            borderRadius: BorderRadius.circular(8),
+                                                          ),
+                                                          filled: true,
+                                                          fillColor: Colors.white,
+                                                          contentPadding:
+                                                          EdgeInsetsDirectional.fromSTEB(
+                                                              16, 24, 0, 24),
+                                                        ),
+                                                        style: FlutterFlowTheme.of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                          fontFamily: 'Outfit',
+                                                          color:
+                                                          FlutterFlowTheme.of(context).tertiary,
+                                                        ),
+                                                        onFieldSubmitted: (value) {
+                                                          if (value.isNotEmpty) {
+                                                            AppCubit.get(context).searchCars(word: value);
+                                                          }
+                                                          else
+                                                          {
+                                                            AppCubit.get(context).getCars();
+                                                          }
+                                                        },
+                                                      ),
+
+                                                    ),
+                                                  ),
+                                                  Padding(
                                                     padding: const EdgeInsetsDirectional
                                                         .fromSTEB(0, 0, 12, 0),
                                                     child: Container(
@@ -284,7 +360,7 @@ class _CarsPageState extends State<CarsPage> {
                                                     mainAxisSize: MainAxisSize.max,
                                                     children: [
                                                       Expanded(
-                                                        child: Text(
+                                                        child: AutoSizeText(
                                                           'Car',
                                                           style:
                                                           FlutterFlowTheme.of(
@@ -310,8 +386,8 @@ class _CarsPageState extends State<CarsPage> {
                                                         tablet: false,
                                                       ))
                                                         Expanded(
-                                                          child: Text(
-                                                            'Car ID',
+                                                          child: AutoSizeText(
+                                                            'Car Number',
                                                             style:
                                                             FlutterFlowTheme.of(
                                                                 context)
@@ -335,8 +411,8 @@ class _CarsPageState extends State<CarsPage> {
                                                         phone: false,
                                                       ))
                                                         Expanded(
-                                                          child: Text(
-                                                            'Car Code',
+                                                          child: AutoSizeText(
+                                                            'Car ID',
                                                             style:
                                                             FlutterFlowTheme.of(
                                                                 context)
@@ -410,16 +486,20 @@ class _CarsPageState extends State<CarsPage> {
                                                       .fromSTEB(0, 16, 0, 0),
                                                   child:
                                                   ConditionalBuilder(
-                                                      condition: state is AppGetAllCarsLoadingState,
+                                                      condition: state is AppGetAllCarsLoadingState||state is AppSearchCarsLoadingState,
                                                       builder: (context) => Center(child: CircularProgressIndicator()),
-                                                      fallback: (context) => ListView.builder(
-                                                        padding: EdgeInsets.zero,
-                                                        shrinkWrap: true,
-                                                        scrollDirection: Axis.vertical,
-                                                        physics: BouncingScrollPhysics(),
-                                                        itemBuilder: (context, index) => carItemBuilder(context, AppCubit.get(context).getAllCarsModel!.data[index]),
-                                                        itemCount: AppCubit.get(context).getAllCarsModel!.results,
-                                                      ),
+                                                      fallback: (context) => ConditionalBuilder(
+                                                        condition: AppCubit.get(context).getCarsModel!.data.isEmpty,
+                                                        builder: (context) => Text('No Results',style: TextStyle(fontSize: 50,color: Colors.grey[300]),),
+                                                        fallback: (context) =>ListView.builder(
+                                                          padding: EdgeInsets.zero,
+                                                          shrinkWrap: true,
+                                                          scrollDirection: Axis.vertical,
+                                                          physics: BouncingScrollPhysics(),
+                                                          itemBuilder: (context, index) => carItemBuilder(context, AppCubit.get(context).getCarsModel!.data[index]),
+                                                          itemCount: AppCubit.get(context).getCarsModel!.data.length,
+                                                        ) ,),
+
                                                   ),
 
                                                 ),

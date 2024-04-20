@@ -21,7 +21,9 @@ class AppCubit extends Cubit<AppCubitStates> {
   GetServicesModel? getServicesModel = null;
   ChangeServiceStateModel? changeServiceStateModel = null;
   GetWorkersModel? getWorkersModel = null;
-  GetCarsModel?getAllCarsModel=null;
+  GetCarsModel?getCarsModel=null;
+  GetRepairingCarsModel?getRepairingCarsModel=null;
+
 
   var time=DateTime.now();
   void changDatePicker(value)
@@ -83,7 +85,7 @@ class AppCubit extends Cubit<AppCubitStates> {
     final headers = {
       'Content-Type': 'application/json',
       'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY0ZGNiZTE2NjM1ZGYwNTQ1ODg4ZjgiLCJpYXQiOjE3MTEwNDk0ODEsImV4cCI6MTcxODgyNTQ4MX0.31Ox7GXHOUwba0kI4FVHisORPVIIDqjeSPYYy7f01As'
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
     };
     emit(AppGetUsersLoadingState());
     read(
@@ -208,9 +210,9 @@ class AppCubit extends Cubit<AppCubitStates> {
       Uri.parse(url),
       headers: headers,
     ).then((value) {
-      getAllCarsModel = GetCarsModel.fromJson(jsonDecode(value));
+      getCarsModel = GetCarsModel.fromJson(jsonDecode(value));
 
-      if (getAllCarsModel?.results != null) {
+      if (getCarsModel?.results != null) {
         emit(AppGetAllCarsSuccessState());
       } else {
         emit(AppGetAllCarsErrorState());
@@ -224,25 +226,87 @@ class AppCubit extends Cubit<AppCubitStates> {
       'Content-Type': 'application/json',
     };
     emit(AppGetRepairingCarsLoadingState());
+
     read(
       Uri.parse(url),
       headers: headers,
     ).then((value) {
 
+      //print(value.toString());
 
-      if (false) {
+        getRepairingCarsModel=GetRepairingCarsModel.fromJson(jsonDecode(value));
+        print(getRepairingCarsModel?.data.toString());
+        print(getRepairingCarsModel?.results);
+        print(getRepairingCarsModel?.data.length);
         emit(AppGetRepairingCarsSuccessState());
-      } else {
-        emit(AppGetRepairingCarsErrorState());
-      }
 
-      print('a7aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+
     }).catchError((onError)
       {
         print(onError.toString());
+        emit(AppGetRepairingCarsErrorState());
+
       }
     );
   }
 
+  void searchWorkers({
+    required String word,
+}){
+    getWorkersModel?.users=[];
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/Worker/search/${word}';
+    final headers = {
+      'Content-Type': 'application/json',
+    };
+    emit(AppSearchWorkersLoadingState());
+    read(
+      Uri.parse(url),
+      headers: headers,
+    ).then((value) {
+      getWorkersModel = GetWorkersModel.fromJson(jsonDecode(value));
+      if (getWorkersModel?.results != null) {
+        emit(AppSearchWorkersSuccessState());
+      } else {
+        emit(AppSearchWorkersErrorState());
+      }
+    }).catchError((error){
+      emit(AppSearchWorkersErrorState());
+    });
+
+  }
+
+
+
+  void searchCars({
+    required String word,
+  }){
+
+    getCarsModel?.data=[];
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/Garage/search/${word}';
+    final headers = {
+      'Content-Type': 'application/json',
+    };
+    emit(AppSearchCarsLoadingState());
+    read(
+      Uri.parse(url),
+      headers: headers,
+    ).then((value) {
+      getCarsModel = GetCarsModel.fromJson(jsonDecode(value));
+      if (getCarsModel?.results != null) {
+        emit(AppSearchCarsSuccessState());
+      } else {
+        emit(AppSearchCarsErrorState());
+      }
+    }).catchError((error){
+      emit(AppSearchCarsErrorState());
+    });
+
+  }
+
+  void searchUsers({
+    required String word,
+}){
+
+  }
 
 }

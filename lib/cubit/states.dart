@@ -16,6 +16,17 @@ class AppGetWorkersSuccessState extends AppCubitStates{}
 class AppGetWorkersErrorState extends AppCubitStates{}
 
 
+class AppSearchWorkersLoadingState extends AppCubitStates{}
+class AppSearchWorkersSuccessState extends AppCubitStates{}
+class AppSearchWorkersErrorState extends AppCubitStates{}
+
+
+class AppSearchCarsLoadingState extends AppCubitStates{}
+class AppSearchCarsSuccessState extends AppCubitStates{}
+class AppSearchCarsErrorState extends AppCubitStates{}
+
+
+
 class AppGetCarServicesByNumberLoadingState extends AppCubitStates{}
 class AppGetCarServicesByNumberSuccessState extends AppCubitStates{}
 class AppGetCarServicesByNumberErrorState extends AppCubitStates{

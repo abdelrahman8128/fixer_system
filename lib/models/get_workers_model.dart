@@ -17,7 +17,7 @@ class Worker {
   String?phoneNumber;
   String?jobTitle;
   double?salary;
-  int?IDNumber;
+  String?IDNumber;
   DateTime?createdAt;
   DateTime?updatedAt;
 

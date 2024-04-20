@@ -31,6 +31,7 @@ class CarData{
   String?motorNumber;
   List<dynamic>componentState=[];
   DateTime?nextRepairDate;
+  double?repairingPercentage;
 
   CarData.fromJson(Map<String,dynamic>json)
   {
@@ -51,7 +52,7 @@ class CarData{
     periodicRepairs=json['periodicRepairs'];
     nonPeriodicRepairs=json['nonPeriodicRepairs'];
     repairing=json['repairing'];
-   componentState.addAll(json['componentState']);
+    componentState.addAll(json['componentState']);
     distance=json['distances'];
     motorNumber=json['motorNumber'];
 

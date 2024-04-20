@@ -38,7 +38,7 @@ class _TeamPageState extends State<TeamPage> {
 
     super.dispose();
   }
-
+ var searchController=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppCubitStates>(
@@ -175,6 +175,81 @@ class _TeamPageState extends State<TeamPage> {
                                               ))
                                                 Padding(
                                                   padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                      0, 0, 12, 0),
+                                                  child: Container(
+                                                    width: 250,
+                                                    height: 50,
+                                                    child:TextFormField(
+                                                      controller: searchController,
+                                                      obscureText: false,
+                                                      decoration: InputDecoration(
+                                                        labelText: 'Search',
+                                                        labelStyle: FlutterFlowTheme.of(context)
+                                                            .bodySmall
+                                                            .override(
+                                                          fontFamily: 'Outfit',
+                                                          color: Color(0xFFF68B1E),
+                                                        ),
+                                                        hintStyle:
+                                                        FlutterFlowTheme.of(context).bodySmall,
+                                                        enabledBorder: OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                            color: Color(0xFFDBE2E7),
+                                                            width: 2,
+                                                          ),
+                                                          borderRadius: BorderRadius.circular(8),
+                                                        ),
+                                                        focusedBorder: OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                            color: Color(0xFFF68B1E),
+                                                            width: 2,
+                                                          ),
+                                                          borderRadius: BorderRadius.circular(8),
+                                                        ),
+                                                        errorBorder: OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                            color: Colors.red,
+                                                            width: 2,
+                                                          ),
+                                                          borderRadius: BorderRadius.circular(8),
+                                                        ),
+                                                        focusedErrorBorder: OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                            color: Colors.red,
+                                                            width: 2,
+                                                          ),
+                                                          borderRadius: BorderRadius.circular(8),
+                                                        ),
+                                                        filled: true,
+                                                        fillColor: Colors.white,
+                                                        contentPadding:
+                                                        EdgeInsetsDirectional.fromSTEB(
+                                                            16, 24, 0, 24),
+                                                      ),
+                                                      style: FlutterFlowTheme.of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                        fontFamily: 'Outfit',
+                                                        color:
+                                                        FlutterFlowTheme.of(context).tertiary,
+                                                      ),
+                                                      onFieldSubmitted: (value) {
+                                                        if (value.isNotEmpty) {
+                                                          AppCubit.get(context).searchWorkers(word: value);
+                                                        }
+                                                        else
+                                                        {
+                                                          AppCubit.get(context).getWorkers();
+                                                        }
+                                                      },
+                                                    ),
+
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:
                                                       const EdgeInsetsDirectional
                                                           .fromSTEB(
                                                           0, 0, 12, 0),
@@ -222,15 +297,20 @@ class _TeamPageState extends State<TeamPage> {
                                                         size: 24,
                                                       ),
                                                       onPressed: () async {
-                                                        showDialog(context: context, builder: (context) => AddNewWorkerPage(context));
-
+                                                        showDialog(
+                                                            context: context,
+                                                            builder: (context) =>
+                                                                AddNewWorkerPage(
+                                                                    context));
                                                       },
                                                     ),
                                                   ),
                                                 ),
+
                                             ],
                                           ),
                                         ),
+
                                       ],
                                     ),
                                     if (responsiveVisibility(
@@ -272,209 +352,213 @@ class _TeamPageState extends State<TeamPage> {
                                             width: 1,
                                           ),
                                         ),
-                                        child: ConditionalBuilder(
-                                          condition: state
-                                              is AppGetWorkersLoadingState,
-                                          builder: (context) => Center(
-                                              child:
-                                                  CircularProgressIndicator()),
-                                          fallback: (context) => Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(0, 0, 0, 12),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(
-                                                          12, 12, 12, 0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
+
+                                        child: Padding(
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(0, 0, 0, 12),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                    12, 12, 12, 0),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                  MainAxisSize.max,
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child: Text(
+                                                        'Name',
+                                                        style: FlutterFlowTheme
+                                                            .of(context)
+                                                            .bodySmall
+                                                            .override(
+                                                          fontFamily: FlutterFlowTheme.of(
+                                                              context)
+                                                              .bodySmallFamily,
+                                                          letterSpacing:
+                                                          0,
+                                                          useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                              .containsKey(
+                                                              FlutterFlowTheme.of(context)
+                                                                  .bodySmallFamily),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    if (responsiveVisibility(
+                                                      context: context,
+                                                      phone: false,
+                                                      tablet: false,
+                                                    ))
                                                       Expanded(
-                                                        flex: 2,
                                                         child: Text(
-                                                          'Name',
+                                                          'National ID',
                                                           style: FlutterFlowTheme
-                                                                  .of(context)
+                                                              .of(context)
                                                               .bodySmall
                                                               .override(
-                                                                fontFamily: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodySmallFamily,
-                                                                letterSpacing:
-                                                                    0,
-                                                                useGoogleFonts: GoogleFonts
-                                                                        .asMap()
-                                                                    .containsKey(
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .bodySmallFamily),
-                                                              ),
+                                                            fontFamily: FlutterFlowTheme.of(
+                                                                context)
+                                                                .bodySmallFamily,
+                                                            letterSpacing:
+                                                            0,
+                                                            useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                                .containsKey(
+                                                                FlutterFlowTheme.of(context)
+                                                                    .bodySmallFamily),
+                                                          ),
                                                         ),
                                                       ),
-                                                      if (responsiveVisibility(
-                                                        context: context,
-                                                        phone: false,
-                                                        tablet: false,
-                                                      ))
-                                                        Expanded(
-                                                          child: Text(
-                                                            'National ID',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodySmall
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodySmallFamily,
-                                                                  letterSpacing:
-                                                                      0,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodySmallFamily),
-                                                                ),
-                                                          ),
-                                                        ),
-                                                      if (responsiveVisibility(
-                                                        context: context,
-                                                        phone: false,
-                                                      ))
-                                                        Expanded(
-                                                          child: Text(
-                                                            'Phone Number',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodySmall
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodySmallFamily,
-                                                                  letterSpacing:
-                                                                      0,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodySmallFamily),
-                                                                ),
-                                                          ),
-                                                        ),
-                                                      if (responsiveVisibility(
-                                                        context: context,
-                                                        phone: false,
-                                                        tablet: false,
-                                                      ))
-                                                        Expanded(
-                                                          child: Text(
-                                                            'Job Title',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodySmall
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodySmallFamily,
-                                                                  letterSpacing:
-                                                                      0,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodySmallFamily),
-                                                                ),
-                                                          ),
-                                                        ),
+                                                    if (responsiveVisibility(
+                                                      context: context,
+                                                      phone: false,
+                                                    ))
                                                       Expanded(
-                                                        child: Align(
-                                                          alignment:
-                                                              const AlignmentDirectional(
-                                                                  -1, 0),
-                                                          child: Text(
-                                                            'Salary',
-                                                            textAlign:
-                                                                TextAlign.end,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodySmall
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodySmallFamily,
-                                                                  letterSpacing:
-                                                                      0,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodySmallFamily),
-                                                                ),
+                                                        child: Text(
+                                                          'Phone Number',
+                                                          style: FlutterFlowTheme
+                                                              .of(context)
+                                                              .bodySmall
+                                                              .override(
+                                                            fontFamily: FlutterFlowTheme.of(
+                                                                context)
+                                                                .bodySmallFamily,
+                                                            letterSpacing:
+                                                            0,
+                                                            useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                                .containsKey(
+                                                                FlutterFlowTheme.of(context)
+                                                                    .bodySmallFamily),
                                                           ),
                                                         ),
                                                       ),
+                                                    if (responsiveVisibility(
+                                                      context: context,
+                                                      phone: false,
+                                                      tablet: false,
+                                                    ))
                                                       Expanded(
-                                                        child: Align(
-                                                          alignment:
-                                                              const AlignmentDirectional(
-                                                                  1, 0),
-                                                          child: Text(
-                                                            'Operations',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily,
-                                                                  letterSpacing:
-                                                                      0,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily),
-                                                                ),
+                                                        child: Text(
+                                                          'Job Title',
+                                                          style: FlutterFlowTheme
+                                                              .of(context)
+                                                              .bodySmall
+                                                              .override(
+                                                            fontFamily: FlutterFlowTheme.of(
+                                                                context)
+                                                                .bodySmallFamily,
+                                                            letterSpacing:
+                                                            0,
+                                                            useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                                .containsKey(
+                                                                FlutterFlowTheme.of(context)
+                                                                    .bodySmallFamily),
                                                           ),
                                                         ),
                                                       ),
-                                                    ],
-                                                  ),
+                                                    Expanded(
+                                                      child: Align(
+                                                        alignment:
+                                                        const AlignmentDirectional(
+                                                            -1, 0),
+                                                        child: Text(
+                                                          'Salary',
+                                                          textAlign:
+                                                          TextAlign.end,
+                                                          style: FlutterFlowTheme
+                                                              .of(context)
+                                                              .bodySmall
+                                                              .override(
+                                                            fontFamily: FlutterFlowTheme.of(
+                                                                context)
+                                                                .bodySmallFamily,
+                                                            letterSpacing:
+                                                            0,
+                                                            useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                                .containsKey(
+                                                                FlutterFlowTheme.of(context)
+                                                                    .bodySmallFamily),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Align(
+                                                        alignment:
+                                                        const AlignmentDirectional(
+                                                            1, 0),
+                                                        child: Text(
+                                                          'Operations',
+                                                          style: FlutterFlowTheme
+                                                              .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                            fontFamily: FlutterFlowTheme.of(
+                                                                context)
+                                                                .bodyMediumFamily,
+                                                            letterSpacing:
+                                                            0,
+                                                            useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                                .containsKey(
+                                                                FlutterFlowTheme.of(context)
+                                                                    .bodyMediumFamily),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                                Padding(
-                                                  padding:
+                                              ),
+                                              ConditionalBuilder(
+                                                condition: state is AppGetWorkersLoadingState||state is AppSearchWorkersLoadingState,
+                                                builder: (context) => Center(child: CircularProgressIndicator()),
+                                                fallback: (context) =>ConditionalBuilder(
+                                                    condition: AppCubit.get(context).getWorkersModel!.users.isEmpty,
+                                                    builder: (context) => Text('No Results',style: TextStyle(fontSize: 50,color: Colors.grey[300]),),
+                                                    fallback: (context) => Padding(
+                                                      padding:
                                                       const EdgeInsetsDirectional
                                                           .fromSTEB(
                                                           0, 16, 0, 0),
-                                                  child: ListView.builder(
-                                                    padding: EdgeInsets.zero,
-                                                    shrinkWrap: true,
-                                                    scrollDirection:
+                                                      child: ListView.builder(
+                                                        padding: EdgeInsets.zero,
+                                                        shrinkWrap: true,
+                                                        scrollDirection:
                                                         Axis.vertical,
-                                                    itemCount:
+                                                        itemCount:
                                                         AppCubit.get(context)
                                                             .getWorkersModel
-                                                            ?.results,
-                                                    physics:
+                                                            ?.users.length,
+                                                        physics:
                                                         BouncingScrollPhysics(),
-                                                    itemBuilder: (context,
+                                                        itemBuilder: (context,
                                                             index) =>
-                                                        teamMemberBuilder(
-                                                            context,
-                                                            AppCubit.get(
+                                                            teamMemberBuilder(
+                                                                context,
+                                                                AppCubit.get(
                                                                     context)
-                                                                .getWorkersModel!
-                                                                .users[index]),
-                                                  ),
+                                                                    .getWorkersModel!
+                                                                    .users[index]),
+                                                      ),
+                                                    ),
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+
+                                            ],
                                           ),
                                         ),
+
                                       ),
                                     ),
                                   ],

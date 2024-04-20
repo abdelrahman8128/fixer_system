@@ -39,6 +39,7 @@ class _ClientsPageState extends State<ClientsPage> {
     super.dispose();
   }
 
+  var searchController=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit,AppCubitStates>(
@@ -175,6 +176,81 @@ class _ClientsPageState extends State<ClientsPage> {
                                               context: context,
                                               phone: false,
                                             ))
+                                              Padding(
+                                                padding:
+                                                const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                    0, 0, 12, 0),
+                                                child: Container(
+                                                  width: 250,
+                                                  height: 50,
+                                                  child:TextFormField(
+                                                    controller: searchController,
+                                                    obscureText: false,
+                                                    decoration: InputDecoration(
+                                                      labelText: 'Search',
+                                                      labelStyle: FlutterFlowTheme.of(context)
+                                                          .bodySmall
+                                                          .override(
+                                                        fontFamily: 'Outfit',
+                                                        color: Color(0xFFF68B1E),
+                                                      ),
+                                                      hintStyle:
+                                                      FlutterFlowTheme.of(context).bodySmall,
+                                                      enabledBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: Color(0xFFDBE2E7),
+                                                          width: 2,
+                                                        ),
+                                                        borderRadius: BorderRadius.circular(8),
+                                                      ),
+                                                      focusedBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: Color(0xFFF68B1E),
+                                                          width: 2,
+                                                        ),
+                                                        borderRadius: BorderRadius.circular(8),
+                                                      ),
+                                                      errorBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: Colors.red,
+                                                          width: 2,
+                                                        ),
+                                                        borderRadius: BorderRadius.circular(8),
+                                                      ),
+                                                      focusedErrorBorder: OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: Colors.red,
+                                                          width: 2,
+                                                        ),
+                                                        borderRadius: BorderRadius.circular(8),
+                                                      ),
+                                                      filled: true,
+                                                      fillColor: Colors.white,
+                                                      contentPadding:
+                                                      EdgeInsetsDirectional.fromSTEB(
+                                                          16, 24, 0, 24),
+                                                    ),
+                                                    style: FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                      fontFamily: 'Outfit',
+                                                      color:
+                                                      FlutterFlowTheme.of(context).tertiary,
+                                                    ),
+                                                    onFieldSubmitted: (value) {
+                                                      if (value.isNotEmpty) {
+                                                        AppCubit.get(context).searchUsers(word: value);
+                                                      }
+                                                      else
+                                                      {
+                                                        AppCubit.get(context).getUsers();
+                                                      }
+                                                    },
+                                                  ),
+
+                                                ),
+                                              ),
                                               Padding(
                                                 padding: const EdgeInsetsDirectional
                                                     .fromSTEB(0, 0, 12, 0),

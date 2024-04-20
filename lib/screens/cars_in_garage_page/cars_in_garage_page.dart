@@ -1,6 +1,7 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:fixer_system/components/car_item_builder.dart';
 import 'package:fixer_system/components/main_nav/main_nav.dart';
 import 'package:fixer_system/cubit/states.dart';
 import 'package:fixer_system/models/get_all_cars_model.dart';
@@ -145,7 +146,7 @@ class _CarsInGaragePageState extends State<CarsInGaragePage> {
                                                       padding: const EdgeInsetsDirectional
                                                           .fromSTEB(0, 4, 0, 0),
                                                       child: Text(
-                                                        'Manage your clients\'s cars in ypur center below.',
+                                                        'Manage your clients\'s cars in your center below.',
                                                         style: FlutterFlowTheme.of(
                                                             context)
                                                             .bodySmall
@@ -496,10 +497,11 @@ class _CarsInGaragePageState extends State<CarsInGaragePage> {
                                                         padding: EdgeInsets.zero,
                                                         shrinkWrap: true,
                                                         scrollDirection: Axis.vertical,
-                                                        itemBuilder: (context, index) =>Container(),// repairingCarItemBuilder(context,AppCubit().getRepairingCarsModel!.data![index]),
-                                                        itemCount:1,// AppCubit.get(context).getRepairingCarsModel!.result,
+                                                        itemBuilder: (context, index) =>//Container(color: Colors.grey,),
+                                                             repairingCarItemBuilder(context,AppCubit.get(context).getRepairingCarsModel!.data[index]),
+                                                        itemCount: AppCubit.get(context).getRepairingCarsModel!.data.length,
                                                       ),  ),
-
+                                                      
                                                   ),
                                                 ],
                                               ),
