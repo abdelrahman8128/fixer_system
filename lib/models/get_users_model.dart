@@ -14,7 +14,7 @@ class User{
   String? id;
   String? name;
   String?phone;
-  List<Car>cars=[];
+  //List<Car>cars=[];
   // String? email;
   // String? password;
   // String  ?role;
@@ -29,9 +29,9 @@ class User{
     id=json['id'];
     name=json['name'];
     phone=json['phoneNumber'];
-    json['cars'].forEach((element) {
-      cars.add(Car.fromJson(element));
-    });
+    // json['cars'].forEach((element) {
+    //   cars.add(Car.fromJson(element));
+    // });
 
     // email=json['email'];
     // password=json['password'];
@@ -45,19 +45,19 @@ class User{
 
   }
 }
-
-class Car {
-  String ? id;
-  String ? carNumber;
-  String ?brand;
-  String ?category ;
-  String ?model;
-  Car.fromJson(Map<String,dynamic>json)
-  {
-    id=json['id'];
-    carNumber=json['carNumber'];
-    brand=json['brand'];
-    category=json['category'];
-    model=json['model'];
-  }
-}
+//
+// class Car {
+//   String ? id;
+//   String ? carNumber;
+//   String ?brand;
+//   String ?category ;
+//   String ?model;
+//   Car.fromJson(Map<String,dynamic>json)
+//   {
+//     id=json['id'];
+//     carNumber=json['carNumber'];
+//     brand=json['brand'];
+//     category=json['category'];
+//     model=json['model'];
+//   }
+// }

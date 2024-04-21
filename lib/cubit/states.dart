@@ -75,3 +75,14 @@ class AppSearchUsersLoadingState extends AppCubitStates{}
 class AppSearchUsersSuccessState extends AppCubitStates{}
 class AppSearchUsersErrorState extends AppCubitStates{}
 
+
+class AppSearchRepairingCarsLoadingState extends AppCubitStates{}
+class AppSearchRepairingCarsSuccessState extends AppCubitStates{}
+class AppSearchRepairingCarsErrorState extends AppCubitStates{}
+
+
+class AppEditComponentLoadingState extends AppCubitStates{}
+class AppEditComponentSuccessState extends AppCubitStates{}
+class AppEditComponentErrorState extends AppCubitStates{}
+
+

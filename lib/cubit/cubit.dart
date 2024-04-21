@@ -11,7 +11,7 @@ import 'package:http/http.dart';
 
 import '../components/show_toast_function/show_toast_function.dart';
 import '../models/get_all_cars_model.dart';
-import '../models/get_list_of_components_model.dart';
+import '../models/get_list_of_inventory_components_model.dart';
 import '../models/get_repairing_cars_model.dart';
 import '../models/get_services_model.dart';
 
@@ -24,7 +24,7 @@ class AppCubit extends Cubit<AppCubitStates> {
   GetWorkersModel? getWorkersModel = null;
   GetCarsModel?getCarsModel=null;
   GetRepairingCarsModel?getRepairingCarsModel=null;
-  GetListOfComponentsModel?getListOfComponentsModel=null;
+  GetListOfInventoryComponentsModel?getListOfComponentsModel=null;
 
   var time=DateTime.now();
   void changDatePicker(value)
@@ -309,6 +309,8 @@ class AppCubit extends Cubit<AppCubitStates> {
   void searchUsers({
     required String word,
 }){
+    getUsersModel?.users=[];
+
     String url = 'https://fixer-backend-1.onrender.com/api/V1/User/search/${word}';
     final headers = {
       'Content-Type': 'application/json',
@@ -322,7 +324,6 @@ class AppCubit extends Cubit<AppCubitStates> {
       headers: headers,
     ).then((value) {
       print(value);
-      getUsersModel?.users=[];
 
       getUsersModel = GetUsersModel.fromJson(jsonDecode(value));
       if (getUsersModel?.results != null) {
@@ -331,6 +332,7 @@ class AppCubit extends Cubit<AppCubitStates> {
         emit(AppSearchUsersErrorState());
       }
     }).catchError((error){
+      print (error);
       emit(AppSearchUsersErrorState());
     });
 
@@ -348,7 +350,7 @@ class AppCubit extends Cubit<AppCubitStates> {
       Uri.parse(url),
       headers: headers,
     ).then((value) {
-      getListOfComponentsModel = GetListOfComponentsModel.fromJson(jsonDecode(value));
+      getListOfComponentsModel = GetListOfInventoryComponentsModel.fromJson(jsonDecode(value));
       if (getListOfComponentsModel?.results != null) {
         emit(AppGetListOfComponentsSuccessState());
       } else {
@@ -399,25 +401,60 @@ class AppCubit extends Cubit<AppCubitStates> {
   }){
 
     getRepairingCarsModel?.data=[];
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/Garage/search/${word}';
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/Garage/search/repairing/${word}';
     final headers = {
       'Content-Type': 'application/json',
     };
-    emit(AppSearchCarsLoadingState());
+    emit(AppSearchRepairingCarsLoadingState());
     read(
       Uri.parse(url),
       headers: headers,
     ).then((value) {
-      getCarsModel = GetCarsModel.fromJson(jsonDecode(value));
-      if (getCarsModel?.results != null) {
-        emit(AppSearchCarsSuccessState());
+      getRepairingCarsModel = GetRepairingCarsModel.fromJson(jsonDecode(value));
+      if (getRepairingCarsModel?.results != null) {
+        emit(AppSearchRepairingCarsSuccessState());
       } else {
-        emit(AppSearchCarsErrorState());
+        emit(AppSearchRepairingCarsErrorState());
       }
     }).catchError((error){
-      emit(AppSearchCarsErrorState());
+      emit(AppSearchRepairingCarsErrorState());
     });
 
   }
+
+
+
+  void editComponent(context,{
+    required String name,
+    required String quantity,
+    required String price,
+    required String id,
+  }) {
+    emit(AppEditComponentLoadingState());
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/Inventort/${id}';
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
+    };
+    final body = jsonEncode({
+      'name': name,
+      'quantity': quantity,
+      'price': price,
+    });
+
+    put(Uri.parse(url), headers: headers, body: body).then((response) {
+
+      if (response.statusCode==200) {
+        showToast(context,"Component edited successfully");
+        emit(AppEditComponentSuccessState());
+      } else {
+        showToast(context ,response.body);
+        emit(AppEditComponentErrorState());
+      }
+    });
+  }
+
+
 
 }

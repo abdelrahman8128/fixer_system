@@ -244,13 +244,13 @@ class _CarsInGaragePageState extends State<CarsInGaragePage> {
                                                             FlutterFlowTheme.of(context).tertiary,
                                                           ),
                                                           onFieldSubmitted: (value) {
-                                                            // if (value.isNotEmpty) {
-                                                            //   AppCubit.get(context).searchUsers(word: value);
-                                                            // }
-                                                            // else
-                                                            // {
-                                                            //   AppCubit.get(context).getUsers();
-                                                            // }
+                                                            if (value.isNotEmpty) {
+                                                              AppCubit.get(context).searchRepairingCars(word: value);
+                                                            }
+                                                            else
+                                                            {
+                                                              AppCubit.get(context).getRepairingCars();
+                                                            }
                                                           },
                                                         ),
 
@@ -518,7 +518,7 @@ class _CarsInGaragePageState extends State<CarsInGaragePage> {
                                                     padding: const EdgeInsetsDirectional
                                                         .fromSTEB(0, 16, 0, 0),
                                                     child:ConditionalBuilder(
-                                                      condition: state is AppGetRepairingCarsLoadingState,
+                                                      condition: state is AppGetRepairingCarsLoadingState||state is AppSearchRepairingCarsLoadingState,
                                                       builder: (context) => Center(child: CircularProgressIndicator()),
                                                       fallback:(context) =>ListView.builder(
                                                         padding: EdgeInsets.zero,

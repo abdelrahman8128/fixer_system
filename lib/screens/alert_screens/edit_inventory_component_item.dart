@@ -1,3 +1,4 @@
+import 'package:fixer_system/models/get_list_of_inventory_components_model.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -18,15 +19,18 @@ var quantityController = TextEditingController();
 
 var priceController = TextEditingController();
 
-Widget AddNewComponentPage(context)
+Widget EditNewComponentPage(context,InventoryComponentData model)
 {
+  nameController=TextEditingController(text: model.name!);
+  quantityController=TextEditingController(text: model.quantity!.toString());
+  priceController=TextEditingController(text: model.price!.toString());
   return BlocConsumer<AppCubit, AppCubitStates>(
     listener: (context, state) {},
     builder: (context, state) {
       return AlertDialog(
         alignment: Alignment.topCenter,
         title:const Text(
-          'Add Component',
+          'Edit Component',
           style: TextStyle(
             fontSize: 25,
           ),
@@ -41,19 +45,20 @@ Widget AddNewComponentPage(context)
         ),
         actions: [
           ConditionalBuilder(
-            condition: state is AppAddComponentLoadingState,
+            condition: state is AppEditComponentLoadingState,
             builder: (context) => Center(child: CircularProgressIndicator()),
             fallback: (context) => FFButtonWidget(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  AppCubit.get(context).addComponent(context,
-                      name: nameController.text,
-                      quantity: quantityController.text,
-                      price: priceController.text,
-                     );
+                  AppCubit.get(context).editComponent(context,
+                    name: nameController.text,
+                    quantity: quantityController.text,
+                    price: priceController.text,
+                    id:model.id!,
+                  );
                 }
               },
-              text: 'Add component',
+              text: 'Edit component',
               options: FFButtonOptions(
                 width: MediaQuery.sizeOf(context).width * 0.20,
                 height: MediaQuery.sizeOf(context).height * 0.065,

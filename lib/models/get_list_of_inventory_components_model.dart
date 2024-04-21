@@ -1,23 +1,23 @@
-class GetListOfComponentsModel{
+class GetListOfInventoryComponentsModel{
   int ?results;
-  List<ComponentData>data=[];
-  GetListOfComponentsModel.fromJson(Map<String,dynamic>json)
+  List<InventoryComponentData>data=[];
+  GetListOfInventoryComponentsModel.fromJson(Map<String,dynamic>json)
   {
     results=json['results'];
     json['data'].forEach((element) {
-      data.add(ComponentData.fromJson(element));
+      data.add(InventoryComponentData.fromJson(element));
     });
   }
 
 }
-class ComponentData{
+class InventoryComponentData{
   String? id;
   String?name;
   int? quantity;
   double ?price;
   String?createdAt;
   String?updatedAt;
-  ComponentData.fromJson(Map<String,dynamic>json)
+  InventoryComponentData.fromJson(Map<String,dynamic>json)
   {
     id=json['_id'];
     name=json['name'];
