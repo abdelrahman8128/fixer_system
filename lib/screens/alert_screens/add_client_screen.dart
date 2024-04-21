@@ -30,7 +30,9 @@ var categoryController = TextEditingController();
 
 var modelController = TextEditingController();
 
-var roleController = TextEditingController();
+var roleController = TextEditingController(text: 'user');
+
+var distanceController= TextEditingController();
 
 Widget AddNewClientPage(context) {
   return BlocConsumer<AppCubit, AppCubitStates>(
@@ -67,7 +69,11 @@ Widget AddNewClientPage(context) {
                       carIdNumber: carIdNumberController.text,
                       color: colorController.text,
                       brand: brandController.text,
-                      category: categoryController.text);
+                      category: categoryController.text,
+                    role:roleController.text,
+                    distance:distanceController.text,
+                  );
+
                 }
               },
               text: 'Add Client',
@@ -368,6 +374,70 @@ Widget AddNewClientPage(context) {
                                   return null;
                                 },
                               ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextFormField(
+                                controller: distanceController,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: 'distance',
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .bodySmall
+                                      .override(
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFFF68B1E),
+                                  ),
+                                  hintStyle:
+                                  FlutterFlowTheme.of(context).bodySmall,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFFDBE2E7),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFFF68B1E),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  contentPadding:
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      16, 24, 0, 24),
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'please enter the distance';
+                                  }
+                                  return null;
+                                },
+                              ),
                             ],
                           ),
                         ),
@@ -627,6 +697,70 @@ Widget AddNewClientPage(context) {
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'please enter the name';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextFormField(
+                                controller: roleController,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: 'role',
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .bodySmall
+                                      .override(
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFFF68B1E),
+                                  ),
+                                  hintStyle:
+                                  FlutterFlowTheme.of(context).bodySmall,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFFDBE2E7),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFFF68B1E),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  contentPadding:
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      16, 24, 0, 24),
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'please enter the role';
                                   }
                                   return null;
                                 },

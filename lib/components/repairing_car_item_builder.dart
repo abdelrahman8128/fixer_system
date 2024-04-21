@@ -30,14 +30,16 @@ Widget repairingCarItemBuilder(context, repairingCarData model) {
                 '${model.brand} ${model.category}',
                 style: FlutterFlowTheme.of(
                     context)
-                    .titleMedium
+                    .bodyMedium
                     .override(
                   fontFamily:
-                  FlutterFlowTheme.of(context).titleMediumFamily,
+                  FlutterFlowTheme.of(context).bodyMediumFamily,
+                  color: FlutterFlowTheme.of(context)
+                      .primaryText,
                   letterSpacing:
                   0,
                   useGoogleFonts:
-                  GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleMediumFamily),
+                  GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                 ),
               ),
             ],
@@ -113,17 +115,13 @@ Widget repairingCarItemBuilder(context, repairingCarData model) {
                 .bodyMedium
                 .override(
               fontFamily:
-              FlutterFlowTheme.of(context)
-                  .bodyMediumFamily,
-              color: FlutterFlowTheme.of(
-                  context)
-                  .alternate,
+              FlutterFlowTheme.of(context).bodyMediumFamily,
+              color: FlutterFlowTheme.of(context)
+                  .primaryText,
               letterSpacing:
               0,
-              useGoogleFonts: GoogleFonts
-                  .asMap()
-                  .containsKey(
-                  FlutterFlowTheme.of(context).bodyMediumFamily),
+              useGoogleFonts:
+              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
             ),
           ),
         ),

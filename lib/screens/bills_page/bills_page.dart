@@ -30,7 +30,7 @@ class _BillsPageState extends State<BillsPage> {
 
     super.dispose();
   }
-
+var searchController=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -163,52 +163,81 @@ class _BillsPageState extends State<BillsPage> {
                                             phone: false,
                                           ))
                                             Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 12, 0),
+                                              padding:
+                                              const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                  0, 0, 12, 0),
                                               child: Container(
-                                                width: 50,
+                                                width: 250,
                                                 height: 50,
-                                                decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                      context)
-                                                      .secondaryBackground,
-                                                  boxShadow: const [
-                                                    BoxShadow(
-                                                      blurRadius: 4,
-                                                      color: Color(0x33000000),
-                                                      offset: Offset(
-                                                        0,
-                                                        2,
+                                                child:TextFormField(
+                                                  controller: searchController,
+                                                  obscureText: false,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Search',
+                                                    labelStyle: FlutterFlowTheme.of(context)
+                                                        .bodySmall
+                                                        .override(
+                                                      fontFamily: 'Outfit',
+                                                      color: Color(0xFFF68B1E),
+                                                    ),
+                                                    hintStyle:
+                                                    FlutterFlowTheme.of(context).bodySmall,
+                                                    enabledBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Color(0xFFDBE2E7),
+                                                        width: 2,
                                                       ),
-                                                    )
-                                                  ],
-                                                  borderRadius:
-                                                  BorderRadius.circular(16),
-                                                ),
-                                                child: FlutterFlowIconButton(
-                                                  borderColor:
-                                                  FlutterFlowTheme.of(
-                                                      context)
-                                                      .lineColor,
-                                                  borderRadius: 12,
-                                                  borderWidth: 1,
-                                                  buttonSize: 50,
-                                                  fillColor:
-                                                  FlutterFlowTheme.of(
-                                                      context)
-                                                      .secondaryBackground,
-                                                  icon: Icon(
-                                                    Icons.search_rounded,
-                                                    color: FlutterFlowTheme.of(
-                                                        context)
-                                                        .secondaryText,
-                                                    size: 24,
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                    focusedBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Color(0xFFF68B1E),
+                                                        width: 2,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                    errorBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.red,
+                                                        width: 2,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                    focusedErrorBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.red,
+                                                        width: 2,
+                                                      ),
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                    filled: true,
+                                                    fillColor: Colors.white,
+                                                    contentPadding:
+                                                    EdgeInsetsDirectional.fromSTEB(
+                                                        16, 24, 0, 24),
                                                   ),
-                                                  onPressed: () async {
+                                                  style: FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                    fontFamily: 'Outfit',
+                                                    color:
+                                                    FlutterFlowTheme.of(context).tertiary,
+                                                  ),
+                                                  onFieldSubmitted: (value) {
+                                                    // if (value.isNotEmpty) {
+                                                    //   AppCubit.get(context).searchUsers(word: value);
+                                                    // }
+                                                    // else
+                                                    // {
+                                                    //   AppCubit.get(context).getUsers();
+                                                    // }
                                                   },
                                                 ),
+
                                               ),
                                             ),
+
                                         ],
                                       ),
                                     ),

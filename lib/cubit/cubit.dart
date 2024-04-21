@@ -11,6 +11,7 @@ import 'package:http/http.dart';
 
 import '../components/show_toast_function/show_toast_function.dart';
 import '../models/get_all_cars_model.dart';
+import '../models/get_list_of_components_model.dart';
 import '../models/get_repairing_cars_model.dart';
 import '../models/get_services_model.dart';
 
@@ -23,7 +24,7 @@ class AppCubit extends Cubit<AppCubitStates> {
   GetWorkersModel? getWorkersModel = null;
   GetCarsModel?getCarsModel=null;
   GetRepairingCarsModel?getRepairingCarsModel=null;
-
+  GetListOfComponentsModel?getListOfComponentsModel=null;
 
   var time=DateTime.now();
   void changDatePicker(value)
@@ -40,13 +41,14 @@ class AppCubit extends Cubit<AppCubitStates> {
     required String color,
     required String brand,
     required String category,
+    required String distance, required String role,
   }) {
     emit(AppAddClientLoadingState());
     const url = 'https://fixer-backend-1.onrender.com/api/V1/User';
     final headers = {
       'Content-Type': 'application/json',
       'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY0ZGNiZTE2NjM1ZGYwNTQ1ODg4ZjgiLCJpYXQiOjE3MTEwNDk0ODEsImV4cCI6MTcxODgyNTQ4MX0.31Ox7GXHOUwba0kI4FVHisORPVIIDqjeSPYYy7f01As'
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
     };
     final body = jsonEncode({
       'name': name,
@@ -58,7 +60,8 @@ class AppCubit extends Cubit<AppCubitStates> {
       'brand': brand,
       'category': category,
       'model': time.toString(),
-      "role": "user",
+      "role": role,
+      'distance':distance,
     });
 
     post(Uri.parse(url), headers: headers, body: body).then((response) {
@@ -92,11 +95,11 @@ class AppCubit extends Cubit<AppCubitStates> {
       Uri.parse(url),
       headers: headers,
     ).then((value) {
-      getUsersModel = GetUsersModel.formJson(jsonDecode(value));
+      getUsersModel = GetUsersModel.fromJson(jsonDecode(value));
       if (getUsersModel?.results != null) {
-        emit(AppAddClientSuccessState());
+        emit(AppGetUsersSuccessState());
       } else {
-        emit(AppAddClientErrorState());
+        emit(AppGetUsersErrorState());
       }
     });
   }
@@ -306,6 +309,114 @@ class AppCubit extends Cubit<AppCubitStates> {
   void searchUsers({
     required String word,
 }){
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/User/search/${word}';
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
+    };
+
+    emit(AppSearchUsersLoadingState());
+    read(
+      Uri.parse(url),
+      headers: headers,
+    ).then((value) {
+      print(value);
+      getUsersModel?.users=[];
+
+      getUsersModel = GetUsersModel.fromJson(jsonDecode(value));
+      if (getUsersModel?.results != null) {
+        emit(AppSearchUsersSuccessState());
+      } else {
+        emit(AppSearchUsersErrorState());
+      }
+    }).catchError((error){
+      emit(AppSearchUsersErrorState());
+    });
+
+
+  }
+
+  void getListOfComponents()
+  {
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/Inventort';
+    final headers = {
+      'Content-Type': 'application/json',
+    };
+    emit(AppGetListOfComponentsLoadingState());
+    read(
+      Uri.parse(url),
+      headers: headers,
+    ).then((value) {
+      getListOfComponentsModel = GetListOfComponentsModel.fromJson(jsonDecode(value));
+      if (getListOfComponentsModel?.results != null) {
+        emit(AppGetListOfComponentsSuccessState());
+      } else {
+        emit(AppGetListOfComponentsErrorState());
+      }
+    }).catchError((error){
+      emit(AppGetListOfComponentsErrorState());
+    });
+
+  }
+
+
+  void addComponent(context,{
+    required String name,
+    required String quantity,
+    required String price,
+
+  }) {
+    emit(AppAddComponentLoadingState());
+    const url = 'https://fixer-backend-1.onrender.com/api/V1/Inventort';
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
+    };
+    final body = jsonEncode({
+      'name': name,
+      'quantity': quantity,
+      'price': price,
+    });
+
+    post(Uri.parse(url), headers: headers, body: body).then((response) {
+
+      if (response.statusCode==201) {
+        showToast(context,"Component added successfully");
+        emit(AppAddComponentSuccessState());
+      } else {
+        showToast(context ,response.body);
+        emit(AppAddComponentErrorState());
+      }
+
+    });
+  }
+
+
+  void searchRepairingCars({
+    required String word,
+  }){
+
+    getRepairingCarsModel?.data=[];
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/Garage/search/${word}';
+    final headers = {
+      'Content-Type': 'application/json',
+    };
+    emit(AppSearchCarsLoadingState());
+    read(
+      Uri.parse(url),
+      headers: headers,
+    ).then((value) {
+      getCarsModel = GetCarsModel.fromJson(jsonDecode(value));
+      if (getCarsModel?.results != null) {
+        emit(AppSearchCarsSuccessState());
+      } else {
+        emit(AppSearchCarsErrorState());
+      }
+    }).catchError((error){
+      emit(AppSearchCarsErrorState());
+    });
 
   }
 

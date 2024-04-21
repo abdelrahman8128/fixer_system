@@ -57,3 +57,21 @@ class AppGetAllCarsErrorState extends AppCubitStates{}
 class AppGetRepairingCarsLoadingState extends AppCubitStates{}
 class AppGetRepairingCarsSuccessState extends AppCubitStates{}
 class AppGetRepairingCarsErrorState extends AppCubitStates{}
+
+
+
+class AppGetListOfComponentsLoadingState extends AppCubitStates{}
+class AppGetListOfComponentsSuccessState extends AppCubitStates{}
+class AppGetListOfComponentsErrorState extends AppCubitStates{}
+
+
+class AppAddComponentLoadingState extends AppCubitStates{}
+class AppAddComponentSuccessState extends AppCubitStates{}
+class AppAddComponentErrorState extends AppCubitStates{}
+
+
+
+class AppSearchUsersLoadingState extends AppCubitStates{}
+class AppSearchUsersSuccessState extends AppCubitStates{}
+class AppSearchUsersErrorState extends AppCubitStates{}
+

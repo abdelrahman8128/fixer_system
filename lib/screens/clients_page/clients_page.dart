@@ -435,7 +435,7 @@ class _ClientsPageState extends State<ClientsPage> {
                                               ),
                                             ),
                                             ConditionalBuilder(
-                                              condition:state is  AppGetUsersLoadingState,
+                                              condition:state is  AppGetUsersLoadingState||state is AppSearchUsersLoadingState,
                                               builder: (context) => Center(child: CircularProgressIndicator()),
                                               fallback:(context) =>  Padding(
                                                 padding: const EdgeInsetsDirectional
@@ -446,7 +446,7 @@ class _ClientsPageState extends State<ClientsPage> {
                                                   scrollDirection: Axis.vertical,
                                                   physics: BouncingScrollPhysics(),
                                                   itemBuilder: (context, index) => clientItemBuilder(context,AppCubit.get(context).getUsersModel!.users[index]),
-                                                  itemCount: AppCubit.get(context).getUsersModel!.results,
+                                                  itemCount: AppCubit.get(context).getUsersModel!.users.length,
                                                 ),
                                               ),
                                             ),

@@ -2,7 +2,7 @@
 class GetUsersModel{
   int? results=null;
   List<User>users=[];
-  GetUsersModel.formJson(Map<String,dynamic>json){
+  GetUsersModel.fromJson(Map<String,dynamic>json){
     results=json['results'];
     json['data'].forEach((element) {
       users.add(User.fromJson(element));
