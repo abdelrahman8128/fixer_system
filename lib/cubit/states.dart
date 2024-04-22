@@ -86,3 +86,8 @@ class AppEditComponentSuccessState extends AppCubitStates{}
 class AppEditComponentErrorState extends AppCubitStates{}
 
 
+
+class AppGetSpecificUserLoadingState extends AppCubitStates{}
+class AppGetSpecificUserSuccessState extends AppCubitStates{}
+class AppGetSpecificUserErrorState extends AppCubitStates{}
+

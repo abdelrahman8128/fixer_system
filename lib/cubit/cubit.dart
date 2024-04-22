@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:fixer_system/cubit/states.dart';
 import 'package:fixer_system/models/change_service_state_model.dart';
+import 'package:fixer_system/models/get_specific_user_model.dart';
 import 'package:fixer_system/models/get_users_model.dart';
 import 'package:fixer_system/models/get_workers_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +26,7 @@ class AppCubit extends Cubit<AppCubitStates> {
   GetCarsModel?getCarsModel=null;
   GetRepairingCarsModel?getRepairingCarsModel=null;
   GetListOfInventoryComponentsModel?getListOfComponentsModel=null;
+  GetSpecificUserModel?getSpecificUserModel=null;
 
   var time=DateTime.now();
   void changDatePicker(value)
@@ -455,6 +457,38 @@ class AppCubit extends Cubit<AppCubitStates> {
     });
   }
 
+
+
+  void getSpecificUser({
+    required String userId,
+  }){
+
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/User/${userId}';
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
+    };
+
+    emit(AppGetSpecificUserLoadingState());
+    read(
+      Uri.parse(url),
+      headers: headers,
+    ).then((value) {
+
+      getSpecificUserModel = GetSpecificUserModel.fromJson(jsonDecode(value));
+      print(getSpecificUserModel?.name);
+      if (getSpecificUserModel?.name != null) {
+        emit(AppGetSpecificUserSuccessState());
+      } else {
+        emit(AppGetSpecificUserSuccessState());
+      }
+    }).catchError((error){
+      print(error);
+      emit(AppGetSpecificUserSuccessState());
+    });
+
+  }
 
 
 }

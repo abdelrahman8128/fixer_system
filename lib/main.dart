@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'cubit/cubit.dart';
 
 void main() {
+
   runApp(const MyApp());
 }
 
