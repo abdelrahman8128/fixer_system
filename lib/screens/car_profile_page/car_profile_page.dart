@@ -168,7 +168,7 @@ class _CarProfilePageState extends State<CarProfilePage> {
           alignment: Alignment.bottomRight,
           child: ConditionalBuilder(
             condition: state is AppUpdateCarLoadingState,
-            builder: (context) => CircularProgressIndicator(),
+            builder: (context) => const CircularProgressIndicator(),
             fallback: (context) => FloatingActionButton(
               onPressed: () {
                 if (readOnly == true) {
@@ -201,8 +201,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide.none),
               child: readOnly == true
-                  ? Icon(Icons.edit_outlined)
-                  : Icon(
+                  ? const Icon(Icons.edit_outlined)
+                  : const Icon(
                       Icons.done,
                       size: 30,
                     ),
@@ -324,7 +324,7 @@ class _CarProfilePageState extends State<CarProfilePage> {
                           padding: const EdgeInsets.all(30),
                           child: Text(
                             '#${idController.text}',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 25, fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -1274,7 +1274,7 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                 height: 700,
                                 child: ConditionalBuilder(
                                   condition: state is AppGetAllCarsLoadingState,
-                                  builder: (context) => Center(
+                                  builder: (context) => const Center(
                                       child: CircularProgressIndicator()),
                                   fallback: (context) => ListView.separated(
                                     scrollDirection: Axis.horizontal,
@@ -1289,7 +1289,7 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                         .repairs
                                         .length,
                                     separatorBuilder: (context, index) =>
-                                        SizedBox(
+                                        const SizedBox(
                                       width: 25,
                                     ),
                                   ),

@@ -217,7 +217,7 @@ void showSnackbar(
         children: [
           if (loading)
             Padding(
-              padding: EdgeInsetsDirectional.only(end: 10.0),
+              padding: const EdgeInsetsDirectional.only(end: 10.0),
               child: Container(
                 height: 20,
                 width: 20,

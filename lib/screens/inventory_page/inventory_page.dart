@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:fixer_system/components/component_item_builder.dart';
 import 'package:fixer_system/components/main_nav/main_nav.dart';
@@ -386,12 +385,12 @@ class _InventoryPageState extends State<InventoryPage> {
                                                      .fromSTEB(0, 16, 0, 0),
                                                  child: ConditionalBuilder(
                                                    condition: state is AppGetListOfComponentsLoadingState,
-                                                   builder: (context) => Center(child: CircularProgressIndicator()),
+                                                   builder: (context) => const Center(child: CircularProgressIndicator()),
                                                    fallback: (context) =>  ListView.builder(
                                                      padding: EdgeInsets.zero,
                                                      shrinkWrap: true,
                                                      scrollDirection: Axis.vertical,
-                                                     physics: BouncingScrollPhysics(),
+                                                     physics: const BouncingScrollPhysics(),
                                                      itemBuilder:(context, index) =>  componentItemBuilder(context, AppCubit.get(context).getListOfComponentsModel!.data[index]),
                                                      itemCount:AppCubit.get(context).getListOfComponentsModel!.data.length,
                                                    ),

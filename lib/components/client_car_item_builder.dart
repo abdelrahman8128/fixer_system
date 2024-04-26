@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 
 import '../models/get_specific_user_model.dart';
 import '../screens/car_profile_page/car_profile_page.dart';
@@ -20,7 +18,7 @@ Widget clientCarItemBuilder(context,SpecificCarData model){
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15),side: BorderSide(color: Colors.orange.shade300)),
         color: Colors.orange.shade100,
       ),
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       width: MediaQuery.sizeOf(context).width * 0.15,
       height: MediaQuery.sizeOf(context).width * 0.13,
       child: Column(

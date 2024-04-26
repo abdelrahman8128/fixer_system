@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../cubit/cubit.dart';
 import '../models/get_specific_car_model.dart';
@@ -17,13 +15,11 @@ Widget repairItemBuilder(context, RepairData model) {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            child: const Text(
-              'General Info',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+          const Text(
+            'General Info',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
           ),
           Padding(
@@ -97,13 +93,11 @@ Widget repairItemBuilder(context, RepairData model) {
             ),
           ),
 
-          Container(
-            child: const Text(
-              'Details',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+          const Text(
+            'Details',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
           ),
 
@@ -153,7 +147,7 @@ Widget repairItemBuilder(context, RepairData model) {
                 ),
               ),
               ...model.services.map((value) {
-                Icon icon =Icon(Icons.done,color: Colors.green,) ;
+                Icon icon =const Icon(Icons.done,color: Colors.green,) ;
 
                 return Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -161,6 +155,8 @@ Widget repairItemBuilder(context, RepairData model) {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Visibility(
+
+                          visible:  (value.state=='repairing'),
 
                           child: IconButton(onPressed: (){
 
@@ -171,7 +167,6 @@ Widget repairItemBuilder(context, RepairData model) {
                                 );
 
                             }, icon: icon),
-                          visible:  (value.state=='repairing'),
                         ),
                         Text('${value.name}'),
                         Text('${value.price} EGP'),

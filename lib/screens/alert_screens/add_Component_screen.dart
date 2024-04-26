@@ -35,14 +35,14 @@ final _formKey = GlobalKey<FormState>();
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: Icon(Icons.close),
+          icon: const Icon(Icons.close),
           hoverColor: Colors.transparent,
           highlightColor: Colors.transparent,
         ),
         actions: [
           ConditionalBuilder(
             condition: state is AppAddComponentLoadingState,
-            builder: (context) => Center(child: CircularProgressIndicator()),
+            builder: (context) => const Center(child: CircularProgressIndicator()),
             fallback: (context) => FFButtonWidget(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
@@ -57,9 +57,9 @@ final _formKey = GlobalKey<FormState>();
               options: FFButtonOptions(
                 width: MediaQuery.sizeOf(context).width * 0.20,
                 height: MediaQuery.sizeOf(context).height * 0.065,
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                color: Color(0xFFF68B1E),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                color: const Color(0xFFF68B1E),
                 textStyle: FlutterFlowTheme.of(context).titleMedium.override(
                   fontFamily: 'Lexend Deca',
                   color: Colors.white,
@@ -67,7 +67,7 @@ final _formKey = GlobalKey<FormState>();
                   fontWeight: FontWeight.bold,
                 ),
                 elevation: 3,
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Colors.transparent,
                   width: 1,
                 ),
@@ -82,7 +82,7 @@ final _formKey = GlobalKey<FormState>();
             key: _formKey,
             child: SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.all(30),
+                padding: const EdgeInsets.all(30),
                 child: Column(
                   children: [
                     Row(
@@ -90,7 +90,7 @@ final _formKey = GlobalKey<FormState>();
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 30),
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
                           width: MediaQuery.sizeOf(context).width * 0.45,
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -105,33 +105,33 @@ final _formKey = GlobalKey<FormState>();
                                       .bodySmall
                                       .override(
                                     fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
+                                    color: const Color(0xFFF68B1E),
                                   ),
                                   hintStyle:
                                   FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0xFFDBE2E7),
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0xFFF68B1E),
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.red,
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.red,
                                       width: 2,
                                     ),
@@ -140,7 +140,7 @@ final _formKey = GlobalKey<FormState>();
                                   filled: true,
                                   fillColor: Colors.white,
                                   contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
+                                  const EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
                                 ),
                                 style: FlutterFlowTheme.of(context)
@@ -157,7 +157,7 @@ final _formKey = GlobalKey<FormState>();
                                   return null;
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
@@ -169,33 +169,33 @@ final _formKey = GlobalKey<FormState>();
                                       .bodySmall
                                       .override(
                                     fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
+                                    color: const Color(0xFFF68B1E),
                                   ),
                                   hintStyle:
                                   FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0xFFDBE2E7),
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0xFFF68B1E),
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.red,
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.red,
                                       width: 2,
                                     ),
@@ -204,7 +204,7 @@ final _formKey = GlobalKey<FormState>();
                                   filled: true,
                                   fillColor: Colors.white,
                                   contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
+                                  const EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
                                 ),
                                 style: FlutterFlowTheme.of(context)
@@ -221,7 +221,7 @@ final _formKey = GlobalKey<FormState>();
                                   return null;
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
@@ -233,33 +233,33 @@ final _formKey = GlobalKey<FormState>();
                                       .bodySmall
                                       .override(
                                     fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
+                                    color: const Color(0xFFF68B1E),
                                   ),
                                   hintStyle:
                                   FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0xFFDBE2E7),
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0xFFF68B1E),
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.red,
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.red,
                                       width: 2,
                                     ),
@@ -268,7 +268,7 @@ final _formKey = GlobalKey<FormState>();
                                   filled: true,
                                   fillColor: Colors.white,
                                   contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
+                                  const EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
                                 ),
                                 style: FlutterFlowTheme.of(context)

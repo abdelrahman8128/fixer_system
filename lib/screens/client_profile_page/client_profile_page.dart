@@ -93,7 +93,7 @@ class _ClientDetailsState extends State<ClientProfilePage> {
                 alignment: Alignment.bottomRight,
                 child: ConditionalBuilder(
                   condition: state is AppUpdateUsersLoadingState,
-                  builder: (context) => CircularProgressIndicator(),
+                  builder: (context) => const CircularProgressIndicator(),
                   fallback: (context) => FloatingActionButton(
                     onPressed: () {
                       if (readOnly==true)
@@ -116,8 +116,8 @@ class _ClientDetailsState extends State<ClientProfilePage> {
                         borderRadius: BorderRadius.circular(30),
                         borderSide: BorderSide.none),
                     child: readOnly == true
-                        ? Icon(Icons.edit_outlined)
-                        : Icon(
+                        ? const Icon(Icons.edit_outlined)
+                        : const Icon(
                       Icons.done,
                       size: 30,
                     ),
@@ -153,7 +153,7 @@ class _ClientDetailsState extends State<ClientProfilePage> {
               ),
               body: ConditionalBuilder(
                 condition: state is AppGetSpecificUserLoadingState,
-                builder: (context) => Center(child: CircularProgressIndicator()),
+                builder: (context) => const Center(child: CircularProgressIndicator()),
                 fallback: (context) =>  SingleChildScrollView(
 
                   child: Container(

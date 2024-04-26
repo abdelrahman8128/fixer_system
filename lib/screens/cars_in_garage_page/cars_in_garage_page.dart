@@ -1,10 +1,7 @@
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:fixer_system/components/car_item_builder.dart';
 import 'package:fixer_system/components/main_nav/main_nav.dart';
 import 'package:fixer_system/cubit/states.dart';
-import 'package:fixer_system/models/get_all_cars_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
@@ -198,33 +195,33 @@ class _CarsInGaragePageState extends State<CarsInGaragePage> {
                                                                 .bodySmall
                                                                 .override(
                                                               fontFamily: 'Outfit',
-                                                              color: Color(0xFFF68B1E),
+                                                              color: const Color(0xFFF68B1E),
                                                             ),
                                                             hintStyle:
                                                             FlutterFlowTheme.of(context).bodySmall,
                                                             enabledBorder: OutlineInputBorder(
-                                                              borderSide: BorderSide(
+                                                              borderSide: const BorderSide(
                                                                 color: Color(0xFFDBE2E7),
                                                                 width: 2,
                                                               ),
                                                               borderRadius: BorderRadius.circular(8),
                                                             ),
                                                             focusedBorder: OutlineInputBorder(
-                                                              borderSide: BorderSide(
+                                                              borderSide: const BorderSide(
                                                                 color: Color(0xFFF68B1E),
                                                                 width: 2,
                                                               ),
                                                               borderRadius: BorderRadius.circular(8),
                                                             ),
                                                             errorBorder: OutlineInputBorder(
-                                                              borderSide: BorderSide(
+                                                              borderSide: const BorderSide(
                                                                 color: Colors.red,
                                                                 width: 2,
                                                               ),
                                                               borderRadius: BorderRadius.circular(8),
                                                             ),
                                                             focusedErrorBorder: OutlineInputBorder(
-                                                              borderSide: BorderSide(
+                                                              borderSide: const BorderSide(
                                                                 color: Colors.red,
                                                                 width: 2,
                                                               ),
@@ -233,7 +230,7 @@ class _CarsInGaragePageState extends State<CarsInGaragePage> {
                                                             filled: true,
                                                             fillColor: Colors.white,
                                                             contentPadding:
-                                                            EdgeInsetsDirectional.fromSTEB(
+                                                            const EdgeInsetsDirectional.fromSTEB(
                                                                 16, 24, 0, 24),
                                                           ),
                                                           style: FlutterFlowTheme.of(context)
@@ -489,28 +486,6 @@ class _CarsInGaragePageState extends State<CarsInGaragePage> {
                                                               ),
                                                             ),
                                                           ),
-                                                        Expanded(
-                                                          child: Text(
-                                                            'Operations',
-                                                            textAlign: TextAlign.end,
-                                                            style:
-                                                            FlutterFlowTheme.of(
-                                                                context)
-                                                                .bodySmall
-                                                                .override(
-                                                              fontFamily: FlutterFlowTheme.of(
-                                                                  context)
-                                                                  .bodySmallFamily,
-                                                              letterSpacing:
-                                                              0,
-                                                              useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                                  .containsKey(
-                                                                  FlutterFlowTheme.of(context)
-                                                                      .bodySmallFamily),
-                                                            ),
-                                                          ),
-                                                        ),
                                                       ],
                                                     ),
                                                   ),
@@ -519,14 +494,15 @@ class _CarsInGaragePageState extends State<CarsInGaragePage> {
                                                         .fromSTEB(0, 16, 0, 0),
                                                     child:ConditionalBuilder(
                                                       condition: state is AppGetRepairingCarsLoadingState||state is AppSearchRepairingCarsLoadingState,
-                                                      builder: (context) => Center(child: CircularProgressIndicator()),
-                                                      fallback:(context) =>ListView.builder(
+                                                      builder: (context) => const Center(child: CircularProgressIndicator()),
+                                                      fallback:(context) =>ListView.separated(
                                                         padding: EdgeInsets.zero,
                                                         shrinkWrap: true,
                                                         scrollDirection: Axis.vertical,
                                                         itemBuilder: (context, index) =>//Container(color: Colors.grey,),
                                                              repairingCarItemBuilder(context,AppCubit.get(context).getRepairingCarsModel!.data[index]),
                                                         itemCount: AppCubit.get(context).getRepairingCarsModel!.data.length,
+                                                        separatorBuilder: (context, index) => Container(color: Colors.grey[400],width: double.infinity,height: 1,),
                                                       ),  ),
                                                       
                                                   ),

@@ -190,33 +190,33 @@ class _TeamPageState extends State<TeamPage> {
                                                             .bodySmall
                                                             .override(
                                                           fontFamily: 'Outfit',
-                                                          color: Color(0xFFF68B1E),
+                                                          color: const Color(0xFFF68B1E),
                                                         ),
                                                         hintStyle:
                                                         FlutterFlowTheme.of(context).bodySmall,
                                                         enabledBorder: OutlineInputBorder(
-                                                          borderSide: BorderSide(
+                                                          borderSide: const BorderSide(
                                                             color: Color(0xFFDBE2E7),
                                                             width: 2,
                                                           ),
                                                           borderRadius: BorderRadius.circular(8),
                                                         ),
                                                         focusedBorder: OutlineInputBorder(
-                                                          borderSide: BorderSide(
+                                                          borderSide: const BorderSide(
                                                             color: Color(0xFFF68B1E),
                                                             width: 2,
                                                           ),
                                                           borderRadius: BorderRadius.circular(8),
                                                         ),
                                                         errorBorder: OutlineInputBorder(
-                                                          borderSide: BorderSide(
+                                                          borderSide: const BorderSide(
                                                             color: Colors.red,
                                                             width: 2,
                                                           ),
                                                           borderRadius: BorderRadius.circular(8),
                                                         ),
                                                         focusedErrorBorder: OutlineInputBorder(
-                                                          borderSide: BorderSide(
+                                                          borderSide: const BorderSide(
                                                             color: Colors.red,
                                                             width: 2,
                                                           ),
@@ -225,7 +225,7 @@ class _TeamPageState extends State<TeamPage> {
                                                         filled: true,
                                                         fillColor: Colors.white,
                                                         contentPadding:
-                                                        EdgeInsetsDirectional.fromSTEB(
+                                                        const EdgeInsetsDirectional.fromSTEB(
                                                             16, 24, 0, 24),
                                                       ),
                                                       style: FlutterFlowTheme.of(context)
@@ -522,7 +522,7 @@ class _TeamPageState extends State<TeamPage> {
                                               ),
                                               ConditionalBuilder(
                                                 condition: state is AppGetWorkersLoadingState||state is AppSearchWorkersLoadingState,
-                                                builder: (context) => Center(child: CircularProgressIndicator()),
+                                                builder: (context) => const Center(child: CircularProgressIndicator()),
                                                 fallback: (context) =>ConditionalBuilder(
                                                     condition: AppCubit.get(context).getWorkersModel!.users.isEmpty,
                                                     builder: (context) => Text('No Results',style: TextStyle(fontSize: 50,color: Colors.grey[300]),),
@@ -541,7 +541,7 @@ class _TeamPageState extends State<TeamPage> {
                                                             .getWorkersModel
                                                             ?.users.length,
                                                         physics:
-                                                        BouncingScrollPhysics(),
+                                                        const BouncingScrollPhysics(),
                                                         itemBuilder: (context,
                                                             index) =>
                                                             teamMemberBuilder(

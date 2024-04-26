@@ -16,7 +16,7 @@ class repairingCarData{
   String? id;
   String? ownerName;
   String? carNumber;
-  String? carIdNumber;
+  String? chassisNumber;
   String? color;
   String? state;
   String? brand;
@@ -31,13 +31,14 @@ class repairingCarData{
   bool?repairing;
   int?distances ;
   String? motorNumber;
-  var repairingPercentage=0.5;
+  var completedServicesRatio;
+
   repairingCarData.fromJson(Map<String,dynamic>?json)
   {
      id=json?['_id'];
      ownerName=json?['ownerName'];
      carNumber=json?['carNumber'];
-     carIdNumber=json?['carIdNumber'];
+     chassisNumber=json?['chassisNumber'];
      color=json?['color'];
      state=json?['State'];
      brand=json?['brand'];
@@ -52,5 +53,6 @@ class repairingCarData{
     repairing=json?['repairing'];
     distances =json?['distances'];
      motorNumber=json?['motorNumber'];
+     completedServicesRatio=json?['completedServicesRatio'];
   }
 }

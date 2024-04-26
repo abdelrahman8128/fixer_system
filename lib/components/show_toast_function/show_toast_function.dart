@@ -8,7 +8,7 @@ void showToast(context,String text,) =>
 
         content: Text('${text}'),
 
-        duration: Duration(seconds: 5),
+        duration: const Duration(seconds: 5),
         backgroundColor: Colors.grey,
 
       ),

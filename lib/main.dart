@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           return  AdaptiveTheme(
             light: ThemeData(
-              colorScheme: ColorScheme.light(primary: Colors.deepOrange),
+              colorScheme: const ColorScheme.light(primary: Colors.deepOrange),
 
               useMaterial3: true,
               brightness: Brightness.light,
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
             dark: ThemeData(
               useMaterial3: true,
               brightness: Brightness.dark,
-              colorScheme: ColorScheme.dark(primary: Colors.deepOrange),
+              colorScheme: const ColorScheme.dark(primary: Colors.deepOrange),
 
 
             ),

@@ -821,6 +821,49 @@ class AppCubit extends Cubit<AppCubitStates> {
 
 
 
+  void updateWorker(context,{
+    required String? id,
+    required String ?name,
+    required String?phoneNumber,
+    required String?jobTitle,
+    required String?salary,
+    required String?IDNumber,
+
+  }){
+    emit(AppUpdateWorkerLoadingState());
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/Worker/withoutNID/${id}';
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
+    };
+    final body = jsonEncode({
+      'name':name,
+      'phoneNumber':phoneNumber,
+      'jobTitle':jobTitle,
+      'salary':salary,
+      'IdNumber':IDNumber,
+    });
+    put(Uri.parse(url), headers: headers, body: body).then((value) {
+      if (value.statusCode==200)
+      {
+        showToast(context, 'Worker updated successfully');
+        emit(AppUpdateWorkerSuccessState());
+
+      }
+      else {
+
+        emit(AppUpdateWorkerErrorState());
+      }
+
+
+    }
+    ).catchError((error){
+      emit(AppUpdateUsersErrorState());
+
+    });
+  }
+
 
 
 }
