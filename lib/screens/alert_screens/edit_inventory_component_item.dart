@@ -2,7 +2,6 @@ import 'package:fixer_system/models/get_list_of_inventory_components_model.dart'
 import 'package:flutter/cupertino.dart';
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +10,8 @@ import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
 
+Widget EditNewComponentPage(context,InventoryComponentData model) {
+
 final _formKey = GlobalKey<FormState>();
 
 var nameController = TextEditingController();
@@ -18,9 +19,6 @@ var nameController = TextEditingController();
 var quantityController = TextEditingController();
 
 var priceController = TextEditingController();
-
-Widget EditNewComponentPage(context,InventoryComponentData model)
-{
   nameController=TextEditingController(text: model.name!);
   quantityController=TextEditingController(text: model.quantity!.toString());
   priceController=TextEditingController(text: model.price!.toString());

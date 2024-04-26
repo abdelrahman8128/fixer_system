@@ -1,15 +1,17 @@
 class GetCarsModel{
+  GetCarsModel();
   int ? results;
   List<CarData>data=[];
-  GetCarsModel.fromJson(Map<String,dynamic>json){
-    results=json['results'];
-    json['data'].forEach((element) {
+  GetCarsModel.fromJson(Map<String,dynamic>?json){
+    results=json?['results'];
+    json?['data'].forEach((element) {
       data.add(CarData.fromJson(element));
     });
   }
 }
 
 class CarData{
+  CarData();
 
   String? id;
   String? ownerName;
@@ -33,28 +35,28 @@ class CarData{
   DateTime?nextRepairDate;
   double?repairingPercentage;
 
-  CarData.fromJson(Map<String,dynamic>json)
+  CarData.fromJson(Map<String,dynamic>?json)
   {
-    state=json['State'];
-    id=json['_id'];
-     ownerName=json['ownerName'];
-     carNumber=json['carNumber'];
-     phoneNumber=json['phoneNumber'];
-     email=json['email'];
-    carIdNumber=json['carIdNumber'];
-    color=json['color'];
-    state=json['state'];
-    brand=json['brand'];
-    category=json['category'];
-    model=json['model'];
-    generatedCode=json['generatedCode'];
-    generatedPassword=json['generatedPassword'];
-    periodicRepairs=json['periodicRepairs'];
-    nonPeriodicRepairs=json['nonPeriodicRepairs'];
-    repairing=json['repairing'];
-    componentState.addAll(json['componentState']);
-    distance=json['distances'];
-    motorNumber=json['motorNumber'];
+    state=json?['State'];
+    id=json?['_id'];
+     ownerName=json?['ownerName'];
+     carNumber=json?['carNumber'];
+     phoneNumber=json?['phoneNumber'];
+     email=json?['email'];
+    carIdNumber=json?['carIdNumber'];
+    color=json?['color'];
+    state=json?['state'];
+    brand=json?['brand'];
+    category=json?['category'];
+    model=json?['model'];
+    generatedCode=json?['generatedCode'];
+    generatedPassword=json?['generatedPassword'];
+    periodicRepairs=json?['periodicRepairs'];
+    nonPeriodicRepairs=json?['nonPeriodicRepairs'];
+    repairing=json?['repairing'];
+    componentState.addAll(json?['componentState']);
+    distance=json?['distances'];
+    motorNumber=json?['motorNumber'];
 
 
 

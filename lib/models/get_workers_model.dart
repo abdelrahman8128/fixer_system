@@ -1,10 +1,11 @@
 
 class GetWorkersModel{
+  GetWorkersModel();
   int? results=null;
   List<Worker>users=[];
-  GetWorkersModel.fromJson(Map<String,dynamic>json){
-    results=json['results'];
-    json['data'].forEach((element) {
+  GetWorkersModel.fromJson(Map<String,dynamic>?json){
+    results=json?['results'];
+    json?['data'].forEach((element) {
       users.add(Worker.fromJson(element));
     });
   }
@@ -12,6 +13,7 @@ class GetWorkersModel{
 }
 
 class Worker {
+  Worker();
   String? id;
   String ?name;
   String?phoneNumber;
@@ -21,14 +23,14 @@ class Worker {
   DateTime?createdAt;
   DateTime?updatedAt;
 
-  Worker.fromJson(Map<String, dynamic>json)
+  Worker.fromJson(Map<String, dynamic>?json)
   {
-    id = json['_id'];
-    name = json['name'];
-    phoneNumber=json['phoneNumber'];
-    jobTitle=json['jobTitle'];
-    salary=(json['salary'])*1.0 ;
-    IDNumber=json['IdNumber'];
+    id = json?['_id'];
+    name = json?['name'];
+    phoneNumber=json?['phoneNumber'];
+    jobTitle=json?['jobTitle'];
+    salary=(json?['salary'])*1.0 ;
+    IDNumber=json?['IdNumber'];
 
   }
 }

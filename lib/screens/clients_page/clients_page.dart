@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:fixer_system/components/client_item_builder.dart';
 import 'package:fixer_system/components/main_nav/main_nav.dart';
@@ -296,7 +295,7 @@ class _ClientsPageState extends State<ClientsPage> {
                                                       size: 24,
                                                     ),
                                                     onPressed: () async {
-                                                      showDialog(context: context, builder: (context) => AddNewClientPage(context));
+                                                      showDialog(context: context, builder: (context) => AddNewClientScreen(context));
                                                     },
                                                   ),
                                                 ),

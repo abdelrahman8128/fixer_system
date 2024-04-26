@@ -10,6 +10,10 @@ import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
 
+
+Widget AddNewWorkerPage(context) {
+
+
 final _formKey = GlobalKey<FormState>();
 
 var nameController = TextEditingController();
@@ -22,8 +26,6 @@ var jobTitleController = TextEditingController();
 
 var salaryController = TextEditingController();
 
-
-Widget AddNewWorkerPage(context) {
   return BlocConsumer<AppCubit, AppCubitStates>(
     listener: (context, state) {},
     builder: (context, state) {

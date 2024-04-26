@@ -91,3 +91,39 @@ class AppGetSpecificUserLoadingState extends AppCubitStates{}
 class AppGetSpecificUserSuccessState extends AppCubitStates{}
 class AppGetSpecificUserErrorState extends AppCubitStates{}
 
+
+class AppAddCarLoadingState extends AppCubitStates{}
+class AppAddCarSuccessState extends AppCubitStates{}
+class AppAddCarErrorState extends AppCubitStates{}
+
+
+class AppUpdateUsersLoadingState extends AppCubitStates{}
+class AppUpdateUsersSuccessState extends AppCubitStates{}
+class AppUpdateUsersErrorState extends AppCubitStates{}
+
+
+class AppGetSpecificCarLoadingState extends AppCubitStates{}
+class AppGetSpecificCarSuccessState extends AppCubitStates{}
+class AppGetSpecificCarErrorState extends AppCubitStates{}
+
+
+class AppAddRepairLoadingState extends AppCubitStates{}
+class AppAddRepairSuccessState extends AppCubitStates{}
+class AppAddRepairErrorState extends AppCubitStates{}
+
+
+class AppGetAllRepairsForSpecificCarLoadingState extends AppCubitStates{}
+class AppGetAllRepairsForSpecificCarSuccessState extends AppCubitStates{}
+class AppGetAllRepairsForSpecificCarErrorState extends AppCubitStates{}
+
+
+class AppUpdateCarLoadingState extends AppCubitStates{}
+class AppUpdateCarSuccessState extends AppCubitStates{}
+class AppUpdateCarErrorState extends AppCubitStates{}
+
+
+
+class AppGetMainPramsLoadingState extends AppCubitStates{}
+class AppGetMainPramsSuccessState extends AppCubitStates{}
+class AppGetMainPramsErrorState extends AppCubitStates{}
+

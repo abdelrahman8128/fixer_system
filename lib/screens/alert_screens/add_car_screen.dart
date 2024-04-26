@@ -12,16 +12,13 @@ import '../../cubit/states.dart';
 
 final _formKey = GlobalKey<FormState>();
 
-Widget AddNewClientScreen(context) {
 
-  var nameController = TextEditingController();
+Widget AddNewCarScreen(context, String userId,) {
 
-  var emailController = TextEditingController();
 
   var carNumberController = TextEditingController();
 
-  var phoneNumberController = TextEditingController();
-
+  var chassisNumberController = TextEditingController();
 
   var colorController = TextEditingController();
 
@@ -30,24 +27,28 @@ Widget AddNewClientScreen(context) {
   var categoryController = TextEditingController();
 
 
-  var roleController = TextEditingController(text: 'user');
+  var nextRepairDateController = TextEditingController();
 
-  var distanceController = TextEditingController();
+  var lastRepairDateController = TextEditingController();
 
-  var chassisNumberController = TextEditingController();
-  var nextRepairDateController  = TextEditingController();
-  var lastRepairDateController  = TextEditingController();
-  var periodicRepairsController  = TextEditingController(text: '0');
-  var nonPeriodicRepairsController  = TextEditingController(text: '0');
-  var motorNumberController  = TextEditingController();
+  var periodicRepairsController = TextEditingController();
+
+  var nonPeriodicRepairsController = TextEditingController();
+
+
+  var distanceController= TextEditingController();
+
+  var motorNumberController = TextEditingController();
+
+
 
   return BlocConsumer<AppCubit, AppCubitStates>(
     listener: (context, state) {},
     builder: (context, state) {
       return AlertDialog(
-        alignment: Alignment.topRight,
+        alignment: Alignment.topCenter,
         title: Text(
-          'Add Client',
+          'Add Car',
           style: TextStyle(
             fontSize: 25,
           ),
@@ -62,32 +63,28 @@ Widget AddNewClientScreen(context) {
         ),
         actions: [
           ConditionalBuilder(
-            condition: state is AppAddClientLoadingState,
+            condition: state is AppAddCarLoadingState,
             builder: (context) => Center(child: CircularProgressIndicator()),
             fallback: (context) => FFButtonWidget(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  AppCubit.get(context).addClient(
-                    context,
-                    name: nameController.text,
-                    email: emailController.text,
+                  AppCubit.get(context).addCar(context,
+                    id: userId,
                     carNumber: carNumberController.text,
-                    phoneNumber: phoneNumberController.text,
                     color: colorController.text,
                     brand: brandController.text,
                     category: categoryController.text,
-                    role: roleController.text,
-                    distance: distanceController.text,
-                    chassisNumber:chassisNumberController.text,
-                    nextRepairDate:nextRepairDateController.text,
-                    lastRepairDate:lastRepairDateController.text,
-                    periodicRepairs:nonPeriodicRepairsController.text,
-                    nonPeriodicRepairs:nonPeriodicRepairsController.text,
-                    motorNumber:motorNumberController.text,
+                    distance:distanceController.text,
+                    chassisNumber: chassisNumberController.text,
+                    nextRepairDate: nextRepairDateController.text,
+                    lastRepairDate: lastRepairDateController.text,
+                    periodicRepairs: periodicRepairsController.text,
+                    nonPeriodicRepairs: nonPeriodicRepairsController.text,
+                    motorNumber: motorNumberController.text,
                   );
                 }
               },
-              text: 'Add Client',
+              text: 'Add Car',
               options: FFButtonOptions(
                 width: MediaQuery.sizeOf(context).width * 0.20,
                 height: MediaQuery.sizeOf(context).height * 0.065,
@@ -95,11 +92,11 @@ Widget AddNewClientScreen(context) {
                 iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 color: Color(0xFFF68B1E),
                 textStyle: FlutterFlowTheme.of(context).titleMedium.override(
-                      fontFamily: 'Lexend Deca',
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  fontFamily: 'Lexend Deca',
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
                 elevation: 3,
                 borderSide: BorderSide(
                   color: Colors.transparent,
@@ -118,6 +115,7 @@ Widget AddNewClientScreen(context) {
               child: Container(
                 padding: EdgeInsets.all(30),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisSize: MainAxisSize.max,
@@ -131,146 +129,18 @@ Widget AddNewClientScreen(context) {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               TextFormField(
-                                controller: nameController,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'name',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                    ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'please enter the name';
-                                  }
-                                  return null;
-                                },
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              TextFormField(
-                                controller: emailController,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Email',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                    ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'please enter the Email';
-                                  }
-                                  return null;
-                                },
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              TextFormField(
                                 controller: carNumberController,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'car number',
+                                  labelText: 'Car number',
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFFF68B1E),
+                                  ),
                                   hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
+                                  FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0xFFDBE2E7),
@@ -302,154 +172,23 @@ Widget AddNewClientScreen(context) {
                                   filled: true,
                                   fillColor: Colors.white,
                                   contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      16, 24, 0, 24),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                    ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'please enter the Car number';
-                                  }
-                                  return null;
-                                },
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              TextFormField(
-                                controller: phoneNumberController,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'phone number',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
                                 ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                    ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return 'please enter the phone number';
-                                  } else if (value.length < 10) {
-                                    return 'The phone number is to short';
+                                    return 'please enter the car number';
                                   }
                                   return null;
                                 },
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              TextFormField(
-                                controller: distanceController,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'distance',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                    ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'please enter the distance';
-                                  }
-                                  return null;
-                                },
-                              ),
-
                               SizedBox(
                                 height: 10,
                               ),
@@ -507,133 +246,16 @@ Widget AddNewClientScreen(context) {
                                   color:
                                   FlutterFlowTheme.of(context).tertiary,
                                 ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'please enter the chassis number';
+                                  }
+                                  return null;
+                                },
                               ),
                               SizedBox(
                                 height: 10,
                               ),
-                              TextFormField(
-                                controller: nextRepairDateController,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'next repair data',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                  fontFamily: 'Outfit',
-                                  color:
-                                  FlutterFlowTheme.of(context).tertiary,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              TextFormField(
-                                controller: lastRepairDateController,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'last repair data',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                  fontFamily: 'Outfit',
-                                  color:
-                                  FlutterFlowTheme.of(context).tertiary,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 30),
-                          width: MediaQuery.sizeOf(context).width * 0.45,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
                               TextFormField(
                                 controller: colorController,
                                 obscureText: false,
@@ -642,11 +264,11 @@ Widget AddNewClientScreen(context) {
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFFF68B1E),
+                                  ),
                                   hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
+                                  FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0xFFDBE2E7),
@@ -678,19 +300,19 @@ Widget AddNewClientScreen(context) {
                                   filled: true,
                                   fillColor: Colors.white,
                                   contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      16, 24, 0, 24),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                    ),
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
+                                ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return 'please enter the name';
+                                    return 'please enter the car color';
                                   }
                                   return null;
                                 },
@@ -706,11 +328,11 @@ Widget AddNewClientScreen(context) {
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFFF68B1E),
+                                  ),
                                   hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
+                                  FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0xFFDBE2E7),
@@ -742,19 +364,19 @@ Widget AddNewClientScreen(context) {
                                   filled: true,
                                   fillColor: Colors.white,
                                   contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      16, 24, 0, 24),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                    ),
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
+                                ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return 'please enter the name';
+                                    return 'please enter car brand';
                                   }
                                   return null;
                                 },
@@ -770,11 +392,11 @@ Widget AddNewClientScreen(context) {
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFFF68B1E),
+                                  ),
                                   hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
+                                  FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0xFFDBE2E7),
@@ -806,39 +428,121 @@ Widget AddNewClientScreen(context) {
                                   filled: true,
                                   fillColor: Colors.white,
                                   contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      16, 24, 0, 24),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                    ),
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
+                                ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return 'please enter the name';
+                                    return 'please enter car category';
                                   }
                                   return null;
+                                },
+                              ),
+                              SizedBox(
+                                height: 70,
+                              ),
+
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 30),
+                          width: MediaQuery.sizeOf(context).width * 0.45,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              TextFormField(
+                                controller: nextRepairDateController,
+
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: 'Next Repair date',
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .bodySmall
+                                      .override(
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFFF68B1E),
+                                  ),
+                                  hintStyle:
+                                  FlutterFlowTheme.of(context).bodySmall,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFFDBE2E7),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFFF68B1E),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  contentPadding:
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      16, 24, 0, 24),
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
+                                ),
+
+                                onTap:() {
+                                    showDatePicker(
+                                    context: context,
+                                    firstDate: DateTime.now(),
+                                    lastDate: DateTime(2999),
+                                    initialDate: DateTime.now(),
+                                    ).then((value) {
+                                    nextRepairDateController.text =
+                                    DateFormat.yMEd().format(value!);
+                                    });
                                 },
                               ),
                               SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
-                                controller: roleController,
+                                controller: lastRepairDateController,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'role',
+                                  labelText: 'last Repair date',
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFFF68B1E),
+                                  ),
                                   hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
+                                  FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0xFFDBE2E7),
@@ -870,25 +574,28 @@ Widget AddNewClientScreen(context) {
                                   filled: true,
                                   fillColor: Colors.white,
                                   contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      16, 24, 0, 24),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                    ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'please enter the role';
-                                  }
-                                  return null;
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
+                                ),
+                                onTap:() {
+                                  showDatePicker(
+                                    context: context,
+                                    firstDate: DateTime.now(),
+                                    lastDate: DateTime(2999),
+                                    initialDate: DateTime.now(),
+                                  ).then((value) {
+                                    lastRepairDateController.text =
+                                        DateFormat.yMEd().format(value!);
+                                  });
                                 },
                               ),
-
-
                               SizedBox(
                                 height: 10,
                               ),
@@ -946,6 +653,7 @@ Widget AddNewClientScreen(context) {
                                   color:
                                   FlutterFlowTheme.of(context).tertiary,
                                 ),
+
                               ),
                               SizedBox(
                                 height: 10,
@@ -954,7 +662,7 @@ Widget AddNewClientScreen(context) {
                                 controller: nonPeriodicRepairsController,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'non periodic repair',
+                                  labelText: 'non periodic repairs',
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
@@ -1004,6 +712,71 @@ Widget AddNewClientScreen(context) {
                                   color:
                                   FlutterFlowTheme.of(context).tertiary,
                                 ),
+
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextFormField(
+                                controller: distanceController,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: 'distance',
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .bodySmall
+                                      .override(
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFFF68B1E),
+                                  ),
+                                  hintStyle:
+                                  FlutterFlowTheme.of(context).bodySmall,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFFDBE2E7),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFFF68B1E),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  contentPadding:
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      16, 24, 0, 24),
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'please enter the distance';
+                                  }
+                                  return null;
+                                },
                               ),
                               SizedBox(
                                 height: 10,
@@ -1062,6 +835,12 @@ Widget AddNewClientScreen(context) {
                                   color:
                                   FlutterFlowTheme.of(context).tertiary,
                                 ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'please enter the motor number';
+                                  }
+                                  return null;
+                                },
                               ),
                             ],
                           ),

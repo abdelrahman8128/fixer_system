@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:fixer_system/cubit/states.dart';
-import 'package:fixer_system/models/change_service_state_model.dart';
 import 'package:fixer_system/models/get_specific_user_model.dart';
 import 'package:fixer_system/models/get_users_model.dart';
 import 'package:fixer_system/models/get_workers_model.dart';
@@ -12,22 +11,24 @@ import 'package:http/http.dart';
 
 import '../components/show_toast_function/show_toast_function.dart';
 import '../models/get_all_cars_model.dart';
+import '../models/get_all_repairs_for_specific_car_model.dart';
 import '../models/get_list_of_inventory_components_model.dart';
 import '../models/get_repairing_cars_model.dart';
-import '../models/get_services_model.dart';
+import '../models/get_specific_car_model.dart';
+import '../models/monthly_report_model.dart';
 
 class AppCubit extends Cubit<AppCubitStates> {
   AppCubit() : super(AppInitialState());
   static AppCubit get(context) => BlocProvider.of(context);
-  GetUsersModel? getUsersModel = null;
-  GetServicesModel? getServicesModel = null;
-  ChangeServiceStateModel? changeServiceStateModel = null;
-  GetWorkersModel? getWorkersModel = null;
-  GetCarsModel?getCarsModel=null;
-  GetRepairingCarsModel?getRepairingCarsModel=null;
-  GetListOfInventoryComponentsModel?getListOfComponentsModel=null;
-  GetSpecificUserModel?getSpecificUserModel=null;
-
+  GetUsersModel? getUsersModel =GetUsersModel();
+  GetWorkersModel? getWorkersModel = GetWorkersModel();
+  GetCarsModel?getCarsModel=GetCarsModel();
+  GetRepairingCarsModel?getRepairingCarsModel=GetRepairingCarsModel();
+  GetListOfInventoryComponentsModel?getListOfComponentsModel=GetListOfInventoryComponentsModel();
+  GetSpecificUserModel?getSpecificUserModel=GetSpecificUserModel();
+  GetSpecificCarModel?getSpecificCarModel=GetSpecificCarModel();
+  GetAllRepairsForSpecificCarModel?getAllRepairsForSpecificCarModel=GetAllRepairsForSpecificCarModel();
+  MainPramsModel?mainPramsModel=MainPramsModel();
   var time=DateTime.now();
   void changDatePicker(value)
   {
@@ -39,11 +40,18 @@ class AppCubit extends Cubit<AppCubitStates> {
     required String email,
     required String carNumber,
     required String phoneNumber,
-    required String carIdNumber,
     required String color,
     required String brand,
     required String category,
-    required String distance, required String role,
+    required String distance,
+    required String role,
+
+    required String chassisNumber,
+    required String nextRepairDate,
+    required String lastRepairDate,
+    required String periodicRepairs,
+    required String nonPeriodicRepairs,
+    required String motorNumber,
   }) {
     emit(AppAddClientLoadingState());
     const url = 'https://fixer-backend-1.onrender.com/api/V1/User';
@@ -57,13 +65,22 @@ class AppCubit extends Cubit<AppCubitStates> {
       'email': email,
       'carNumber': carNumber,
       'phoneNumber': phoneNumber,
-      'carIdNumber': carIdNumber,
       'color': color,
       'brand': brand,
       'category': category,
-      'model': time.toString(),
+      'model': time.year.toString(),
       "role": role,
-      'distance':distance,
+      'distances':distance,
+      'chassisNumber':chassisNumber,
+       'nextRepairDate':nextRepairDate,
+       'lastRepairDate':lastRepairDate,
+       'periodicRepairs':periodicRepairs,
+       'nonPeriodicRepairs':nonPeriodicRepairs,
+       'motorNumber':motorNumber,
+      "State": "good",
+
+
+
     });
 
     post(Uri.parse(url), headers: headers, body: body).then((response) {
@@ -106,45 +123,33 @@ class AppCubit extends Cubit<AppCubitStates> {
     });
   }
 
-  void getCarServicesByNumber(context,{
-    required String carNumber,
-  }) async {
-    if (getServicesModel == null) {
-      emit(AppGetCarServicesByNumberLoadingState());
-      String url =
-          'https://fixer-backend-1.onrender.com/api/V1/repairing/' + carNumber;
-      final headers = {'Content-Type': 'application/json'};
-      return read(
-        Uri.parse(url),
-        headers: headers,
-      ).then((response) {
-        getServicesModel = GetServicesModel.fromJson(jsonDecode(response));
-        if (getServicesModel!.visits.isNotEmpty) {
-          print('daret ya sey3');
-          emit(AppGetCarServicesByNumberSuccessState());
-        } else {
-          emit(AppGetCarServicesByNumberErrorState(response.toString()));
-          showToast(context,'Failed to load, please try to reopen the app');
-        }
-      }).catchError((error) {
-        emit(AppGetCarServicesByNumberErrorState(error.toString()));
-      });
-    }
-  }
 
   void changeServiceState(context,
-      {required String serviceId, required String state}) async {
+      {required String serviceId,
+        required String state,
+      })  {
+    print (serviceId);
     emit(AppChangeServiceStateLoadingState());
-    String url =
-        'https://fixer-backend-1.onrender.com/api/V1/repairing/' + serviceId;
+    String url ='https://fixer-backend-1.onrender.com/api/V1/repairing/${serviceId}';
     final headers = {'Content-Type': 'application/json'};
-    return put(Uri.parse(url), headers: headers, body: {
+    final body = jsonEncode({
       'newState': state,
-    }).then((response) {
-      print(jsonDecode(response.body)['message']);
-      showToast(context,jsonDecode(response.body)['message']);
-      emit(AppChangeServiceStateSuccessState());
+
+    });
+     put(Uri.parse(url), headers: headers, body:body).then((response) {
+      print(response.body.toString());
+      if (response.statusCode==200){
+        showToast(context, 'service state changed successfully');
+        emit(AppChangeServiceStateSuccessState());
+
+      }
+      else{
+        emit(AppChangeServiceStateErrorState(''));
+        showToast(context, response.body);
+
+      }
     }).catchError((error) {
+      print(error.toString());
       emit(AppChangeServiceStateErrorState(error.toString()));
     });
   }
@@ -174,6 +179,7 @@ class AppCubit extends Cubit<AppCubitStates> {
     required String jobTitle,
     required String salary,
     required String IDNumber,
+
   }) {
     emit(AppAddWorkerLoadingState());
     const url = 'https://fixer-backend-1.onrender.com/api/V1/Worker';
@@ -463,6 +469,8 @@ class AppCubit extends Cubit<AppCubitStates> {
     required String userId,
   }){
 
+
+    emit(AppGetSpecificUserLoadingState());
     String url = 'https://fixer-backend-1.onrender.com/api/V1/User/${userId}';
     final headers = {
       'Content-Type': 'application/json',
@@ -470,25 +478,349 @@ class AppCubit extends Cubit<AppCubitStates> {
       'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
     };
 
-    emit(AppGetSpecificUserLoadingState());
     read(
       Uri.parse(url),
       headers: headers,
     ).then((value) {
 
       getSpecificUserModel = GetSpecificUserModel.fromJson(jsonDecode(value));
-      print(getSpecificUserModel?.name);
       if (getSpecificUserModel?.name != null) {
         emit(AppGetSpecificUserSuccessState());
       } else {
-        emit(AppGetSpecificUserSuccessState());
+        emit(AppGetSpecificUserErrorState());
       }
     }).catchError((error){
       print(error);
-      emit(AppGetSpecificUserSuccessState());
+      emit(AppGetSpecificUserErrorState());
     });
 
   }
+
+
+
+  void addCar(context,{
+
+    required String id,
+    required String carNumber,
+    required String color,
+    required String brand,
+    required String category,
+    required String distance,
+    required String chassisNumber,
+    required String nextRepairDate,
+    required String lastRepairDate,
+    required String periodicRepairs,
+    required String nonPeriodicRepairs,
+    required String motorNumber,
+  }) {
+    emit(AppAddCarLoadingState());
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/Garage/add/${id}';
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
+    };
+    final body = jsonEncode({
+      'carNumber': carNumber,
+      'chassisNumber':chassisNumber,
+      'nextRepairDate':nextRepairDate,
+      'lastRepairDate':lastRepairDate,
+      'color': color,
+      'brand': brand,
+      'category': category,
+      'model': time.year.toString(),
+      'distance':distance,
+      'motorNumber':motorNumber,
+      'repairing':false,
+      "periodicRepairs": 0,
+      "nonPeriodicRepairs": 0,
+
+    });
+
+    post(Uri.parse(url), headers: headers, body: body).then((response) {
+
+      if (response.statusCode==201) {
+        showToast(context,"User added successfully");
+        emit(AppAddCarSuccessState());
+      } else {
+        showToast(context ,response.body);
+        emit(AppAddCarErrorState());
+
+      }
+      // if (forgetPasswordModel!.status != 'fail') {
+      //   emit(AppForgetPasswordSuccessState());
+      //   showToast('password sent to your email');
+      // } else {
+      //   emit(AppForgetPasswordErrorState(forgetPasswordModel?.message ?? ''));
+      // }
+    });
+  }
+
+  void updateUser(context,{
+    required String id,
+    required String email,
+    required String name,
+    required String phone,
+}){
+    emit(AppUpdateUsersLoadingState());
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/User/${id}';
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
+    };
+    final body = jsonEncode({
+      'name': name,
+      'email':email,
+      'phoneNumber':phone,
+    });
+    put(Uri.parse(url), headers: headers, body: body).then((value) {
+      if (value.statusCode==200)
+        {
+          showToast(context, 'user updated successfully');
+          emit(AppUpdateUsersSuccessState());
+
+        }
+      else {
+
+        emit(AppUpdateUsersErrorState());
+      }
+
+
+        }
+    ).catchError((error){
+      emit(AppUpdateUsersErrorState());
+
+    });
+  }
+
+  void getSpecificCarById({
+    required String carId,
+
+  }){
+    getAllRepairsForSpecificCarModel?.repairs=[];
+    emit(AppGetSpecificCarLoadingState());
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/Garage/getCar/${carId}';
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
+    };
+
+    read(
+      Uri.parse(url),
+      headers: headers,
+    ).then((value) {
+      getSpecificCarModel = GetSpecificCarModel.fromJson(jsonDecode(value));
+      if (getSpecificCarModel?.carData?.id!= null) {
+        emit(AppGetSpecificCarSuccessState());
+        getAllRepairsForSpecificCar(carId: carId);
+      } else {
+        emit(AppGetSpecificCarSuccessState());
+      }
+    }).catchError((error){
+      print(error);
+      emit(AppGetSpecificCarErrorState());
+    });
+
+  }
+
+
+
+  void addRepair(context,{
+
+    required String carNumber,
+   required List<Map<String,dynamic>>components,
+    required List<Map<String,dynamic>>services,
+    required List<Map<String,dynamic>>additions,
+    required String type,
+    required double discount,
+    required int daysItTake,
+    required String nextPerDate,
+
+  }) {
+    emit(AppAddRepairLoadingState());
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/repairing';
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
+    };
+    final body = jsonEncode({
+      'components': components,
+      'services':services,
+      'additions':additions,
+      'carNumber':carNumber,
+      'type': type,
+      'discount':discount ,
+      'daysItTake': daysItTake,
+      'nextPerDate':nextPerDate,
+
+    });
+
+    post(Uri.parse(url), headers: headers, body: body).then((response) {
+
+      if (response.statusCode==200) {
+        showToast(context,"Repair added successfully");
+        emit(AppAddRepairSuccessState());
+      } else {
+        showToast(context ,response.body);
+        emit(AppAddRepairErrorState());
+      }
+      // if (forgetPasswordModel!.status != 'fail') {
+      //   emit(AppForgetPasswordSuccessState());
+      //   showToast('password sent to your email');
+      // } else {
+      //   emit(AppForgetPasswordErrorState(forgetPasswordModel?.message ?? ''));
+      // }
+    });
+  }
+
+
+  void getAllRepairsForSpecificCar({
+    required String carId,
+  }){
+
+
+    emit(AppGetAllRepairsForSpecificCarLoadingState());
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/repairing/getById/${carId}';
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
+    };
+
+    read(
+      Uri.parse(url),
+      headers: headers,
+    ).then((value) {
+
+      getAllRepairsForSpecificCarModel = GetAllRepairsForSpecificCarModel.fromJson(jsonDecode(value));
+      if (getAllRepairsForSpecificCarModel?.repairs != null) {
+        emit(AppGetAllRepairsForSpecificCarSuccessState());
+      } else {
+        emit(AppGetSpecificUserErrorState());
+      }
+    }).catchError((error){
+      print(error);
+      emit(AppGetAllRepairsForSpecificCarErrorState());
+    });
+
+  }
+
+
+  void updateCar(context,{
+    required String carNumber,
+    required String carIdNumber,
+    required String color,
+    required String state,
+    required String brand,
+    required String category,
+    required String model,
+    required String periodicRepairs,
+    required String nonPeriodicRepairs,
+    required String repairing,
+    required String distance,
+    required String motorNumber,
+    required String nextRepair,
+    required String carId,
+    required String lastRepair,
+
+  }){
+    emit(AppUpdateCarLoadingState());
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/Garage/update/${carId}';
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
+    };
+    final body = jsonEncode({
+      '_id': carId,
+      "carNumber": carNumber,
+      "carIdNumber": carIdNumber,
+      "color": color,
+      "State": state,
+      "brand": brand,
+      "category": category,
+      "model": model,
+      "nextRepairDate": nextRepair,
+      "lastRepairDate": lastRepair,
+      "periodicRepairs": periodicRepairs,
+      "nonPeriodicRepairs": nonPeriodicRepairs,
+      // "componentState": [
+      //   {
+      //     "_id": "661d425cf5cfc07996163c99"
+      //   },
+      //   {
+      //     "_id": "661d425cf5cfc07996163c9a"
+      //   }
+      // ],
+      "repairing": repairing,
+      "distances": distance,
+      "motorNumber": motorNumber,
+    });
+    put(Uri.parse(url), headers: headers, body: body).then((value) {
+      if (value.statusCode==200)
+      {
+        showToast(context, 'car updated successfully');
+        emit(AppUpdateCarSuccessState());
+
+      }
+      else {
+
+        emit(AppUpdateCarErrorState());
+      }
+
+
+    }
+    ).catchError((error){
+      emit(AppUpdateCarErrorState());
+
+    });
+  }
+
+
+
+  void getMainPrams({
+    required String year,
+    required String month,
+  }){
+
+
+    emit(AppGetMainPramsLoadingState());
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/MonthlyReport/specific_month_year/';
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E',
+      'year':year,
+      'month':month,
+    };
+    // final body = jsonEncode({
+    //
+    // });
+
+    read(
+      Uri.parse(url),
+      headers: headers,
+
+    ).then((value) {
+      print(value);
+      mainPramsModel = MainPramsModel.fromJson(jsonDecode(value));
+      if (mainPramsModel?.id != null) {
+        emit(AppGetMainPramsSuccessState());
+      } else {
+        emit(AppGetMainPramsErrorState());
+      }
+    }).catchError((error){
+      print(error);
+      emit(AppGetMainPramsErrorState());
+    });
+
+  }
+
+
+
 
 
 }

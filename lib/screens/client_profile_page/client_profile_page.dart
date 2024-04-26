@@ -5,11 +5,11 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../components/client_car_item_builder.dart';
 import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
+import '../alert_screens/add_car_screen.dart';
 
 class ClientProfilePage extends StatefulWidget {
 String userId;
@@ -28,16 +28,6 @@ class _ClientDetailsState extends State<ClientProfilePage> {
     //WidgetsFlutterBinding.ensureInitialized();
 
     AppCubit.get(context).getSpecificUser(userId: userId);
-    nameController = TextEditingController(text: AppCubit.get(context).getSpecificUserModel?.name);
-
-    emailController = TextEditingController(text: AppCubit.get(context).getSpecificUserModel?.email);
-
-    phoneNumberController = TextEditingController(text: AppCubit.get(context).getSpecificUserModel?.phoneNumber);
-
-    passwordController=TextEditingController(text: AppCubit.get(context).getSpecificUserModel?.password);
-
-    _radioSelected =AppCubit.get(context).getSpecificUserModel!.active!?1:2 ;
-
 
     super.initState();
 
@@ -49,7 +39,9 @@ class _ClientDetailsState extends State<ClientProfilePage> {
     super.dispose();
   }
 
-  final _formKey = GlobalKey<FormState>();
+
+
+  final formKey = GlobalKey<FormState>();
 
   var nameController = TextEditingController();
 
@@ -60,9 +52,9 @@ class _ClientDetailsState extends State<ClientProfilePage> {
 
   var passwordController = TextEditingController();
 
-  int? _radioSelected;
+  int? _radioSelected=1;
   bool? _radioVal;
-
+  bool readOnly=true;
   @override
   Widget build(BuildContext context) {
 
@@ -70,296 +62,401 @@ class _ClientDetailsState extends State<ClientProfilePage> {
     return BlocConsumer<AppCubit,AppCubitStates>(
         listener: (context, state) {
 
+          if (state is AppGetSpecificUserSuccessState)
+            {
+              nameController = TextEditingController(text: AppCubit.get(context).getSpecificUserModel?.name);
+
+              emailController = TextEditingController(text: AppCubit.get(context).getSpecificUserModel?.email);
+
+              phoneNumberController = TextEditingController(text: AppCubit.get(context).getSpecificUserModel?.phoneNumber);
+
+              passwordController=TextEditingController(text: AppCubit.get(context).getSpecificUserModel?.password);
+
+              _radioSelected =AppCubit.get(context).getSpecificUserModel!.active ?1:2 ;
+
+
+
+            }
+          else if (state is AppUpdateUsersSuccessState)
+            {
+              readOnly= true;
+            }
+
+
         },
         builder:(context, state) {
-          return Scaffold(
-            appBar: AppBar(),
-            body:  Form(
-              key: _formKey,
-              child: SingleChildScrollView(
+          return Form(
+            key: formKey,
+            child: Scaffold(
+            
+              floatingActionButton: Container(
+                alignment: Alignment.bottomRight,
+                child: ConditionalBuilder(
+                  condition: state is AppUpdateUsersLoadingState,
+                  builder: (context) => CircularProgressIndicator(),
+                  fallback: (context) => FloatingActionButton(
+                    onPressed: () {
+                      if (readOnly==true)
+                        {
+                          setState(() {
+                          readOnly=false;
 
-                child: Container(
-                  padding: EdgeInsets.all(30),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 30),
-                            width: MediaQuery.sizeOf(context).width * 0.45,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                TextFormField(
-                                  controller: nameController,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelText: 'name',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .bodySmall
-                                        .override(
-                                      fontFamily: 'Outfit',
-                                      color: Color(0xFFF68B1E),
-                                    ),
-                                    hintStyle:
-                                    FlutterFlowTheme.of(context).bodySmall,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0xFFDBE2E7),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0xFFF68B1E),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    contentPadding:
-                                    EdgeInsetsDirectional.fromSTEB(
-                                        16, 24, 0, 24),
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color:
-                                    FlutterFlowTheme.of(context).tertiary,
-                                  ),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'please enter the name';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                TextFormField(
-                                  controller: emailController,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelText: 'Email',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .bodySmall
-                                        .override(
-                                      fontFamily: 'Outfit',
-                                      color: Color(0xFFF68B1E),
-                                    ),
-                                    hintStyle:
-                                    FlutterFlowTheme.of(context).bodySmall,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0xFFDBE2E7),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0xFFF68B1E),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    contentPadding:
-                                    EdgeInsetsDirectional.fromSTEB(
-                                        16, 24, 0, 24),
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color:
-                                    FlutterFlowTheme.of(context).tertiary,
-                                  ),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'please enter the Email';
-                                    }
-                                    return null;
-                                  },
-                                ),
-
-
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 30),
-                            width: MediaQuery.sizeOf(context).width * 0.45,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                TextFormField(
-                                  controller: phoneNumberController,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    labelText: 'phone number',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .bodySmall
-                                        .override(
-                                      fontFamily: 'Outfit',
-                                      color: Color(0xFFF68B1E),
-                                    ),
-                                    hintStyle:
-                                    FlutterFlowTheme.of(context).bodySmall,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0xFFDBE2E7),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0xFFF68B1E),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    contentPadding:
-                                    EdgeInsetsDirectional.fromSTEB(
-                                        16, 24, 0, 24),
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color:
-                                    FlutterFlowTheme.of(context).tertiary,
-                                  ),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'please enter the phone number';
-                                    } else if (value.length < 10) {
-                                      return 'The phone number is to short';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(25),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Radio(
-                                        value: 1,
-                                        groupValue: _radioSelected,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            _radioSelected = value;
-                                            _radioVal = true;
-                                          });
-                                        },
-                                      ),
-                                      Text('Active'),
-                                      SizedBox(width: 20,),
-                                      Radio(
-                                        value: 2,
-                                        groupValue: _radioSelected,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            _radioSelected = value;
-                                            _radioVal = false;
-                                          });
-                                        },
-                                      ),
-                                      Text('Not Active'),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      ConditionalBuilder(
-                        condition:state is  AppGetSpecificUserLoadingState,
-                        builder: (context) => Center(child: CircularProgressIndicator()),
-                        fallback:(context) =>  Padding(
-                          padding: const EdgeInsetsDirectional
-                              .fromSTEB(0, 16, 0, 0),
-                          child: Container(
-                            height: 250,
-                            child: ListView.builder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-
-                              scrollDirection: Axis.horizontal,
-                              //physics: BouncingScrollPhysics(),
-                              itemBuilder: (context, index) => clientCarItemBuilder(context,AppCubit.get(context).getSpecificUserModel!.cars[index]),//AppCubit.get(context).getUsersModel!.users[index]),
-                              itemCount: AppCubit.get(context).getSpecificUserModel!.cars.length,
-                            ),
-                          ),
-                        ),
-                      ),
-
-                    ],
+                          });
+                        }
+                      else if (formKey.currentState!.validate()) {
+                        AppCubit.get(context).updateUser(context,
+                          email: emailController.text.toString(),
+                          name: nameController.text.toString(),
+                          phone: phoneNumberController.text.toString(),
+                          id: userId,
+                        );
+                      }
+                    },
+                    shape: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: BorderSide.none),
+                    child: readOnly == true
+                        ? Icon(Icons.edit_outlined)
+                        : Icon(
+                      Icons.done,
+                      size: 30,
+                    ),
                   ),
                 ),
               ),
-            ),
+              appBar: AppBar(
+                actions: [
+                  FlutterFlowIconButton(
+                    borderColor:
+                    FlutterFlowTheme.of(
+                        context)
+                        .lineColor,
+                    borderRadius: 12,
+                    borderWidth: 1,
+                    buttonSize: 50,
+                    fillColor: FlutterFlowTheme
+                        .of(context)
+                        .secondaryBackground,
+                    icon: Icon(
+                      Icons.car_repair_rounded,
+                      color:
+                      FlutterFlowTheme.of(
+                          context)
+                          .secondaryText,
+                      size: 24,
+                    ),
+                    onPressed: () async {
+                      showDialog(context: context, builder: (context) => AddNewCarScreen(context,userId));
+                    },
+                  ),
+                ],
+              ),
+              body: ConditionalBuilder(
+                condition: state is AppGetSpecificUserLoadingState,
+                builder: (context) => Center(child: CircularProgressIndicator()),
+                fallback: (context) =>  SingleChildScrollView(
 
+                  child: Container(
+                    padding: const EdgeInsets.all(30),
+                    child: Column(
+                      children: [
+
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 30),
+                              width: MediaQuery.sizeOf(context).width * 0.45,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  TextFormField(
+                                    readOnly: readOnly,
+                                    controller: nameController,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      labelText: 'name',
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .bodySmall
+                                          .override(
+                                        fontFamily: 'Outfit',
+                                        color: const Color(0xFFF68B1E),
+                                      ),
+                                      hintStyle:
+                                      FlutterFlowTheme.of(context).bodySmall,
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Color(0xFFDBE2E7),
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Color(0xFFF68B1E),
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Colors.red,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Colors.red,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      contentPadding:
+                                      const EdgeInsetsDirectional.fromSTEB(
+                                          16, 24, 0, 24),
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                      fontFamily: 'Outfit',
+                                      color:
+                                      FlutterFlowTheme.of(context).tertiary,
+                                    ),
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'please enter the name';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextFormField(
+                                    readOnly: readOnly,
+
+                                    controller: emailController,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      labelText: 'Email',
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .bodySmall
+                                          .override(
+                                        fontFamily: 'Outfit',
+                                        color: const Color(0xFFF68B1E),
+                                      ),
+                                      hintStyle:
+                                      FlutterFlowTheme.of(context).bodySmall,
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Color(0xFFDBE2E7),
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Color(0xFFF68B1E),
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Colors.red,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Colors.red,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      contentPadding:
+                                      const EdgeInsetsDirectional.fromSTEB(
+                                          16, 24, 0, 24),
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                      fontFamily: 'Outfit',
+                                      color:
+                                      FlutterFlowTheme.of(context).tertiary,
+                                    ),
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'please enter the Email';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+
+
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 30),
+                              width: MediaQuery.sizeOf(context).width * 0.45,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextFormField(
+                                    readOnly: readOnly,
+
+                                    controller: phoneNumberController,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      labelText: 'phone number',
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .bodySmall
+                                          .override(
+                                        fontFamily: 'Outfit',
+                                        color: const Color(0xFFF68B1E),
+                                      ),
+                                      hintStyle:
+                                      FlutterFlowTheme.of(context).bodySmall,
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Color(0xFFDBE2E7),
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Color(0xFFF68B1E),
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Colors.red,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: Colors.red,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      contentPadding:
+                                      const EdgeInsetsDirectional.fromSTEB(
+                                          16, 24, 0, 24),
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                      fontFamily: 'Outfit',
+                                      color:
+                                      FlutterFlowTheme.of(context).tertiary,
+                                    ),
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'please enter the phone number';
+                                      } else if (value.length < 10) {
+                                        return 'The phone number is to short';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(25),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Radio(
+                                          value: 1,
+                                          groupValue: _radioSelected,
+                                          onChanged: (value) {
+                                            if (readOnly==false) {
+                                              setState(() {
+                                                _radioSelected = value;
+                                                _radioVal = true;
+                                              });
+                                            }
+                                          },
+                                        ),
+                                        const Text('Active'),
+                                        const SizedBox(width: 20,),
+                                        Radio(
+                                          value: 2,
+                                          groupValue: _radioSelected,
+                                          onChanged: (value) {
+                                            if (readOnly==false)
+                                            {
+                                              setState(() {
+                                                _radioSelected = value;
+                                                _radioVal = false;
+                                              });
+                                            }
+                                          },
+                                        ),
+                                        const Text('Not Active'),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+
+                          children: [
+                            ConditionalBuilder(
+                              condition:state is  AppGetSpecificUserLoadingState,
+                              builder: (context) => const Center(child: CircularProgressIndicator()),
+                              fallback:(context) =>  Padding(
+                                padding: const EdgeInsetsDirectional
+                                    .all(25),
+                                child: Container(
+                                  height: 250,
+                                  child: ListView.separated(
+                                    padding: EdgeInsets.zero,
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    physics: const BouncingScrollPhysics(),
+                                    itemBuilder: (context, index) => clientCarItemBuilder(context,AppCubit.get(context).getSpecificUserModel!.cars[index]),//AppCubit.get(context).getUsersModel!.users[index]),
+                                    itemCount: AppCubit.get(context).getSpecificUserModel!.cars.length,
+                                    separatorBuilder: (context, index) => const SizedBox(width: 15,),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+
+            
+            ),
           );
         },
     );

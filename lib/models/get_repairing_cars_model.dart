@@ -1,12 +1,13 @@
 
 class GetRepairingCarsModel{
+  GetRepairingCarsModel();
   int ? results;
   int ? page;
   List<repairingCarData>data=[];
-  GetRepairingCarsModel.fromJson(Map<String,dynamic>json){
-    results=json['result'];
-    page=json['page'];
-    json['data'].forEach((element) {
+  GetRepairingCarsModel.fromJson(Map<String,dynamic>?json){
+    results=json?['result'];
+    page=json?['page'];
+    json?['data'].forEach((element) {
       data.add(repairingCarData.fromJson(element));
     });
   }
@@ -31,25 +32,25 @@ class repairingCarData{
   int?distances ;
   String? motorNumber;
   var repairingPercentage=0.5;
-  repairingCarData.fromJson(Map<String,dynamic>json)
+  repairingCarData.fromJson(Map<String,dynamic>?json)
   {
-     id=json['_id'];
-     ownerName=json['ownerName'];
-     carNumber=json['carNumber'];
-     carIdNumber=json['carIdNumber'];
-     color=json['color'];
-     state=json['State'];
-     brand=json['brand'];
-    category=json['category'];
-     model=json['model'];
-     generatedCode=json['generatedCode'];
-     nextRepairDate=json['nextRepairDate'];
-     lastRepairDate=json['lastRepairDate'];
-     periodicRepairs=json['periodicRepairs'];
-     nonPeriodicRepairs=json['nonPeriodicRepairs'];
-     componentState.addAll(json['componentState']);
-    repairing=json['repairing'];
-    distances =json['distances'];
-     motorNumber=json['motorNumber'];
+     id=json?['_id'];
+     ownerName=json?['ownerName'];
+     carNumber=json?['carNumber'];
+     carIdNumber=json?['carIdNumber'];
+     color=json?['color'];
+     state=json?['State'];
+     brand=json?['brand'];
+    category=json?['category'];
+     model=json?['model'];
+     generatedCode=json?['generatedCode'];
+     nextRepairDate=json?['nextRepairDate'];
+     lastRepairDate=json?['lastRepairDate'];
+     periodicRepairs=json?['periodicRepairs'];
+     nonPeriodicRepairs=json?['nonPeriodicRepairs'];
+     componentState.addAll(json?['componentState']);
+    repairing=json?['repairing'];
+    distances =json?['distances'];
+     motorNumber=json?['motorNumber'];
   }
 }
