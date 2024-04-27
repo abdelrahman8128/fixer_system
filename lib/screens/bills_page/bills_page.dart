@@ -55,7 +55,7 @@ var searchController=TextEditingController();
                   navOne: FlutterFlowTheme.of(context).secondaryText,
                   navTwo: FlutterFlowTheme.of(context).secondaryText,
                   navThree: FlutterFlowTheme.of(context).secondaryText,
-                  navFour: FlutterFlowTheme.of(context).alternate,
+                  navFour: Color(0xFFF68B1E),
                   navFive: FlutterFlowTheme.of(context).secondaryText,
                   navSix: FlutterFlowTheme.of(context).secondaryText,
                   navSeven: FlutterFlowTheme.of(context).secondaryText,

@@ -137,8 +137,7 @@ final _formKey = GlobalKey<FormState>();
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   const EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -201,8 +200,7 @@ final _formKey = GlobalKey<FormState>();
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   const EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -265,8 +263,7 @@ final _formKey = GlobalKey<FormState>();
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   const EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),

@@ -169,8 +169,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -233,8 +232,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -297,8 +295,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -361,8 +358,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -425,8 +421,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -501,8 +496,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -571,8 +565,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -640,8 +633,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -699,8 +691,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -758,8 +749,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -822,8 +812,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),

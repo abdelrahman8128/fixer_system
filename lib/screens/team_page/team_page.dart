@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:fixer_system/components/main_nav/main_nav.dart';
 import 'package:fixer_system/cubit/states.dart';
@@ -67,7 +66,7 @@ class _TeamPageState extends State<TeamPage> {
                       navTwo: FlutterFlowTheme.of(context).secondaryText,
                       navThree: FlutterFlowTheme.of(context).secondaryText,
                       navFour: FlutterFlowTheme.of(context).secondaryText,
-                      navFive: FlutterFlowTheme.of(context).alternate,
+                      navFive: Color(0xFFF68B1E),
                       navSix: FlutterFlowTheme.of(context).secondaryText,
                       navSeven: FlutterFlowTheme.of(context).secondaryText,
                     ),

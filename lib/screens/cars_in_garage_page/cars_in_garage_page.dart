@@ -70,7 +70,7 @@ class _CarsInGaragePageState extends State<CarsInGaragePage> {
                         child: MainNavWidget(
                           navOne: FlutterFlowTheme.of(context).secondaryText,
                           navTwo: FlutterFlowTheme.of(context).secondaryText,
-                          navThree: FlutterFlowTheme.of(context).alternate,
+                          navThree: Color(0xFFF68B1E),
                           navFour: FlutterFlowTheme.of(context).secondaryText,
                           navFive: FlutterFlowTheme.of(context).secondaryText,
                           navSix: FlutterFlowTheme.of(context).secondaryText,

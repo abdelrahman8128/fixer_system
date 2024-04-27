@@ -1,8 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 
@@ -12,22 +10,21 @@ import '../../cubit/states.dart';
 import '../alert_screens/add_car_screen.dart';
 
 class ClientProfilePage extends StatefulWidget {
-String userId;
-   ClientProfilePage(this.userId, {super.key});
+  const ClientProfilePage(this.userId, {super.key});
+  final String userId;
+
   @override
-  State<ClientProfilePage> createState() => _ClientDetailsState(userId);
+  State<ClientProfilePage> createState() => _ClientDetailsState();
 }
 
 class _ClientDetailsState extends State<ClientProfilePage> {
-  String userId;
-  _ClientDetailsState(this.userId);
 
 
   @override
   void initState() {
     //WidgetsFlutterBinding.ensureInitialized();
 
-    AppCubit.get(context).getSpecificUser(userId: userId);
+    AppCubit.get(context).getSpecificUser(userId: widget.userId);
 
     super.initState();
 
@@ -108,7 +105,7 @@ class _ClientDetailsState extends State<ClientProfilePage> {
                           email: emailController.text.toString(),
                           name: nameController.text.toString(),
                           phone: phoneNumberController.text.toString(),
-                          id: userId,
+                          id: widget.userId,
                         );
                       }
                     },
@@ -124,32 +121,66 @@ class _ClientDetailsState extends State<ClientProfilePage> {
                   ),
                 ),
               ),
-              appBar: AppBar(
-                actions: [
-                  FlutterFlowIconButton(
-                    borderColor:
-                    FlutterFlowTheme.of(
-                        context)
-                        .lineColor,
-                    borderRadius: 12,
-                    borderWidth: 1,
-                    buttonSize: 50,
-                    fillColor: FlutterFlowTheme
-                        .of(context)
-                        .secondaryBackground,
-                    icon: Icon(
-                      Icons.car_repair_rounded,
-                      color:
+              appBar: PreferredSize(
+                preferredSize: Size.fromHeight(66),
+                child: AppBar(
+                  toolbarHeight: 66,
+                  leadingWidth: 66,
+                  actions: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: FlutterFlowIconButton(
+                        borderColor:
+                        FlutterFlowTheme.of(
+                            context)
+                            .lineColor,
+                        borderRadius: 12,
+                        borderWidth: 1,
+                        buttonSize: 50,
+                        fillColor: FlutterFlowTheme
+                            .of(context)
+                            .secondaryBackground,
+                        icon: Icon(
+                          Icons.car_repair_rounded,
+                          color:
+                          FlutterFlowTheme.of(
+                              context)
+                              .secondaryText,
+                          size: 24,
+                        ),
+                        onPressed: () async {
+                          showDialog(context: context, builder: (context) => AddNewCarScreen(context,widget.userId));
+                        },
+                      ),
+                    ),
+                  ],
+                  leading: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: FlutterFlowIconButton(
+                      borderColor:
                       FlutterFlowTheme.of(
                           context)
-                          .secondaryText,
-                      size: 24,
+                          .lineColor,
+                      borderRadius: 12,
+                      borderWidth: 1,
+                      buttonSize: 50,
+                      fillColor: FlutterFlowTheme
+                          .of(context)
+                          .secondaryBackground,
+                      icon: Icon(
+                        Icons.arrow_back_rounded,
+                        color:
+                        FlutterFlowTheme.of(
+                            context)
+                            .secondaryText,
+                        size: 24,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                     ),
-                    onPressed: () async {
-                      showDialog(context: context, builder: (context) => AddNewCarScreen(context,userId));
-                    },
                   ),
-                ],
+                ),
               ),
               body: ConditionalBuilder(
                 condition: state is AppGetSpecificUserLoadingState,
@@ -187,8 +218,8 @@ class _ClientDetailsState extends State<ClientProfilePage> {
                                       hintStyle:
                                       FlutterFlowTheme.of(context).bodySmall,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFDBE2E7),
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context).alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -253,8 +284,8 @@ class _ClientDetailsState extends State<ClientProfilePage> {
                                       hintStyle:
                                       FlutterFlowTheme.of(context).bodySmall,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFDBE2E7),
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context).alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -332,8 +363,8 @@ class _ClientDetailsState extends State<ClientProfilePage> {
                                       hintStyle:
                                       FlutterFlowTheme.of(context).bodySmall,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFDBE2E7),
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context).alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -441,7 +472,7 @@ class _ClientDetailsState extends State<ClientProfilePage> {
                                     physics: const BouncingScrollPhysics(),
                                     itemBuilder: (context, index) => clientCarItemBuilder(context,AppCubit.get(context).getSpecificUserModel!.cars[index]),//AppCubit.get(context).getUsersModel!.users[index]),
                                     itemCount: AppCubit.get(context).getSpecificUserModel!.cars.length,
-                                    separatorBuilder: (context, index) => const SizedBox(width: 15,),
+                                    separatorBuilder: (context, index) => const SizedBox(width: 20,),
                                   ),
                                 ),
                               ),

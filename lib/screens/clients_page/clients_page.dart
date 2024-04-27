@@ -66,7 +66,7 @@ class _ClientsPageState extends State<ClientsPage> {
                   updateCallback: () => setState(() {}),
                   child: MainNavWidget(
                     navOne: FlutterFlowTheme.of(context).secondaryText,
-                    navTwo: FlutterFlowTheme.of(context).alternate,
+                    navTwo: Color(0xFFF68B1E),
                     navThree: FlutterFlowTheme.of(context).secondaryText,
                     navFour: FlutterFlowTheme.of(context).secondaryText,
                     navFive: FlutterFlowTheme.of(context).secondaryText,

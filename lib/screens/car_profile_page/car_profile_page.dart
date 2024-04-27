@@ -10,15 +10,13 @@ import '../../cubit/states.dart';
 
 
 class CarProfilePage extends StatefulWidget {
-  String carId;
-  CarProfilePage(this.carId, {super.key});
+  const CarProfilePage(this.carId, {super.key});
+  final String carId;
   @override
-  State<CarProfilePage> createState() => _CarProfilePageState(carId);
+  State<CarProfilePage> createState() => _CarProfilePageState();
 }
 
 class _CarProfilePageState extends State<CarProfilePage> {
-  String carId;
-  _CarProfilePageState(this.carId);
 
   TextEditingController idController = TextEditingController();
 
@@ -60,7 +58,7 @@ class _CarProfilePageState extends State<CarProfilePage> {
   @override
   void initState() {
     super.initState();
-    AppCubit.get(context).getSpecificCarById(carId: carId);
+    AppCubit.get(context).getSpecificCarById(carId: widget.carId);
   }
 
   @override
@@ -178,7 +176,7 @@ class _CarProfilePageState extends State<CarProfilePage> {
                 } else if (formKey.currentState!.validate()) {
                   AppCubit.get(context).updateCar(
                     context,
-                    carId: carId,
+                    carId: widget.carId,
                     carNumber: carNumberController.text,
                     carIdNumber: carIdNumberController.text,
                     color: colorController.text,
@@ -352,8 +350,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodySmall,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFDBE2E7),
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context).alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -408,8 +406,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodySmall,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFDBE2E7),
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context).alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -464,8 +462,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodySmall,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFDBE2E7),
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context).alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -520,8 +518,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodySmall,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFDBE2E7),
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context).alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -576,8 +574,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodySmall,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFDBE2E7),
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context).alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -632,8 +630,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodySmall,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFDBE2E7),
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context).alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -688,8 +686,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodySmall,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFDBE2E7),
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context).alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -744,8 +742,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodySmall,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFDBE2E7),
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context).alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -809,8 +807,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodySmall,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFDBE2E7),
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context).alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -865,8 +863,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodySmall,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFDBE2E7),
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context).alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -921,8 +919,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodySmall,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFDBE2E7),
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context).alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -977,8 +975,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodySmall,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFDBE2E7),
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context).alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -1033,8 +1031,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodySmall,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFDBE2E7),
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context).alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -1107,8 +1105,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodySmall,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFDBE2E7),
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context).alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),
@@ -1182,8 +1180,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodySmall,
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFDBE2E7),
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context).alternate,
                                           width: 2,
                                         ),
                                         borderRadius: BorderRadius.circular(8),

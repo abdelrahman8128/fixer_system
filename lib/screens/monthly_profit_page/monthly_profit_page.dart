@@ -70,7 +70,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                         navThree: FlutterFlowTheme.of(context).secondaryText,
                         navFour: FlutterFlowTheme.of(context).secondaryText,
                         navFive: FlutterFlowTheme.of(context).secondaryText,
-                        navSix: FlutterFlowTheme.of(context).alternate,
+                        navSix: Color(0xFFF68B1E),
                         navSeven: FlutterFlowTheme.of(context).secondaryText,
                       ),
                     ),

@@ -46,6 +46,8 @@ Widget AddNewClientScreen(context) {
     builder: (context, state) {
       return AlertDialog(
         alignment: Alignment.topRight,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        surfaceTintColor: FlutterFlowTheme.of(context).primaryBackground,
         title: Text(
           'Add Client',
           style: TextStyle(
@@ -56,9 +58,10 @@ Widget AddNewClientScreen(context) {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: Icon(Icons.close),
+          icon: Icon(Icons.close,color: FlutterFlowTheme.of(context).error,),
           hoverColor: Colors.transparent,
           highlightColor: Colors.transparent,
+          alignment: Alignment.centerRight,
         ),
         actions: [
           ConditionalBuilder(
@@ -171,8 +174,7 @@ Widget AddNewClientScreen(context) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           16, 24, 0, 24),
@@ -235,8 +237,7 @@ Widget AddNewClientScreen(context) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           16, 24, 0, 24),
@@ -299,8 +300,7 @@ Widget AddNewClientScreen(context) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           16, 24, 0, 24),
@@ -363,8 +363,7 @@ Widget AddNewClientScreen(context) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           16, 24, 0, 24),
@@ -429,8 +428,7 @@ Widget AddNewClientScreen(context) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           16, 24, 0, 24),
@@ -494,8 +492,7 @@ Widget AddNewClientScreen(context) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -552,8 +549,7 @@ Widget AddNewClientScreen(context) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -610,8 +606,7 @@ Widget AddNewClientScreen(context) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -675,8 +670,7 @@ Widget AddNewClientScreen(context) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           16, 24, 0, 24),
@@ -739,8 +733,7 @@ Widget AddNewClientScreen(context) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           16, 24, 0, 24),
@@ -803,8 +796,7 @@ Widget AddNewClientScreen(context) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           16, 24, 0, 24),
@@ -867,8 +859,7 @@ Widget AddNewClientScreen(context) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           16, 24, 0, 24),
@@ -933,8 +924,7 @@ Widget AddNewClientScreen(context) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -991,8 +981,7 @@ Widget AddNewClientScreen(context) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -1049,8 +1038,7 @@ Widget AddNewClientScreen(context) {
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),

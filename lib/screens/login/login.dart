@@ -110,14 +110,14 @@ class _LoginState extends State<Login> {
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).accent2,
+                                color: FlutterFlowTheme.of(context).alternate,
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).alternate,
+                                color: Color(0xFFF68B1E),
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
@@ -183,14 +183,14 @@ class _LoginState extends State<Login> {
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).accent2,
+                                color: FlutterFlowTheme.of(context).alternate,
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).alternate,
+                                color: Color(0xFFF68B1E),
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
@@ -256,7 +256,7 @@ class _LoginState extends State<Login> {
                           height: 40,
                           padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
                           iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          color: FlutterFlowTheme.of(context).alternate,
+                          color: Color(0xFFF68B1E),
                           textStyle: FlutterFlowTheme.of(context)
                               .titleSmall
                               .override(

@@ -71,7 +71,7 @@ class _InventoryPageState extends State<InventoryPage> {
                        navFour: FlutterFlowTheme.of(context).secondaryText,
                        navFive: FlutterFlowTheme.of(context).secondaryText,
                        navSix: FlutterFlowTheme.of(context).secondaryText,
-                       navSeven: FlutterFlowTheme.of(context).alternate,
+                       navSeven: Color(0xFFF68B1E),
                      ),
                    ),
                  Expanded(

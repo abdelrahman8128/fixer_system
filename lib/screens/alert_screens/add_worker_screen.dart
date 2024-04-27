@@ -149,8 +149,7 @@ var salaryController = TextEditingController();
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           16, 24, 0, 24),
@@ -213,8 +212,7 @@ var salaryController = TextEditingController();
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           16, 24, 0, 24),
@@ -279,8 +277,7 @@ var salaryController = TextEditingController();
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -343,8 +340,7 @@ var salaryController = TextEditingController();
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -407,8 +403,7 @@ var salaryController = TextEditingController();
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),

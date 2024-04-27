@@ -140,8 +140,7 @@ var priceController = TextEditingController();
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   const EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -204,8 +203,7 @@ var priceController = TextEditingController();
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   const EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),
@@ -268,8 +266,7 @@ var priceController = TextEditingController();
                                     ),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  filled: true,
-                                  fillColor: Colors.white,
+
                                   contentPadding:
                                   const EdgeInsetsDirectional.fromSTEB(
                                       16, 24, 0, 24),

@@ -67,7 +67,7 @@ class _CarsPageState extends State<CarsPage> {
                       model: _model.mainNavModel,
                       updateCallback: () => setState(() {}),
                       child: MainNavWidget(
-                        navOne: FlutterFlowTheme.of(context).alternate,
+                        navOne: Color(0xFFF68B1E),
                         navTwo: FlutterFlowTheme.of(context).secondaryText,
                         navThree: FlutterFlowTheme.of(context).secondaryText,
                         navFour: FlutterFlowTheme.of(context).secondaryText,
@@ -199,8 +199,8 @@ class _CarsPageState extends State<CarsPage> {
                                                           hintStyle:
                                                           FlutterFlowTheme.of(context).bodySmall,
                                                           enabledBorder: OutlineInputBorder(
-                                                            borderSide: const BorderSide(
-                                                              color: Color(0xFFDBE2E7),
+                                                            borderSide: BorderSide(
+                                                              color: FlutterFlowTheme.of(context).alternate,
                                                               width: 2,
                                                             ),
                                                             borderRadius: BorderRadius.circular(8),
@@ -226,8 +226,8 @@ class _CarsPageState extends State<CarsPage> {
                                                             ),
                                                             borderRadius: BorderRadius.circular(8),
                                                           ),
-                                                          filled: true,
-                                                          fillColor: Colors.white,
+                                                          /*filled: true,*/
+                                                          /*fillColor: Colors.white,*/
                                                           contentPadding:
                                                           const EdgeInsetsDirectional.fromSTEB(
                                                               16, 24, 0, 24),
