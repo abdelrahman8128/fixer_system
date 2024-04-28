@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 
@@ -15,58 +16,29 @@ Widget clientCarItemBuilder(context,SpecificCarData model){
       );
     },
     child: Container(
-      decoration:BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        /*color: Colors.orange.shade100,*/
-        /*gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Colors.grey.shade200,
-            Colors.grey.shade300,
-            Colors.grey.shade400,
-            Colors.grey.shade500,
-          ],
-        ),*/
-        color: Colors.grey.shade300,
-        boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade600,
-              spreadRadius: 1,
-              blurRadius: 5,
-              offset: const Offset(0, 5),
-            ),
-            BoxShadow(
-              color: Colors.grey.shade300,
-              offset: const Offset(-5,0),
-            ),
-            BoxShadow(
-              color: Colors.grey.shade300,
-              offset: const Offset(5,0),
-            )
-          ],
+      decoration:ShapeDecoration(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15),side: BorderSide(color: Colors.orange.shade300)),
+        color: Colors.orange.shade100,
+        shadows: CupertinoContextMenu.kEndBoxShadow
+
       ),
       padding: const EdgeInsets.all(5),
       width: MediaQuery.sizeOf(context).width * 0.15,
-      height: 250,
+      height: MediaQuery.sizeOf(context).width * 0.13,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset(
+            'assets/images/car.png',
+            width: MediaQuery.sizeOf(context).width * 0.15,
+            height: MediaQuery.sizeOf(context).width * 0.1,
+            fit: BoxFit.cover,
+          ),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              child: Image.asset(
-                'assets/images/car.png',
-                width: MediaQuery.sizeOf(context).width * 0.15,
-                height: MediaQuery.sizeOf(context).width * 0.1,
-                fit: BoxFit.cover,
-              ),
-              width: MediaQuery.sizeOf(context).width * 0.15,
-              height: MediaQuery.sizeOf(context).width * 0.1,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
-                borderRadius: BorderRadius.circular(15)
-              ),
-            ),
             Row(
               children: [
                 Text('Car Number: ',
@@ -78,7 +50,7 @@ Widget clientCarItemBuilder(context,SpecificCarData model){
                     fontSize: 12,
                   ),
                 ),
-                Text('${model.carNumber}',
+                Text('${(model.carNumber)??'-'}',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -100,7 +72,7 @@ Widget clientCarItemBuilder(context,SpecificCarData model){
                     fontSize: 12,
                   ),
                 ),
-                Text('${model.brand} ${model.category}',
+                Text('${(model.brand)??'-'} ${(model.category)??'-'}',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -122,7 +94,7 @@ Widget clientCarItemBuilder(context,SpecificCarData model){
                     fontSize: 12,
                   ),
                 ),
-                Text('${model.model}',
+                Text('${(model.model)??'-'}',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -144,7 +116,7 @@ Widget clientCarItemBuilder(context,SpecificCarData model){
                     fontSize: 12,
                   ),
                 ),
-                Text('${model.carCode}',
+                Text('${(model.carCode)??'-'}',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -155,8 +127,12 @@ Widget clientCarItemBuilder(context,SpecificCarData model){
                 ),
               ],
             ),
+        
           ],
         ),
+      ),
+      ]
     ),
+  ),
   );
 }

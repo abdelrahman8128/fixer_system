@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 
 import '../../components/client_car_item_builder.dart';
+import '../../components/custom/box_decoration.dart';
 import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
 import '../alert_screens/add_car_screen.dart';
@@ -122,7 +123,7 @@ class _ClientDetailsState extends State<ClientProfilePage> {
                 ),
               ),
               appBar: PreferredSize(
-                preferredSize: Size.fromHeight(66),
+                preferredSize: const Size.fromHeight(66),
                 child: AppBar(
                   toolbarHeight: 66,
                   leadingWidth: 66,
@@ -154,6 +155,7 @@ class _ClientDetailsState extends State<ClientProfilePage> {
                       ),
                     ),
                   ],
+                  title:const Text( "Client Profile"),
                   leading: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: FlutterFlowIconButton(
@@ -207,50 +209,8 @@ class _ClientDetailsState extends State<ClientProfilePage> {
                                     readOnly: readOnly,
                                     controller: nameController,
                                     obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelText: 'name',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                        fontFamily: 'Outfit',
-                                        color: const Color(0xFFF68B1E),
-                                      ),
-                                      hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context).alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFF68B1E),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                      const EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
-                                    ),
+                                    decoration: CustomInputDecoration.customInputDecoration(context,'name'),
+                                       
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -273,50 +233,8 @@ class _ClientDetailsState extends State<ClientProfilePage> {
 
                                     controller: emailController,
                                     obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelText: 'Email',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                        fontFamily: 'Outfit',
-                                        color: const Color(0xFFF68B1E),
-                                      ),
-                                      hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context).alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFF68B1E),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                      const EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
-                                    ),
+                                    decoration: CustomInputDecoration.customInputDecoration(context,'Email'),
+                                       
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -352,50 +270,8 @@ class _ClientDetailsState extends State<ClientProfilePage> {
 
                                     controller: phoneNumberController,
                                     obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelText: 'phone number',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                        fontFamily: 'Outfit',
-                                        color: const Color(0xFFF68B1E),
-                                      ),
-                                      hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context).alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFF68B1E),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                      const EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
-                                    ),
+                                    decoration: CustomInputDecoration.customInputDecoration(context,'phone number'),
+
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(

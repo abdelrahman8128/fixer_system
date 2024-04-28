@@ -30,7 +30,7 @@ class SpecificCarData{
   String? carNumber;
   int? phoneNumber;
   String? email;
-  String? carIdNumber;
+  String? chassisNumber;
   String? color;
   String? state;
   String? brand;
@@ -58,7 +58,7 @@ class SpecificCarData{
     carNumber = json?['carNumber'];
     phoneNumber = json?['phoneNumber'];
     email = json?['email'];
-    carIdNumber = json?['carIdNumber'];
+    chassisNumber = json?['chassisNumber'];
     color = json?['color'];
     brand = json?['brand'];
     category = json?['category'];

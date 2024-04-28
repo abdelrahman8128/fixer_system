@@ -12,6 +12,7 @@ class MainPramsModel {
    id=json?["_id"];
     salaries=json?["salars"];
     totalOutcome=json?["totalOutcome"];
+    income=json?['income'];
     createdAt=json?["createdAt"];
     updatedAt=json?["updatedAt"];
 

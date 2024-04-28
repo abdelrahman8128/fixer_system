@@ -1,8 +1,10 @@
+
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 
+import '../../components/custom/box_decoration.dart';
 import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
 
@@ -19,9 +21,13 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
   _AddRepairScreenState(this.carNumber);
 
   final _formKey = GlobalKey<FormState>();
-  List<Map<String, dynamic>> components = [];
-  List<Map<String, dynamic>> services = [];
-  List<Map<String, dynamic>> additions = [];
+  List<Map<String, dynamic>> components = [{'id': '', 'quantity': 0}];
+  List<Map<String, dynamic>> services = [{
+    'name': '',
+    'price': 0,
+    'state': 'repairing'
+  }];
+  List<Map<String, dynamic>> additions = [{'name': '', 'price': 0}];
   String serviceType = 'nonPeriodic';
   String serviceState='repairing';
 
@@ -166,56 +172,20 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                             children: [
                               Expanded(
                                 child: TextFormField(
+                                  validator: (value) {
+                                    if (value==null||value.isEmpty)
+                                      {
+                                        return'please fill this field';
+                                      }
+                                    return null;
+                                  },
                                   initialValue: components[index]['id'],
                                   onChanged: (value) {
                                     setState(() {
                                       components[index]['id'] = value;
                                     });
                                   },
-                                  decoration: InputDecoration(
-                                    labelText: 'ID',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .bodySmall
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: const Color(0xFFF68B1E),
-                                        ),
-                                    hintStyle:
-                                        FlutterFlowTheme.of(context).bodySmall,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFDBE2E7),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFF68B1E),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    contentPadding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            16, 24, 0, 24),
-                                  ),
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'ID'),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -235,6 +205,7 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(20)),
                                     onPressed: () {
+
                                       setState(() {
                                         if ( components[index]['quantity']> 1) components[index]['quantity']--;
                                       });
@@ -265,12 +236,20 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                             ],
                           );
                         },
+
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          setState(() {
-                            components.add({'id': '', 'quantity': 0});
-                          });
+                          if(components.isNotEmpty)
+                          {
+                            if (components.last['id']
+                                .toString()
+                                .isNotEmpty) {
+                              setState(() {
+                                components.add({'id': '', 'quantity': 0});
+                              });
+                            }
+                          }
                         },
                         child: const Text('Add Component'),
                       ),
@@ -286,50 +265,14 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                             children: [
                               Expanded(
                                 child: TextFormField(
-                                  decoration: InputDecoration(
-                                    labelText: 'Name',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .bodySmall
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: const Color(0xFFF68B1E),
-                                        ),
-                                    hintStyle:
-                                        FlutterFlowTheme.of(context).bodySmall,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFDBE2E7),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFF68B1E),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    contentPadding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            16, 24, 0, 24),
-                                  ),
+                                  validator: (value) {
+                                    if (value==null||value.isEmpty)
+                                    {
+                                      return'please fill this field';
+                                    }
+                                    return null;
+                                  },
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Name'),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -348,50 +291,14 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                               const SizedBox(width: 16.0),
                               Expanded(
                                 child: TextFormField(
-                                  decoration: InputDecoration(
-                                    labelText: 'Price',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .bodySmall
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: const Color(0xFFF68B1E),
-                                        ),
-                                    hintStyle:
-                                        FlutterFlowTheme.of(context).bodySmall,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFDBE2E7),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFF68B1E),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    contentPadding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            16, 24, 0, 24),
-                                  ),
+                                  validator: (value) {
+                                    if (value==null||value.isEmpty)
+                                    {
+                                      return'please fill this field';
+                                    }
+                                    return null;
+                                  },
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Price'),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -412,50 +319,7 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                               const SizedBox(width: 16.0),
                               Expanded(
                                 child: DropdownButtonFormField<String>(
-                                  decoration: InputDecoration(
-                                    labelText: 'State',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .bodySmall
-                                        .override(
-                                      fontFamily: 'Outfit',
-                                      color: const Color(0xFFF68B1E),
-                                    ),
-                                    hintStyle:
-                                    FlutterFlowTheme.of(context).bodySmall,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFDBE2E7),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFF68B1E),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    contentPadding:
-                                    const EdgeInsetsDirectional.fromSTEB(
-                                        16, 24, 0, 24),
-                                  ),
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'State'),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -486,9 +350,18 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          setState(() {
-                            services.add({'name': '', 'price': 0, 'state': 'repairing'});
-                          });
+                          if (services.isNotEmpty)
+                          {
+                            if (services.last['name'].toString().isNotEmpty) {
+                              setState(() {
+                                services.add({
+                                  'name': '',
+                                  'price': 0,
+                                  'state': 'repairing'
+                                });
+                              });
+                            }
+                          }
                         },
                         child: const Text('Add Service'),
                       ),
@@ -503,50 +376,14 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                             children: [
                               Expanded(
                                 child: TextFormField(
-                                  decoration: InputDecoration(
-                                    labelText: 'Name',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .bodySmall
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: const Color(0xFFF68B1E),
-                                        ),
-                                    hintStyle:
-                                        FlutterFlowTheme.of(context).bodySmall,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFDBE2E7),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFF68B1E),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    contentPadding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            16, 24, 0, 24),
-                                  ),
+                                  validator: (value) {
+                                    if (value==null||value.isEmpty)
+                                    {
+                                      return'please fill this field';
+                                    }
+                                    return null;
+                                  },
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Name'),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -565,50 +402,14 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                               const SizedBox(width: 16.0),
                               Expanded(
                                 child: TextFormField(
-                                  decoration: InputDecoration(
-                                    labelText: 'Price',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .bodySmall
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: const Color(0xFFF68B1E),
-                                        ),
-                                    hintStyle:
-                                        FlutterFlowTheme.of(context).bodySmall,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFDBE2E7),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFF68B1E),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    contentPadding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            16, 24, 0, 24),
-                                  ),
+                                  validator: (value) {
+                                    if (value==null||value.isEmpty)
+                                    {
+                                      return'please fill this field';
+                                    }
+                                    return null;
+                                  },
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Price'),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -632,9 +433,14 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          setState(() {
-                            additions.add({'name': '', 'price': 0});
-                          });
+                          if (additions.isNotEmpty)
+                          {
+                            if (additions.last['name'].toString().isNotEmpty) {
+                              setState(() {
+                                additions.add({'name': '', 'price': 0});
+                              });
+                            }
+                          }
                         },
                         child: const Text('Add Addition'),
                       ),
@@ -646,50 +452,7 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                             child: Column(
                               children: [
                                 DropdownButtonFormField<String>(
-                                  decoration: InputDecoration(
-                                    labelText: 'Type',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .bodySmall
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: const Color(0xFFF68B1E),
-                                        ),
-                                    hintStyle:
-                                        FlutterFlowTheme.of(context).bodySmall,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFDBE2E7),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFF68B1E),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    contentPadding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            16, 24, 0, 24),
-                                  ),
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Type'),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -714,50 +477,15 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                                 ),
                                 const SizedBox(height: 16.0),
                                 TextFormField(
-                                  decoration: InputDecoration(
-                                    labelText: 'Discount',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .bodySmall
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: const Color(0xFFF68B1E),
-                                        ),
-                                    hintStyle:
-                                        FlutterFlowTheme.of(context).bodySmall,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFDBE2E7),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFF68B1E),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    contentPadding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            16, 24, 0, 24),
-                                  ),
+                                  validator: (value) {
+                                    if (value==null||value.isEmpty)
+                                    {
+                                      return'please fill this field';
+                                    }
+                                    return null;
+                                  },
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Discount'),
+
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -784,50 +512,14 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                             child: Column(
                               children: [
                                 TextFormField(
-                                  decoration: InputDecoration(
-                                    labelText: 'Days It Takes',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .bodySmall
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: const Color(0xFFF68B1E),
-                                        ),
-                                    hintStyle:
-                                        FlutterFlowTheme.of(context).bodySmall,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFDBE2E7),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFF68B1E),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    contentPadding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            16, 24, 0, 24),
-                                  ),
+                                  validator: (value) {
+                                    if (value==null||value.isEmpty)
+                                    {
+                                      return'please fill this field';
+                                    }
+                                    return null;
+                                  },
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Days It Takes'),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -844,51 +536,15 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                                 ),
                                 const SizedBox(height: 16.0),
                                 TextFormField(
+                                  validator: (value) {
+                                    if (value==null||value.isEmpty)
+                                    {
+                                      return'please fill this field';
+                                    }
+                                    return null;
+                                  },
                                   controller:nextPerDateController ,
-                                  decoration: InputDecoration(
-                                    labelText: 'Next Per Date',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .bodySmall
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: const Color(0xFFF68B1E),
-                                        ),
-                                    hintStyle:
-                                        FlutterFlowTheme.of(context).bodySmall,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFDBE2E7),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Color(0xFFF68B1E),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                        color: Colors.red,
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    contentPadding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            16, 24, 0, 24),
-                                  ),
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Next Per Date'),
 
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium

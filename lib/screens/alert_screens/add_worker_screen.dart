@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 
+import '../../components/custom/box_decoration.dart';
 import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
 
@@ -42,9 +43,10 @@ var salaryController = TextEditingController();
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: Icon(Icons.close),
+          icon: Icon(Icons.close,color: FlutterFlowTheme.of(context).error,),
           hoverColor: Colors.transparent,
           highlightColor: Colors.transparent,
+          alignment: Alignment.centerRight,
         ),
         actions: [
           ConditionalBuilder(
@@ -111,49 +113,8 @@ var salaryController = TextEditingController();
                               TextFormField(
                                 controller: nameController,
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'name',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-
-                                  contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
-                                ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'name'),
+                                     
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -174,49 +135,7 @@ var salaryController = TextEditingController();
                               TextFormField(
                                 controller: phoneNumberController,
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'phone number',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-
-                                  contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
-                                ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'phone number'),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -239,49 +158,7 @@ var salaryController = TextEditingController();
                               TextFormField(
                                 controller: IdNumberController,
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'ID number',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-
-                                  contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'ID number'),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -302,49 +179,10 @@ var salaryController = TextEditingController();
                               TextFormField(
                                 controller: jobTitleController,
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Job title ',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'Job title '),
+                                   
 
-                                  contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
+                                   
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -365,49 +203,10 @@ var salaryController = TextEditingController();
                               TextFormField(
                                 controller: salaryController,
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Salary',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'Salary'),
+                                   
 
-                                  contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
+                                   
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(

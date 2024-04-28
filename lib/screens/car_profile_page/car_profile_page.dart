@@ -7,6 +7,8 @@ import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import '../../components/repair_item_builder.dart';
 import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
+import '../../components/custom/box_decoration.dart';
+
 
 
 class CarProfilePage extends StatefulWidget {
@@ -22,7 +24,7 @@ class _CarProfilePageState extends State<CarProfilePage> {
 
   TextEditingController carNumberController = TextEditingController();
 
-  TextEditingController carIdNumberController = TextEditingController();
+  TextEditingController carChassisNumberController = TextEditingController();
 
   TextEditingController colorController = TextEditingController();
 
@@ -65,7 +67,7 @@ class _CarProfilePageState extends State<CarProfilePage> {
   void dispose() {
     idController.dispose();
     carNumberController.dispose();
-    carIdNumberController.dispose();
+    carChassisNumberController.dispose();
     colorController.dispose();
     stateController.dispose();
     brandController.dispose();
@@ -92,11 +94,11 @@ class _CarProfilePageState extends State<CarProfilePage> {
         carNumberController = TextEditingController(
             text:
                 AppCubit.get(context).getSpecificCarModel?.carData?.carNumber);
-        carIdNumberController = TextEditingController(
+        carChassisNumberController = TextEditingController(
             text: AppCubit.get(context)
                 .getSpecificCarModel
                 ?.carData
-                ?.carIdNumber);
+                ?.chassisNumber);
         colorController = TextEditingController(
             text: AppCubit.get(context).getSpecificCarModel?.carData?.color);
         stateController = TextEditingController(
@@ -158,7 +160,14 @@ class _CarProfilePageState extends State<CarProfilePage> {
                 ?.carData
                 ?.lastRepairDate
                 ?.toString());
+
       }
+      else if (state is AppUpdateCarSuccessState)
+        {
+          setState(() {
+          readOnly=true;
+          });
+        }
     },
         builder: (context, state) {
       return Scaffold(
@@ -178,7 +187,6 @@ class _CarProfilePageState extends State<CarProfilePage> {
                     context,
                     carId: widget.carId,
                     carNumber: carNumberController.text,
-                    carIdNumber: carIdNumberController.text,
                     color: colorController.text,
                     state: stateController.text,
                     brand: brandController.text,
@@ -208,35 +216,74 @@ class _CarProfilePageState extends State<CarProfilePage> {
           ),
         ),
         appBar: AppBar(
+          toolbarHeight: 66,
+          leadingWidth: 66,
           title: const Text(
             'Car profile',
           ),
           actions: [
-            FlutterFlowIconButton(
-              borderColor: FlutterFlowTheme.of(context).lineColor,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FlutterFlowIconButton(
+                borderColor:
+                FlutterFlowTheme.of(
+                    context)
+                    .lineColor,
+                borderRadius: 12,
+                borderWidth: 1,
+                buttonSize: 50,
+                fillColor: FlutterFlowTheme
+                    .of(context)
+                    .secondaryBackground,
+                icon: Icon(
+                  Icons.car_repair_rounded,
+                  color:
+                  FlutterFlowTheme.of(
+                      context)
+                      .secondaryText,
+                  size: 24,
+                ),
+                onPressed: () async {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddRepairScreen(AppCubit.get(context)
+                          .getSpecificCarModel!
+                          .carData!
+                          .carNumber!),
+                    ),
+                  );
+                },
+              ),
+            ),
+
+          ],
+          leading: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FlutterFlowIconButton(
+              borderColor:
+              FlutterFlowTheme.of(
+                  context)
+                  .lineColor,
               borderRadius: 12,
               borderWidth: 1,
               buttonSize: 50,
-              fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+              fillColor: FlutterFlowTheme
+                  .of(context)
+                  .secondaryBackground,
               icon: Icon(
-                Icons.car_repair_rounded,
-                color: FlutterFlowTheme.of(context).secondaryText,
+                Icons.arrow_back_rounded,
+                color:
+                FlutterFlowTheme.of(
+                    context)
+                    .secondaryText,
                 size: 24,
               ),
-              onPressed: () async {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AddRepairScreen(AppCubit.get(context)
-                        .getSpecificCarModel!
-                        .carData!
-                        .carNumber!),
-                  ),
-                );
-                // showDialog(context: context, builder: (context) => AddRepairScreen());
+              onPressed: () {
+                Navigator.pop(context);
               },
             ),
-          ],
+          ),
         ),
         body: Form(
           key: formKey,
@@ -318,14 +365,7 @@ class _CarProfilePageState extends State<CarProfilePage> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(30),
-                          child: Text(
-                            '#${idController.text}',
-                            style: const TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold),
-                          ),
-                        ),
+
                         Row(
                           children: [
                             Container(
@@ -337,52 +377,10 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                 children: [
                                   const SizedBox(height: 16.0),
                                   TextFormField(
-                                    controller: carIdNumberController,
+                                    controller: carChassisNumberController,
                                     readOnly:false,
-                                    decoration: InputDecoration(
-                                      labelText: 'Car ID Number',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: const Color(0xFFF68B1E),
-                                          ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context).alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFF68B1E),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              16, 24, 0, 24),
-                                    ),
+                                    decoration: CustomInputDecoration.customInputDecoration(context,'Car Chassis Number'),
+                                       
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -395,50 +393,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                   TextFormField(
                                     controller: colorController,
                                     readOnly:readOnly,
-                                    decoration: InputDecoration(
-                                      labelText: 'Color',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: const Color(0xFFF68B1E),
-                                          ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context).alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFF68B1E),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              16, 24, 0, 24),
-                                    ),
+                                    decoration: CustomInputDecoration.customInputDecoration(context,'Color'),
+                                       
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -451,50 +407,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                   TextFormField(
                                     controller: stateController,
                                     readOnly:false,
-                                    decoration: InputDecoration(
-                                      labelText: 'State',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: const Color(0xFFF68B1E),
-                                          ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context).alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFF68B1E),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              16, 24, 0, 24),
-                                    ),
+                                    decoration: CustomInputDecoration.customInputDecoration(context,'State'),
+                                       
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -507,50 +421,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                   TextFormField(
                                     controller: brandController,
                                     readOnly:readOnly,
-                                    decoration: InputDecoration(
-                                      labelText: 'Brand',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: const Color(0xFFF68B1E),
-                                          ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context).alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFF68B1E),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              16, 24, 0, 24),
-                                    ),
+                                    decoration: CustomInputDecoration.customInputDecoration(context,'Brand'),
+                                       
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -563,50 +435,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                   TextFormField(
                                     controller: categoryController,
                                     readOnly:readOnly,
-                                    decoration: InputDecoration(
-                                      labelText: 'Category',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: const Color(0xFFF68B1E),
-                                          ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context).alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFF68B1E),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              16, 24, 0, 24),
-                                    ),
+                                    decoration: CustomInputDecoration.customInputDecoration(context,'Category'),
+                                       
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -619,50 +449,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                   TextFormField(
                                     controller: modelController,
                                     readOnly:readOnly,
-                                    decoration: InputDecoration(
-                                      labelText: 'Model',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: const Color(0xFFF68B1E),
-                                          ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context).alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFF68B1E),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              16, 24, 0, 24),
-                                    ),
+                                    decoration: CustomInputDecoration.customInputDecoration(context,'Model'),
+                                       
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -674,51 +462,9 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                   const SizedBox(height: 16.0),
                                   TextFormField(
                                     controller: generatedCodeController,
-                                    readOnly:false,
-                                    decoration: InputDecoration(
-                                      labelText: 'Generated Code',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: const Color(0xFFF68B1E),
-                                          ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context).alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFF68B1E),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              16, 24, 0, 24),
-                                    ),
+                                    readOnly:true,
+                                    decoration: CustomInputDecoration.customInputDecoration(context,'Generated Code'),
+                                       
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -730,51 +476,9 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                   const SizedBox(height: 16.0),
                                   TextFormField(
                                     controller: generatedPasswordController,
-                                    readOnly:false,
-                                    decoration: InputDecoration(
-                                      labelText: 'Generated Password',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: const Color(0xFFF68B1E),
-                                          ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context).alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFF68B1E),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              16, 24, 0, 24),
-                                    ),
+                                    readOnly:true,
+                                    decoration: CustomInputDecoration.customInputDecoration(context,'Generated Password'),
+                                       
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -796,50 +500,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                  TextFormField(
                                     controller: periodicRepairsController,
                                     readOnly:readOnly,
-                                    decoration: InputDecoration(
-                                      labelText: 'Periodic Repairs',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: const Color(0xFFF68B1E),
-                                          ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context).alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFF68B1E),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              16, 24, 0, 24),
-                                    ),
+                                    decoration: CustomInputDecoration.customInputDecoration(context,'Periodic Repairs'),
+                                       
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -852,50 +514,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                   TextFormField(
                                     controller: nonPeriodicRepairsController,
                                     readOnly:readOnly,
-                                    decoration: InputDecoration(
-                                      labelText: 'Non-Periodic Repairs',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: const Color(0xFFF68B1E),
-                                          ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context).alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFF68B1E),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              16, 24, 0, 24),
-                                    ),
+                                    decoration: CustomInputDecoration.customInputDecoration(context,'Non-Periodic Repairs'),
+                                       
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -908,50 +528,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                   TextFormField(
                                     controller: repairingController,
                                     readOnly:false,
-                                    decoration: InputDecoration(
-                                      labelText: 'Repairing',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: const Color(0xFFF68B1E),
-                                          ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context).alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFF68B1E),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              16, 24, 0, 24),
-                                    ),
+                                    decoration: CustomInputDecoration.customInputDecoration(context,'Repairing'),
+                                       
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -964,50 +542,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                   TextFormField(
                                     controller: distanceController,
                                     readOnly:readOnly,
-                                    decoration: InputDecoration(
-                                      labelText: 'Distance',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: const Color(0xFFF68B1E),
-                                          ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context).alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFF68B1E),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              16, 24, 0, 24),
-                                    ),
+                                    decoration: CustomInputDecoration.customInputDecoration(context,'Distance'),
+                                       
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -1020,50 +556,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                   TextFormField(
                                     controller: motorNumberController,
                                     readOnly:readOnly,
-                                    decoration: InputDecoration(
-                                      labelText: 'Motor Number',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: const Color(0xFFF68B1E),
-                                          ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context).alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFF68B1E),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              16, 24, 0, 24),
-                                    ),
+                                    decoration: CustomInputDecoration.customInputDecoration(context,'Motor Number'),
+                                       
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -1094,50 +588,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                     },
                                     controller: lastRepairDateController,
                                     readOnly:readOnly,
-                                    decoration: InputDecoration(
-                                      labelText: 'last Repair Date',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: const Color(0xFFF68B1E),
-                                          ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context).alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFF68B1E),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              16, 24, 0, 24),
-                                    ),
+                                    decoration: CustomInputDecoration.customInputDecoration(context,'last Repair Date'),
+                                       
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -1169,50 +621,7 @@ class _CarProfilePageState extends State<CarProfilePage> {
 
                                     controller: nextRepairDateController,
                                     readOnly:readOnly,
-                                    decoration: InputDecoration(
-                                      labelText: 'Next Repair Date',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: const Color(0xFFF68B1E),
-                                          ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodySmall,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context).alternate,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0xFFF68B1E),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Colors.red,
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              16, 24, 0, 24),
-                                    ),
+                                    decoration: CustomInputDecoration.customInputDecoration(context,'Next Repair Date'),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(

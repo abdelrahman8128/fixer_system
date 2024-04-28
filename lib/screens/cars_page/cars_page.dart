@@ -9,6 +9,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../components/custom/box_decoration.dart';
 import 'cars_page_model.dart';
 export 'cars_page_model.dart';
 
@@ -47,9 +48,12 @@ class _CarsPageState extends State<CarsPage> {
       },
       builder: (context, state) {
         return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
+          onTap: () {
+            _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+              : FocusScope.of(context).unfocus();
+
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -188,50 +192,7 @@ class _CarsPageState extends State<CarsPage> {
                                                       child:TextFormField(
                                                         controller: searchController,
                                                         obscureText: false,
-                                                        decoration: InputDecoration(
-                                                          labelText: 'Search',
-                                                          labelStyle: FlutterFlowTheme.of(context)
-                                                              .bodySmall
-                                                              .override(
-                                                            fontFamily: 'Outfit',
-                                                            color: const Color(0xFFF68B1E),
-                                                          ),
-                                                          hintStyle:
-                                                          FlutterFlowTheme.of(context).bodySmall,
-                                                          enabledBorder: OutlineInputBorder(
-                                                            borderSide: BorderSide(
-                                                              color: FlutterFlowTheme.of(context).alternate,
-                                                              width: 2,
-                                                            ),
-                                                            borderRadius: BorderRadius.circular(8),
-                                                          ),
-                                                          focusedBorder: OutlineInputBorder(
-                                                            borderSide: const BorderSide(
-                                                              color: Color(0xFFF68B1E),
-                                                              width: 2,
-                                                            ),
-                                                            borderRadius: BorderRadius.circular(8),
-                                                          ),
-                                                          errorBorder: OutlineInputBorder(
-                                                            borderSide: const BorderSide(
-                                                              color: Colors.red,
-                                                              width: 2,
-                                                            ),
-                                                            borderRadius: BorderRadius.circular(8),
-                                                          ),
-                                                          focusedErrorBorder: OutlineInputBorder(
-                                                            borderSide: const BorderSide(
-                                                              color: Colors.red,
-                                                              width: 2,
-                                                            ),
-                                                            borderRadius: BorderRadius.circular(8),
-                                                          ),
-                                                          /*filled: true,*/
-                                                          /*fillColor: Colors.white,*/
-                                                          contentPadding:
-                                                          const EdgeInsetsDirectional.fromSTEB(
-                                                              16, 24, 0, 24),
-                                                        ),
+                                                        decoration: CustomInputDecoration.customInputDecoration(context,'Search'),
                                                         style: FlutterFlowTheme.of(context)
                                                             .bodyMedium
                                                             .override(

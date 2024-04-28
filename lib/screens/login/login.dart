@@ -6,6 +6,7 @@ import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../components/custom/box_decoration.dart';
 import 'login_model.dart';
 export 'login_model.dart';
 
@@ -88,55 +89,9 @@ class _LoginState extends State<Login> {
                           autofillHints: const [AutofillHints.email],
                           textInputAction: TextInputAction.next,
                           obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'email',
-                            labelStyle:
-                            FlutterFlowTheme.of(context).labelMedium.override(
-                              fontFamily: FlutterFlowTheme.of(context)
-                                  .labelMediumFamily,
-                              letterSpacing: 0,
-                              useGoogleFonts: GoogleFonts.asMap()
-                                  .containsKey(FlutterFlowTheme.of(context)
-                                  .labelMediumFamily),
-                            ),
-                            hintStyle:
-                            FlutterFlowTheme.of(context).labelMedium.override(
-                              fontFamily: FlutterFlowTheme.of(context)
-                                  .labelMediumFamily,
-                              letterSpacing: 0,
-                              useGoogleFonts: GoogleFonts.asMap()
-                                  .containsKey(FlutterFlowTheme.of(context)
-                                  .labelMediumFamily),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).alternate,
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFFF68B1E),
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
+                          decoration: CustomInputDecoration.customInputDecoration(context,'email'),
+
+
                           style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily:
                             FlutterFlowTheme.of(context).bodyMediumFamily,
@@ -161,7 +116,7 @@ class _LoginState extends State<Login> {
                           autofocus: true,
                           textInputAction: TextInputAction.done,
                           obscureText: !_model.passwordVisibility,
-                          decoration: InputDecoration(
+                          decoration:InputDecoration(
                             labelText: 'password',
                             labelStyle:
                             FlutterFlowTheme.of(context).labelMedium.override(

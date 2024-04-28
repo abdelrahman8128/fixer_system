@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 
+import '../../components/custom/box_decoration.dart';
 import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
 
@@ -53,13 +54,14 @@ Widget AddNewCarScreen(context, String userId,) {
             fontSize: 25,
           ),
         ),
-        icon: IconButton(
+        icon:IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: Icon(Icons.close),
+          icon: Icon(Icons.close,color: FlutterFlowTheme.of(context).error,),
           hoverColor: Colors.transparent,
           highlightColor: Colors.transparent,
+          alignment: Alignment.centerRight,
         ),
         actions: [
           ConditionalBuilder(
@@ -131,49 +133,7 @@ Widget AddNewCarScreen(context, String userId,) {
                               TextFormField(
                                 controller: carNumberController,
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Car number',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-
-                                  contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'Car number'),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -194,49 +154,7 @@ Widget AddNewCarScreen(context, String userId,) {
                               TextFormField(
                                 controller: chassisNumberController,
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'chassis number',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-
-                                  contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'chassis number'),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -257,49 +175,7 @@ Widget AddNewCarScreen(context, String userId,) {
                               TextFormField(
                                 controller: colorController,
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'color',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-
-                                  contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'color'),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -320,49 +196,7 @@ Widget AddNewCarScreen(context, String userId,) {
                               TextFormField(
                                 controller: brandController,
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'brand',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-
-                                  contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'brand'),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -383,49 +217,7 @@ Widget AddNewCarScreen(context, String userId,) {
                               TextFormField(
                                 controller: categoryController,
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'category',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-
-                                  contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'category'),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -458,49 +250,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                 controller: nextRepairDateController,
 
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Next Repair date',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-
-                                  contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'Next Repair date'),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -527,56 +277,7 @@ Widget AddNewCarScreen(context, String userId,) {
                               TextFormField(
                                 controller: lastRepairDateController,
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'last Repair date',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-
-                                  contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                  fontFamily: 'Outfit',
-                                  color:
-                                  FlutterFlowTheme.of(context).tertiary,
-                                ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'last Repair date'),
                                 onTap:() {
                                   showDatePicker(
                                     context: context,
@@ -595,49 +296,8 @@ Widget AddNewCarScreen(context, String userId,) {
                               TextFormField(
                                 controller: periodicRepairsController,
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'periodic repairs',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-
-                                  contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'periodic repairs'),
+                                   
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -653,49 +313,9 @@ Widget AddNewCarScreen(context, String userId,) {
                               TextFormField(
                                 controller: nonPeriodicRepairsController,
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'non periodic repairs',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'non periodic repairs'),
 
-                                  contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
+
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -711,49 +331,9 @@ Widget AddNewCarScreen(context, String userId,) {
                               TextFormField(
                                 controller: distanceController,
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'distance',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'distance'),
 
-                                  contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
+                                   
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -774,49 +354,10 @@ Widget AddNewCarScreen(context, String userId,) {
                               TextFormField(
                                 controller: motorNumberController,
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'motor number',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'motor number'),
 
-                                  contentPadding:
-                                  EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
+
+                                   
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(

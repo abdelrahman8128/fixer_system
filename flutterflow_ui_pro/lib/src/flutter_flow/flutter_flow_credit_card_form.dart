@@ -18,7 +18,7 @@ class FlutterFlowCreditCardForm extends StatefulWidget {
     this.obscureCvv = false,
     this.textStyle,
     this.spacing = 10.0,
-    this.inputDecoration = const InputDecoration(
+    this.CustomInputDecoration.customInputDecoration(context,''), = const InputDecoration(
       border: OutlineInputBorder(),
     ),
   }) : super(key: key);

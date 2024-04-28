@@ -98,11 +98,11 @@ Widget AddNewClientScreen(context) {
                 iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 color: Color(0xFFF68B1E),
                 textStyle: FlutterFlowTheme.of(context).titleMedium.override(
-                      fontFamily: 'Lexend Deca',
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  fontFamily: 'Lexend Deca',
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
                 elevation: 3,
                 borderSide: BorderSide(
                   color: Colors.transparent,
@@ -141,11 +141,11 @@ Widget AddNewClientScreen(context) {
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFFF68B1E),
+                                  ),
                                   hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
+                                  FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0xFFDBE2E7),
@@ -176,16 +176,16 @@ Widget AddNewClientScreen(context) {
                                   ),
 
                                   contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      16, 24, 0, 24),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                    ),
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
+                                ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'please enter the name';
@@ -204,11 +204,11 @@ Widget AddNewClientScreen(context) {
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFFF68B1E),
+                                  ),
                                   hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
+                                  FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0xFFDBE2E7),
@@ -239,16 +239,16 @@ Widget AddNewClientScreen(context) {
                                   ),
 
                                   contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      16, 24, 0, 24),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                    ),
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
+                                ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'please enter the Email';
@@ -267,11 +267,11 @@ Widget AddNewClientScreen(context) {
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFFF68B1E),
+                                  ),
                                   hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
+                                  FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0xFFDBE2E7),
@@ -302,16 +302,16 @@ Widget AddNewClientScreen(context) {
                                   ),
 
                                   contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      16, 24, 0, 24),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                    ),
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
+                                ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'please enter the Car number';
@@ -330,11 +330,11 @@ Widget AddNewClientScreen(context) {
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFFF68B1E),
+                                  ),
                                   hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
+                                  FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0xFFDBE2E7),
@@ -365,16 +365,16 @@ Widget AddNewClientScreen(context) {
                                   ),
 
                                   contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      16, 24, 0, 24),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                    ),
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
+                                ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'please enter the phone number';
@@ -395,11 +395,11 @@ Widget AddNewClientScreen(context) {
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFFF68B1E),
+                                  ),
                                   hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
+                                  FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0xFFDBE2E7),
@@ -430,16 +430,16 @@ Widget AddNewClientScreen(context) {
                                   ),
 
                                   contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      16, 24, 0, 24),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                    ),
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
+                                ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'please enter the distance';
@@ -637,11 +637,11 @@ Widget AddNewClientScreen(context) {
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFFF68B1E),
+                                  ),
                                   hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
+                                  FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0xFFDBE2E7),
@@ -672,16 +672,16 @@ Widget AddNewClientScreen(context) {
                                   ),
 
                                   contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      16, 24, 0, 24),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                    ),
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
+                                ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'please enter the name';
@@ -700,11 +700,11 @@ Widget AddNewClientScreen(context) {
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFFF68B1E),
+                                  ),
                                   hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
+                                  FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0xFFDBE2E7),
@@ -735,16 +735,16 @@ Widget AddNewClientScreen(context) {
                                   ),
 
                                   contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      16, 24, 0, 24),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                    ),
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
+                                ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'please enter the name';
@@ -763,11 +763,11 @@ Widget AddNewClientScreen(context) {
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFFF68B1E),
+                                  ),
                                   hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
+                                  FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0xFFDBE2E7),
@@ -798,16 +798,16 @@ Widget AddNewClientScreen(context) {
                                   ),
 
                                   contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      16, 24, 0, 24),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                    ),
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
+                                ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'please enter the name';
@@ -826,11 +826,11 @@ Widget AddNewClientScreen(context) {
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
-                                        fontFamily: 'Outfit',
-                                        color: Color(0xFFF68B1E),
-                                      ),
+                                    fontFamily: 'Outfit',
+                                    color: Color(0xFFF68B1E),
+                                  ),
                                   hintStyle:
-                                      FlutterFlowTheme.of(context).bodySmall,
+                                  FlutterFlowTheme.of(context).bodySmall,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color(0xFFDBE2E7),
@@ -861,16 +861,16 @@ Widget AddNewClientScreen(context) {
                                   ),
 
                                   contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 24, 0, 24),
+                                  EdgeInsetsDirectional.fromSTEB(
+                                      16, 24, 0, 24),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Outfit',
-                                      color:
-                                          FlutterFlowTheme.of(context).tertiary,
-                                    ),
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
+                                ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'please enter the role';

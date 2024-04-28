@@ -1,5 +1,6 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:fixer_system/components/client_item_builder.dart';
+import 'package:fixer_system/components/custom/box_decoration.dart';
 import 'package:fixer_system/components/main_nav/main_nav.dart';
 import 'package:fixer_system/screens/alert_screens/add_client_screen.dart';
 import 'package:flutter/material.dart';
@@ -186,50 +187,7 @@ class _ClientsPageState extends State<ClientsPage> {
                                                   child:TextFormField(
                                                     controller: searchController,
                                                     obscureText: false,
-                                                    decoration: InputDecoration(
-                                                      labelText: 'Search',
-                                                      labelStyle: FlutterFlowTheme.of(context)
-                                                          .bodySmall
-                                                          .override(
-                                                        fontFamily: 'Outfit',
-                                                        color: const Color(0xFFF68B1E),
-                                                      ),
-                                                      hintStyle:
-                                                      FlutterFlowTheme.of(context).bodySmall,
-                                                      enabledBorder: OutlineInputBorder(
-                                                        borderSide: const BorderSide(
-                                                          color: Color(0xFFDBE2E7),
-                                                          width: 2,
-                                                        ),
-                                                        borderRadius: BorderRadius.circular(8),
-                                                      ),
-                                                      focusedBorder: OutlineInputBorder(
-                                                        borderSide: const BorderSide(
-                                                          color: Color(0xFFF68B1E),
-                                                          width: 2,
-                                                        ),
-                                                        borderRadius: BorderRadius.circular(8),
-                                                      ),
-                                                      errorBorder: OutlineInputBorder(
-                                                        borderSide: const BorderSide(
-                                                          color: Colors.red,
-                                                          width: 2,
-                                                        ),
-                                                        borderRadius: BorderRadius.circular(8),
-                                                      ),
-                                                      focusedErrorBorder: OutlineInputBorder(
-                                                        borderSide: const BorderSide(
-                                                          color: Colors.red,
-                                                          width: 2,
-                                                        ),
-                                                        borderRadius: BorderRadius.circular(8),
-                                                      ),
-                                                      filled: true,
-                                                      fillColor: Colors.white,
-                                                      contentPadding:
-                                                      const EdgeInsetsDirectional.fromSTEB(
-                                                          16, 24, 0, 24),
-                                                    ),
+                                                    decoration: CustomInputDecoration.customInputDecoration(context,'Search'),
                                                     style: FlutterFlowTheme.of(context)
                                                         .bodyMedium
                                                         .override(

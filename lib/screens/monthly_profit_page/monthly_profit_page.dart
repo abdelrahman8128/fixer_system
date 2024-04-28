@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:fixer_system/components/main_nav/main_nav.dart';
 import 'package:fixer_system/cubit/states.dart';
 import 'package:flutter/material.dart';
@@ -22,13 +23,12 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   int currentYear = DateTime.now().year;
 
-
-
-
   @override
   void initState() {
     super.initState();
-    AppCubit.get(context).getMainPrams(year: DateTime.now().year.toString(), month: DateTime.now().month.toString());
+    AppCubit.get(context).getMainPrams(
+        year: DateTime.now().year.toString(),
+        month: DateTime.now().month.toString());
     _model = createModel(context, () => MonthlyProfitPageModel());
   }
 
@@ -42,7 +42,14 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppCubitStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state==AppGetMainPramsSuccessState)
+          {
+            setState(() {
+
+            });
+          }
+      },
       builder: (context, state) {
         return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
@@ -299,8 +306,11 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                   const EdgeInsetsDirectional
                                                       .fromSTEB(8, 0, 8, 0),
                                               child: FlutterFlowDropDown(
-                                                initialOption: '2024',
-                                                options:List.generate(currentYear- 2020+1, (index) => (2020+index).toString()),
+                                                initialOption: DateTime.now().year.toString(),
+                                                options: List.generate(
+                                                    currentYear - 2020 + 1,
+                                                    (index) => (2020 + index)
+                                                        .toString()),
                                                 onChanged: (val) => setState(
                                                     () => _model
                                                         .dropDownValue1 = val),
@@ -344,7 +354,6 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                     const EdgeInsetsDirectional
                                                         .fromSTEB(16, 4, 16, 4),
                                                 hidesUnderline: true,
-
                                               ),
                                             ),
                                             Padding(
@@ -352,12 +361,14 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                   const EdgeInsetsDirectional
                                                       .fromSTEB(8, 0, 8, 0),
                                               child: FlutterFlowDropDown(
-                                                initialOption: '5',
-                                                options:List.generate(12, (index) =>( 1+index).toString()),
+                                                initialOption: DateTime.now().month.toString(),
+                                                options: List.generate(
+                                                    12,
+                                                    (index) =>
+                                                        (1 + index).toString()),
                                                 onChanged: (val) => setState(
                                                     () => _model
-                                                        .dropDownValue2 = val
-                                                ),
+                                                        .dropDownValue2 = val),
                                                 width: 150,
                                                 height: 56,
                                                 textStyle:
@@ -441,26 +452,32 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                         BorderRadius.circular(
                                                             16),
                                                   ),
-                                                  child: FlutterFlowIconButton(
-                                                    borderColor:
+                                                  child: ConditionalBuilder(
+                                                      condition: state is AppGetMainPramsLoadingState,
+                                                      builder: (context) => CircularProgressIndicator(),
+                                                      fallback:(context) => FlutterFlowIconButton(
+                                                        borderColor:
                                                         FlutterFlowTheme.of(
-                                                                context)
+                                                            context)
                                                             .lineColor,
-                                                    borderRadius: 12,
-                                                    borderWidth: 1,
-                                                    buttonSize: 50,
-                                                    fillColor: FlutterFlowTheme
+                                                        borderRadius: 12,
+                                                        borderWidth: 1,
+                                                        buttonSize: 50,
+                                                        fillColor: FlutterFlowTheme
                                                             .of(context)
-                                                        .secondaryBackground,
-                                                    icon: Icon(
-                                                      Icons.search_rounded,
-                                                      color:
+                                                            .secondaryBackground,
+                                                        icon: Icon(
+                                                          Icons.search_rounded,
+                                                          color:
                                                           FlutterFlowTheme.of(
-                                                                  context)
+                                                              context)
                                                               .secondaryText,
-                                                      size: 24,
-                                                    ),
-                                                    onPressed: () async {},
+                                                          size: 24,
+                                                        ),
+                                                        onPressed: () async {
+                                                          AppCubit.get(context).getMainPrams(year: _model.dropDownValueController1!.value!.toString(), month: _model.dropDownValueController2!.value!.toString());
+                                                        },
+                                                      ),
                                                   ),
                                                 ),
                                               ),
@@ -589,7 +606,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                                   .fromSTEB(
                                                                   0, 16, 0, 0),
                                                           child: Text(
-                                                            '${(AppCubit.get(context).mainPramsModel?.income)?? '-' } EGP',
+                                                            '${(AppCubit.get(context).mainPramsModel?.income) ?? '-'} EGP',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .displaySmall
@@ -672,7 +689,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                                   .fromSTEB(
                                                                   0, 16, 0, 0),
                                                           child: Text(
-                                                            '${(AppCubit.get(context).mainPramsModel?.salaries)??"-"} EGP',
+                                                            '${(AppCubit.get(context).mainPramsModel?.salaries) ?? "-"} EGP',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .displaySmall
@@ -755,7 +772,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                                   .fromSTEB(
                                                                   0, 16, 0, 0),
                                                           child: Text(
-                                                            '${(AppCubit.get(context).mainPramsModel?.totalOutcome)??'-'} EGP',
+                                                            '${(AppCubit.get(context).mainPramsModel?.totalOutcome) ?? '-'} EGP',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .displaySmall

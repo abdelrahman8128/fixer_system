@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 
+import '../../components/custom/box_decoration.dart';
 import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
 
@@ -33,13 +34,14 @@ var priceController = TextEditingController();
             fontSize: 25,
           ),
         ),
-        icon: IconButton(
+        icon:IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: const Icon(Icons.close),
+          icon: Icon(Icons.close,color: FlutterFlowTheme.of(context).error,),
           hoverColor: Colors.transparent,
           highlightColor: Colors.transparent,
+          alignment: Alignment.centerRight,
         ),
         actions: [
           ConditionalBuilder(
@@ -102,49 +104,7 @@ var priceController = TextEditingController();
                               TextFormField(
                                 controller: nameController,
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'name',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: const Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-
-                                  contentPadding:
-                                  const EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'name'),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -165,49 +125,7 @@ var priceController = TextEditingController();
                               TextFormField(
                                 controller: quantityController,
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'quantity',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: const Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-
-                                  contentPadding:
-                                  const EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'quantity'),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -228,49 +146,7 @@ var priceController = TextEditingController();
                               TextFormField(
                                 controller: priceController,
                                 obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'price',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodySmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: const Color(0xFFF68B1E),
-                                  ),
-                                  hintStyle:
-                                  FlutterFlowTheme.of(context).bodySmall,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0xFFDBE2E7),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0xFFF68B1E),
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Colors.red,
-                                      width: 2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-
-                                  contentPadding:
-                                  const EdgeInsetsDirectional.fromSTEB(
-                                      16, 24, 0, 24),
-                                ),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'price'),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(

@@ -87,6 +87,7 @@ class AppCubit extends Cubit<AppCubitStates> {
 
       if (response.statusCode==201) {
         showToast(context,"User added successfully");
+        getUsersModel?.users.add(User.fromJson(jsonDecode(response.body)));
         emit(AppAddClientSuccessState());
       } else {
         showToast(context ,response.body);
@@ -711,7 +712,6 @@ class AppCubit extends Cubit<AppCubitStates> {
 
   void updateCar(context,{
     required String carNumber,
-    required String carIdNumber,
     required String color,
     required String state,
     required String brand,
@@ -737,7 +737,6 @@ class AppCubit extends Cubit<AppCubitStates> {
     final body = jsonEncode({
       '_id': carId,
       "carNumber": carNumber,
-      "carIdNumber": carIdNumber,
       "color": color,
       "State": state,
       "brand": brand,
@@ -788,7 +787,7 @@ class AppCubit extends Cubit<AppCubitStates> {
 
 
     emit(AppGetMainPramsLoadingState());
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/MonthlyReport/specific_month_year/';
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/MonthlyReport/specific_month_year/${year}_${month}';
     final headers = {
       'Content-Type': 'application/json',
       'Authorization':
