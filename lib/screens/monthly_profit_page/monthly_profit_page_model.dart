@@ -11,10 +11,10 @@ class MonthlyProfitPageModel extends FlutterFlowModel<MonthlyProfitPage> {
   // Model for mainWebNav component.
   late MainNavModel mainNavModel;
   // State field(s) for DropDown widget.
-  String? dropDownValue1;
+  String? dropDownValue1=DateTime.now().year.toString();
   FormFieldController<String>? dropDownValueController1;
   // State field(s) for DropDown widget.
-  String? dropDownValue2;
+  String? dropDownValue2=DateTime.now().month.toString();
   FormFieldController<String>? dropDownValueController2;
 
   @override

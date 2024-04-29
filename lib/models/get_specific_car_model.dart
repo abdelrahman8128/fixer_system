@@ -44,8 +44,8 @@ class SpecificCarData{
   int? distance;
   String?motorNumber;
   var componentState=[];
-  String?nextRepairDate;
-  String?lastRepairDate;
+  DateTime?nextRepairDate;
+  DateTime?lastRepairDate;
   double?repairingPercentage;
 
 
@@ -71,8 +71,12 @@ class SpecificCarData{
     componentState.addAll(json?['componentState']);
     distance = json?['distances'];
     motorNumber = json?['motorNumber'];
-    nextRepairDate=json?['nextRepairDate'];
-    lastRepairDate=json?['lastRepairDate'];
+    if (json?['nextRepairDate']!=null) {
+      nextRepairDate=DateTime.tryParse(json?['nextRepairDate']);
+    }
+    if (json?['lastRepairDate']!=null) {
+      lastRepairDate=DateTime.tryParse(json?['lastRepairDate']);
+    }
     repairingPercentage=json?['repairingPercentage'];
 
   }
@@ -90,15 +94,15 @@ class RepairData {
   String? totalPrice;
   String? carNumber;
   String? type;
-  String? expectedDate;
+  DateTime? expectedDate;
   List<Service>services = [];
   List<Addition>additions = [];
   List<Component>components = [];
   int ?priceAfterDiscount;
   bool? complete;
   var  completedServicesRatio;
-  String? createdAt;
-  String? updatedAt;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
 
   RepairData.fromJson(Map<String, dynamic>?json)
@@ -112,29 +116,35 @@ class RepairData {
    totalPrice= json?["totalPrice"];
    carNumber= json?["carNumber"];
    type= json?["type"];
-   expectedDate= json?["expectedDate"];
+   if (json?["expectedDate"]!=null) {
+     expectedDate= DateTime.tryParse(json?["expectedDate"]);
+   }
    json?["Services"].forEach((element){
      if (element!=null) {
-        services.add(Service.fromjson(element));
+        services.add(Service.fromJson(element));
       }
     });
     json?["additions"].forEach((element){
      if (element!=null) {
-       additions.add(Addition.fromjson(element));
+       additions.add(Addition.fromJson(element));
      }
     });
 
       json?["component"].forEach((element) {
      if (element!=null) {
-       components.add(Component.fromjson(element));
+       components.add(Component.fromJson(element));
      }
       });
 
    priceAfterDiscount= json?["priceAfterDiscount"];
    complete= json?["complete"];
    completedServicesRatio= json?["completedServicesRatio"];
-   createdAt= json?["createdAt"];
-   updatedAt= json?["updatedAt"];
+   if(json?["createdAt"]!=null) {
+     createdAt= DateTime.tryParse(json?["createdAt"]);
+   }
+   if(json?["updatedAt"]!=null) {
+     updatedAt= DateTime.tryParse(json?["updatedAt"]);
+   }
   }
 }
 
@@ -143,7 +153,7 @@ class Service{
   double?price;
   String?state;
   String?id;
-  Service.fromjson(Map<String,dynamic>?json)
+  Service.fromJson(Map<String,dynamic>?json)
   {
     name=json?['name'];
     price=json?['price']*1.0;
@@ -157,7 +167,7 @@ class Addition{
   String? name;
   double?price;
   String?id;
-  Addition.fromjson(Map<String,dynamic>?json)
+  Addition.fromJson(Map<String,dynamic>?json)
   {
     name=json?['name'];
     price=json?['price']*1.0;
@@ -172,7 +182,7 @@ class Component{
   double?price;
   String?id;
   int?quantity;
-  Component.fromjson(Map<String,dynamic>?json)
+  Component.fromJson(Map<String,dynamic>?json)
   {
     name=json?['name'];
     price=json?['price']*1.0;

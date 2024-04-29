@@ -56,6 +56,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
 
   bool readOnly = true;
   var formKey = GlobalKey<FormState>();
+  DateTime? nextRepairDate;
+  DateTime? lastRepairDate;
 
   @override
   void initState() {
@@ -149,17 +151,13 @@ class _CarProfilePageState extends State<CarProfilePage> {
                 ?.carData
                 ?.motorNumber);
         nextRepairDateController = TextEditingController(
-            text: AppCubit.get(context)
-                .getSpecificCarModel
-                ?.carData
-                ?.nextRepairDate
-                ?.toString());
+          text: '${(AppCubit.get(context).getSpecificCarModel?.carData?.nextRepairDate?.day)??'-'}/${(AppCubit.get(context).getSpecificCarModel?.carData?.nextRepairDate?.month)??'-'}/${(AppCubit.get(context).getSpecificCarModel?.carData?.nextRepairDate?.year)??'-'}',
+        );
         lastRepairDateController = TextEditingController(
-            text: AppCubit.get(context)
-                .getSpecificCarModel
-                ?.carData
-                ?.lastRepairDate
-                ?.toString());
+            text: '${(AppCubit.get(context).getSpecificCarModel?.carData?.lastRepairDate?.day)??'-'}/${(AppCubit.get(context).getSpecificCarModel?.carData?.lastRepairDate?.month)??'-'}/${(AppCubit.get(context).getSpecificCarModel?.carData?.lastRepairDate?.year)??'-'}',
+        );
+        nextRepairDate=AppCubit.get(context).getSpecificCarModel?.carData?.nextRepairDate;
+        lastRepairDate=AppCubit.get(context).getSpecificCarModel?.carData?.lastRepairDate;
 
       }
       else if (state is AppUpdateCarSuccessState)
@@ -195,10 +193,10 @@ class _CarProfilePageState extends State<CarProfilePage> {
                     periodicRepairs: periodicRepairsController.text,
                     nonPeriodicRepairs: nonPeriodicRepairsController.text,
                     repairing: repairingController.text,
-                    lastRepair: lastRepairDateController.text,
                     distance: distanceController.text,
+                    lastRepair: lastRepairDate,
                     motorNumber: motorNumberController.text,
-                    nextRepair: nextRepairDateController.text,
+                    nextRepair:nextRepairDate ,
 
                   );
                 }
@@ -290,7 +288,12 @@ class _CarProfilePageState extends State<CarProfilePage> {
           child: ConditionalBuilder(
             condition: state is AppGetSpecificCarLoadingState,
             builder: (context) =>
-                const Center(child: CircularProgressIndicator()),
+                const  Center(
+              child: Padding(padding: EdgeInsets.all(40.0),
+                 child: CircularProgressIndicator(),
+                                            ),),
+            
+                                        
             fallback: (context) => Padding(
               padding: const EdgeInsets.all(16.0),
               child: SingleChildScrollView(
@@ -378,7 +381,7 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                   const SizedBox(height: 16.0),
                                   TextFormField(
                                     controller: carChassisNumberController,
-                                    readOnly:false,
+                                    readOnly:readOnly,
                                     decoration: CustomInputDecoration.customInputDecoration(context,'Car Chassis Number'),
                                        
                                     style: FlutterFlowTheme.of(context)
@@ -406,7 +409,7 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                   const SizedBox(height: 16.0),
                                   TextFormField(
                                     controller: stateController,
-                                    readOnly:false,
+                                    readOnly:true,
                                     decoration: CustomInputDecoration.customInputDecoration(context,'State'),
                                        
                                     style: FlutterFlowTheme.of(context)
@@ -527,7 +530,7 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                   const SizedBox(height: 16.0),
                                   TextFormField(
                                     controller: repairingController,
-                                    readOnly:false,
+                                    readOnly:true,
                                     decoration: CustomInputDecoration.customInputDecoration(context,'Repairing'),
                                        
                                     style: FlutterFlowTheme.of(context)
@@ -579,6 +582,7 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                         ).then((value) {
                                           setState(() {
                                             if (value!=null) {
+                                              lastRepairDate=value;
                                               lastRepairDateController.text =
                                             '${value.day.toString()}/${value.month.toString()}/${value.year.toString()}';
                                             }
@@ -606,13 +610,13 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                         showDatePicker(
                                           context: context,
                                           firstDate: DateTime.now(),
-                                          lastDate: DateTime(2999),
+                                          lastDate: DateTime.utc(2999,30,24,60,60),
                                           initialDate: DateTime.now(),
                                         ).then((value) {
                                           setState(() {
                                             if (value!=null) {
-                                              nextRepairDateController.text =
-                                                '${value.day.toString()}/${value.month.toString()}/${value.year.toString()}';
+                                              nextRepairDateController.text ='${value.day.toString()}/${value.month.toString()}/${value.year.toString()}';
+                                              nextRepairDate=value;
                                             }
                                           });
                                         });

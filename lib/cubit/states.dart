@@ -131,3 +131,8 @@ class AppGetMainPramsErrorState extends AppCubitStates{}
 class AppUpdateWorkerLoadingState extends AppCubitStates{}
 class AppUpdateWorkerSuccessState extends AppCubitStates{}
 class AppUpdateWorkerErrorState extends AppCubitStates{}
+
+
+class AppGetCompletedRepairsLoadingState extends AppCubitStates{}
+class AppGetCompletedRepairsSuccessState extends AppCubitStates{}
+class AppGetCompletedRepairsErrorState extends AppCubitStates{}

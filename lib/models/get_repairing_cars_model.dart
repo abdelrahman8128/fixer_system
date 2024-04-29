@@ -23,8 +23,8 @@ class repairingCarData{
   String? category;
   String? model;
   String? generatedCode;
-  String? nextRepairDate;
-  String? lastRepairDate;
+  DateTime? nextRepairDate;
+  DateTime? lastRepairDate;
   int? periodicRepairs;
   int? nonPeriodicRepairs;
   List<dynamic> componentState=[];
@@ -45,8 +45,12 @@ class repairingCarData{
     category=json?['category'];
      model=json?['model'];
      generatedCode=json?['generatedCode'];
-     nextRepairDate=json?['nextRepairDate'];
-     lastRepairDate=json?['lastRepairDate'];
+     if(json?['nextRepairDate']!=null) {
+       nextRepairDate=DateTime.tryParse(json?['nextRepairDate']);
+     }
+     if(json?['lastRepairDate']!=null) {
+       lastRepairDate=DateTime.tryParse(json?['lastRepairDate']);
+     }
      periodicRepairs=json?['periodicRepairs'];
      nonPeriodicRepairs=json?['nonPeriodicRepairs'];
      componentState.addAll(json?['componentState']);

@@ -4,8 +4,8 @@ class MainPramsModel {
   int? salaries;
   int? income;
   int? totalOutcome;
-  String? createdAt;
-  String? updatedAt;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
   MainPramsModel.fromJson(Map<String,dynamic>?json){
     json=json?['data'];
@@ -13,8 +13,8 @@ class MainPramsModel {
     salaries=json?["salars"];
     totalOutcome=json?["totalOutcome"];
     income=json?['income'];
-    createdAt=json?["createdAt"];
-    updatedAt=json?["updatedAt"];
+    createdAt=DateTime.tryParse(json?["createdAt"]);
+    updatedAt=DateTime.tryParse(json?["updatedAt"]);
 
   }
 }

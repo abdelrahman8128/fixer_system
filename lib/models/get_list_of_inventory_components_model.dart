@@ -17,15 +17,15 @@ class InventoryComponentData{
   String?name;
   int? quantity;
   double ?price;
-  String?createdAt;
-  String?updatedAt;
+  DateTime?createdAt;
+  DateTime?updatedAt;
   InventoryComponentData.fromJson(Map<String,dynamic>?json)
   {
     id=json?['_id'];
     name=json?['name'];
     quantity=json?['quantity'];
     price=(json?['price']*1.0);
-    createdAt=json?['createdAt'];
-    updatedAt=json?['updatedAt'];
+    createdAt=DateTime.tryParse(json?['createdAt']);
+    updatedAt=DateTime.tryParse(json?['updatedAt']);
   }
 }

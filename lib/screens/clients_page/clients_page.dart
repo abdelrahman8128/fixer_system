@@ -361,31 +361,6 @@ class _ClientsPageState extends State<ClientsPage> {
                                                         ),
                                                       ),
                                                     ),
-                                                  if (responsiveVisibility(
-                                                    context: context,
-                                                    phone: false,
-                                                  ))
-                                                    Expanded(
-                                                      child: Text(
-                                                        'User ID',
-                                                        style:
-                                                        FlutterFlowTheme.of(
-                                                            context)
-                                                            .bodySmall
-                                                            .override(
-                                                          fontFamily: FlutterFlowTheme.of(
-                                                              context)
-                                                              .bodySmallFamily,
-                                                          letterSpacing:
-                                                          0,
-                                                          useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                              .containsKey(
-                                                              FlutterFlowTheme.of(context)
-                                                                  .bodySmallFamily),
-                                                        ),
-                                                      ),
-                                                    ),
 
 
                                                 ],
@@ -393,7 +368,12 @@ class _ClientsPageState extends State<ClientsPage> {
                                             ),
                                             ConditionalBuilder(
                                               condition:state is  AppGetUsersLoadingState||state is AppSearchUsersLoadingState,
-                                              builder: (context) => const Center(child: CircularProgressIndicator()),
+                                              builder: (context) => const  Center(
+              child: Padding(padding: EdgeInsets.all(40.0),
+                 child: CircularProgressIndicator(),
+                                            ),),
+            
+                                        
                                               fallback:(context) =>  Padding(
                                                 padding: const EdgeInsetsDirectional
                                                     .fromSTEB(0, 16, 0, 0),

@@ -46,7 +46,12 @@ var priceController = TextEditingController();
         actions: [
           ConditionalBuilder(
             condition: state is AppEditComponentLoadingState,
-            builder: (context) => const Center(child: CircularProgressIndicator()),
+            builder: (context) => const  Center(
+              child: Padding(padding: EdgeInsets.all(40.0),
+                 child: CircularProgressIndicator(),
+                                            ),),
+            
+                                        
             fallback: (context) => FFButtonWidget(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {

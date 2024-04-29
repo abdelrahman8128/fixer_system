@@ -308,8 +308,8 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                               child: FlutterFlowDropDown(
                                                 initialOption: DateTime.now().year.toString(),
                                                 options: List.generate(
-                                                    currentYear - 2020 + 1,
-                                                    (index) => (2020 + index)
+                                                    currentYear - 2023 + 1,
+                                                    (index) => (2023 + index)
                                                         .toString()),
                                                 onChanged: (val) => setState(
                                                     () => _model
@@ -475,7 +475,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                           size: 24,
                                                         ),
                                                         onPressed: () async {
-                                                          AppCubit.get(context).getMainPrams(year: _model.dropDownValueController1!.value!.toString(), month: _model.dropDownValueController2!.value!.toString());
+                                                          AppCubit.get(context).getMainPrams(year: _model.dropDownValue1!.toString(), month: _model.dropDownValue2!.toString());
                                                         },
                                                       ),
                                                   ),

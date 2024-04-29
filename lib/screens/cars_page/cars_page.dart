@@ -322,31 +322,6 @@ class _CarsPageState extends State<CarsPage> {
                                                         phone: false,
                                                       ))
                                                         Expanded(
-                                                          child: AutoSizeText(
-                                                            'Car ID',
-                                                            style:
-                                                            FlutterFlowTheme.of(
-                                                                context)
-                                                                .bodySmall
-                                                                .override(
-                                                              fontFamily: FlutterFlowTheme.of(
-                                                                  context)
-                                                                  .bodySmallFamily,
-                                                              letterSpacing:
-                                                              0,
-                                                              useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                                  .containsKey(
-                                                                  FlutterFlowTheme.of(context)
-                                                                      .bodySmallFamily),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      if (responsiveVisibility(
-                                                        context: context,
-                                                        phone: false,
-                                                      ))
-                                                        Expanded(
                                                           child: Text(
                                                             'Owner',
                                                             style:
@@ -367,28 +342,6 @@ class _CarsPageState extends State<CarsPage> {
                                                             ),
                                                           ),
                                                         ),
-                                                      Expanded(
-                                                        child: Text(
-                                                          'Operations',
-                                                          textAlign: TextAlign.end,
-                                                          style:
-                                                          FlutterFlowTheme.of(
-                                                              context)
-                                                              .bodySmall
-                                                              .override(
-                                                            fontFamily: FlutterFlowTheme.of(
-                                                                context)
-                                                                .bodySmallFamily,
-                                                            letterSpacing:
-                                                            0,
-                                                            useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                                .containsKey(
-                                                                FlutterFlowTheme.of(context)
-                                                                    .bodySmallFamily),
-                                                          ),
-                                                        ),
-                                                      ),
                                                     ],
                                                   ),
                                                 ),
@@ -398,7 +351,12 @@ class _CarsPageState extends State<CarsPage> {
                                                   child:
                                                   ConditionalBuilder(
                                                       condition: state is AppGetAllCarsLoadingState||state is AppSearchCarsLoadingState,
-                                                      builder: (context) => const Center(child: CircularProgressIndicator()),
+                                                      builder: (context) => const  Center(
+              child: Padding(padding: EdgeInsets.all(40.0),
+                 child: CircularProgressIndicator(),
+                                            ),),
+            
+                                        
                                                       fallback: (context) => ConditionalBuilder(
                                                         condition: AppCubit.get(context).getCarsModel!.data.isEmpty,
                                                         builder: (context) => Text('No Results',style: TextStyle(fontSize: 50,color: Colors.grey[300]),),

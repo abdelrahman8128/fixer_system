@@ -80,7 +80,7 @@ Widget repairingCarItemBuilder(context, repairingCarData model) {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                 child: AutoSizeText(
-                  '${(model.id)??'-'}',
+                  '${(model.carNumber)??'-'}',
                   style: FlutterFlowTheme.of(
                       context)
                       .bodyMedium

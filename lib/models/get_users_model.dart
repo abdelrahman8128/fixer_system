@@ -31,35 +31,6 @@ class User{
     id=json?['id'];
     name=json?['name'];
     phone=json?['phoneNumber'];
-    // json['cars'].forEach((element) {
-    //   cars.add(Car.fromJson(element));
-    // });
-
-    // email=json['email'];
-    // password=json['password'];
-    // role=json['role'];
-    // active=json['active'];
-    // carId=json['Car'];
-    // carCode=json['carCode'];
-    // carNumber=json['car'];
-    // createdAt=DateTime.parse(json['createdAt']);
-    // updatedAt=DateTime.parse(json['updatedAt']);
 
   }
 }
-//
-// class Car {
-//   String ? id;
-//   String ? carNumber;
-//   String ?brand;
-//   String ?category ;
-//   String ?model;
-//   Car.fromJson(Map<String,dynamic>json)
-//   {
-//     id=json['id'];
-//     carNumber=json['carNumber'];
-//     brand=json['brand'];
-//     category=json['category'];
-//     model=json['model'];
-//   }
-// }

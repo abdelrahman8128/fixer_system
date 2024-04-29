@@ -8,7 +8,7 @@ class GetSpecificUserModel{
   bool active=false;
   String? phoneNumber;
   List<SpecificCarData>cars=[];
-  String? createdAt;
+  DateTime? createdAt;
   GetSpecificUserModel.fromJson(Map<String,dynamic>?json){
     json=json?['data'];
     id=json?['id'];
@@ -18,7 +18,7 @@ class GetSpecificUserModel{
     role=json?['role'];
     active=json?['active'];
     phoneNumber=json?['phoneNumber'];
-    createdAt=json?['createdAt'];
+    createdAt=DateTime.tryParse(json?['createdAt']);
     json?['car'].forEach((element) {
       cars.add(SpecificCarData.fromJson(element));
     });

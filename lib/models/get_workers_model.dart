@@ -20,9 +20,9 @@ class Worker {
   String?jobTitle;
   double?salary;
   String?IDNumber;
-  DateTime?createdAt;
-  DateTime?updatedAt;
-
+  // DateTime?createdAt;
+  // DateTime?updatedAt;
+  //
   Worker.fromJson(Map<String, dynamic>?json)
   {
     id = json?['_id'];

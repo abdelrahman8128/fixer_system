@@ -72,23 +72,6 @@ Widget clientItemBuilder(context, User model) {
                         ),
                   ),
                 ),
-              if (responsiveVisibility(
-                context: context,
-                phone: false,
-              ))
-                Expanded(
-                  child: AutoSizeText(
-                    '${model.id ?? '-'}',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyMediumFamily,
-                          letterSpacing: 0,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyMediumFamily),
-                        ),
-                  ),
-                ),
-           
     
             ],
           ),

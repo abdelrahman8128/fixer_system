@@ -57,6 +57,9 @@ class CarData{
     componentState.addAll(json?['componentState']);
     distance=json?['distances'];
     motorNumber=json?['motorNumber'];
+    if (json?['nextRepairDate']!=null) {
+      nextRepairDate=DateTime.tryParse(json?['nextRepairDate']);
+    }
 
 
 

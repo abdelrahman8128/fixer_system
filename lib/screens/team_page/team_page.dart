@@ -480,7 +480,12 @@ class _TeamPageState extends State<TeamPage> {
                                               ),
                                               ConditionalBuilder(
                                                 condition: state is AppGetWorkersLoadingState||state is AppSearchWorkersLoadingState,
-                                                builder: (context) => const Center(child: CircularProgressIndicator()),
+                                                builder: (context) => const  Center(
+              child: Padding(padding: EdgeInsets.all(40.0),
+                 child: CircularProgressIndicator(),
+                                            ),),
+            
+                                        
                                                 fallback: (context) =>ConditionalBuilder(
                                                     condition: AppCubit.get(context).getWorkersModel!.users.isEmpty,
                                                     builder: (context) => Text('No Results',style: TextStyle(fontSize: 50,color: Colors.grey[300]),),

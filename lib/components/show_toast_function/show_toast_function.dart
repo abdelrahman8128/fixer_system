@@ -1,7 +1,12 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
-void showToast(context,String text,) =>showSnackbar(
+void showToast(context,String text,) =>
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
 
-    context, text,
-);
+            content: Text('${text}'),
+
+            duration: const Duration(seconds: 5),
+            backgroundColor: Colors.grey,
+
+        ),
+    );

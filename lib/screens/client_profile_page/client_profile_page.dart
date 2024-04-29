@@ -186,7 +186,12 @@ class _ClientDetailsState extends State<ClientProfilePage> {
               ),
               body: ConditionalBuilder(
                 condition: state is AppGetSpecificUserLoadingState,
-                builder: (context) => const Center(child: CircularProgressIndicator()),
+                builder: (context) => const  Center(
+              child: Padding(padding: EdgeInsets.all(40.0),
+                 child: CircularProgressIndicator(),
+                                            ),),
+            
+                                        
                 fallback: (context) =>  SingleChildScrollView(
 
                   child: Container(
@@ -335,7 +340,12 @@ class _ClientDetailsState extends State<ClientProfilePage> {
                           children: [
                             ConditionalBuilder(
                               condition:state is  AppGetSpecificUserLoadingState,
-                              builder: (context) => const Center(child: CircularProgressIndicator()),
+                              builder: (context) => const  Center(
+              child: Padding(padding: EdgeInsets.all(40.0),
+                 child: CircularProgressIndicator(),
+                                            ),),
+            
+                                        
                               fallback:(context) =>  Padding(
                                 padding: const EdgeInsetsDirectional
                                     .all(25),

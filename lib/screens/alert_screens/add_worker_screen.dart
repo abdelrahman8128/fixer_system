@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,7 +32,7 @@ var salaryController = TextEditingController();
       return AlertDialog(
 
         alignment: Alignment.topRight,
-        title: Text(
+        title: const Text(
           'Add Worker',
           style: TextStyle(
             fontSize: 25,
@@ -51,7 +50,12 @@ var salaryController = TextEditingController();
         actions: [
           ConditionalBuilder(
             condition: state is AppAddWorkerLoadingState,
-            builder: (context) => Center(child: CircularProgressIndicator()),
+            builder: (context) => const  Center(
+              child: Padding(padding: EdgeInsets.all(40.0),
+                 child: CircularProgressIndicator(),
+                                            ),),
+            
+                                        
             fallback: (context) => FFButtonWidget(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
@@ -70,9 +74,9 @@ var salaryController = TextEditingController();
               options: FFButtonOptions(
                 width: MediaQuery.sizeOf(context).width * 0.20,
                 height: MediaQuery.sizeOf(context).height * 0.065,
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                color: Color(0xFFF68B1E),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                color: const Color(0xFFF68B1E),
                 textStyle: FlutterFlowTheme.of(context).titleMedium.override(
                       fontFamily: 'Lexend Deca',
                       color: Colors.white,
@@ -80,7 +84,7 @@ var salaryController = TextEditingController();
                       fontWeight: FontWeight.bold,
                     ),
                 elevation: 3,
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Colors.transparent,
                   width: 1,
                 ),
@@ -95,7 +99,7 @@ var salaryController = TextEditingController();
             key: _formKey,
             child: SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.all(30),
+                padding: const EdgeInsets.all(30),
                 child: Column(
 
                   children: [
@@ -104,7 +108,7 @@ var salaryController = TextEditingController();
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 30),
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
                           width: MediaQuery.sizeOf(context).width * 0.70,
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -129,7 +133,7 @@ var salaryController = TextEditingController();
                                   return null;
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
@@ -152,7 +156,7 @@ var salaryController = TextEditingController();
                                   return null;
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
@@ -173,7 +177,7 @@ var salaryController = TextEditingController();
                                   return null;
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
@@ -197,7 +201,7 @@ var salaryController = TextEditingController();
                                   return null;
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               TextFormField(

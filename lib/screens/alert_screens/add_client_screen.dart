@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/cupertino.dart';
@@ -66,7 +65,12 @@ Widget AddNewClientScreen(context) {
         actions: [
           ConditionalBuilder(
             condition: state is AppAddClientLoadingState,
-            builder: (context) => Center(child: CircularProgressIndicator()),
+            builder: (context) =>  Center(
+              child: Padding(padding: EdgeInsets.all(40.0),
+                 child: CircularProgressIndicator(),
+                                            ),),
+            
+                                        
             fallback: (context) => FFButtonWidget(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {

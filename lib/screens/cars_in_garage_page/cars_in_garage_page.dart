@@ -351,7 +351,7 @@ class _CarsInGaragePageState extends State<CarsInGaragePage> {
                                                         ))
                                                           Expanded(
                                                             child: Text(
-                                                              'Car ID',
+                                                              'Chassis Number',
                                                               style:
                                                               FlutterFlowTheme.of(
                                                                   context)
@@ -376,7 +376,7 @@ class _CarsInGaragePageState extends State<CarsInGaragePage> {
                                                         ))
                                                           Expanded(
                                                             child: Text(
-                                                              'Car Code',
+                                                              'Car Number',
                                                               style:
                                                               FlutterFlowTheme.of(
                                                                   context)
@@ -453,7 +453,12 @@ class _CarsInGaragePageState extends State<CarsInGaragePage> {
                                                         .fromSTEB(0, 16, 0, 0),
                                                     child:ConditionalBuilder(
                                                       condition: state is AppGetRepairingCarsLoadingState||state is AppSearchRepairingCarsLoadingState,
-                                                      builder: (context) => const Center(child: CircularProgressIndicator()),
+                                                      builder: (context) => const  Center(
+              child: Padding(padding: EdgeInsets.all(40.0),
+                 child: CircularProgressIndicator(),
+                                            ),),
+
+                                        
                                                       fallback:(context) =>ListView.separated(
                                                         padding: EdgeInsets.zero,
                                                         shrinkWrap: true,

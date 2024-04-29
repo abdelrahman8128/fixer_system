@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:fixer_system/cubit/states.dart';
+import 'package:fixer_system/models/get_completed_repairs_model.dart';
 import 'package:fixer_system/models/get_specific_user_model.dart';
 import 'package:fixer_system/models/get_users_model.dart';
 import 'package:fixer_system/models/get_workers_model.dart';
@@ -29,6 +30,7 @@ class AppCubit extends Cubit<AppCubitStates> {
   GetSpecificCarModel?getSpecificCarModel=GetSpecificCarModel();
   GetAllRepairsForSpecificCarModel?getAllRepairsForSpecificCarModel=GetAllRepairsForSpecificCarModel();
   MainPramsModel?mainPramsModel=MainPramsModel();
+  GetCompletedRepairsModel?getCompletedRepairsModel=GetCompletedRepairsModel();
   var time=DateTime.now();
   void changDatePicker(value)
   {
@@ -700,7 +702,7 @@ class AppCubit extends Cubit<AppCubitStates> {
       if (getAllRepairsForSpecificCarModel?.repairs != null) {
         emit(AppGetAllRepairsForSpecificCarSuccessState());
       } else {
-        emit(AppGetSpecificUserErrorState());
+        emit(AppGetAllRepairsForSpecificCarErrorState());
       }
     }).catchError((error){
       print(error);
@@ -722,11 +724,12 @@ class AppCubit extends Cubit<AppCubitStates> {
     required String repairing,
     required String distance,
     required String motorNumber,
-    required String nextRepair,
+     DateTime? nextRepair,
     required String carId,
-    required String lastRepair,
+     DateTime? lastRepair,
 
   }){
+    print (nextRepair);
     emit(AppUpdateCarLoadingState());
     String url = 'https://fixer-backend-1.onrender.com/api/V1/Garage/update/${carId}';
     final headers = {
@@ -742,10 +745,13 @@ class AppCubit extends Cubit<AppCubitStates> {
       "brand": brand,
       "category": category,
       "model": model,
-      "nextRepairDate": nextRepair,
-      "lastRepairDate": lastRepair,
+       "nextRepairDate": nextRepair.toString(),
+       "lastRepairDate":lastRepair.toString(),
       "periodicRepairs": periodicRepairs,
       "nonPeriodicRepairs": nonPeriodicRepairs,
+      "repairing": repairing,
+      "distances": distance,
+      "motorNumber": motorNumber,
       // "componentState": [
       //   {
       //     "_id": "661d425cf5cfc07996163c99"
@@ -754,9 +760,6 @@ class AppCubit extends Cubit<AppCubitStates> {
       //     "_id": "661d425cf5cfc07996163c9a"
       //   }
       // ],
-      "repairing": repairing,
-      "distances": distance,
-      "motorNumber": motorNumber,
     });
     put(Uri.parse(url), headers: headers, body: body).then((value) {
       if (value.statusCode==200)
@@ -773,6 +776,7 @@ class AppCubit extends Cubit<AppCubitStates> {
 
     }
     ).catchError((error){
+      print (error.toString());
       emit(AppUpdateCarErrorState());
 
     });
@@ -785,7 +789,7 @@ class AppCubit extends Cubit<AppCubitStates> {
     required String month,
   }){
 
-
+    mainPramsModel=MainPramsModel();
     emit(AppGetMainPramsLoadingState());
     String url = 'https://fixer-backend-1.onrender.com/api/V1/MonthlyReport/specific_month_year/${year}_${month}';
     final headers = {
@@ -795,10 +799,6 @@ class AppCubit extends Cubit<AppCubitStates> {
       'year':year,
       'month':month,
     };
-    // final body = jsonEncode({
-    //
-    // });
-
     read(
       Uri.parse(url),
       headers: headers,
@@ -862,6 +862,38 @@ class AppCubit extends Cubit<AppCubitStates> {
 
     });
   }
+
+
+  void getCompletedRepairs()
+  {
+    getCompletedRepairsModel=GetCompletedRepairsModel();
+    emit(AppGetCompletedRepairsLoadingState());
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/repairing';
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
+    };
+
+    read(
+      Uri.parse(url),
+      headers: headers,
+    ).then((value) {
+
+      getCompletedRepairsModel = GetCompletedRepairsModel.fromJson(jsonDecode(value));
+      if (getCompletedRepairsModel?.results != null) {
+        emit(AppGetCompletedRepairsSuccessState());
+      } else {
+        emit(AppGetCompletedRepairsErrorState());
+      }
+    }).catchError((error){
+      print(error);
+      emit(AppGetCompletedRepairsErrorState());
+    });
+
+  }
+
+
 
 
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../cubit/cubit.dart';
 import '../models/get_specific_car_model.dart';
 
-Widget repairItemBuilder(context, RepairData model) {
+Widget repairItemBuilder(context, RepairData? model) {
   return SingleChildScrollView(
     child: Container(
       width: MediaQuery.sizeOf(context).width * 0.30,
@@ -30,63 +30,63 @@ Widget repairItemBuilder(context, RepairData model) {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Client'),
-                    Text('${model.client}'),
+                    Text('${model?.client}'),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Brand'),
-                    Text('${model.brand}'),
+                    Text('${model?.brand}'),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Category'),
-                    Text('${model.category}'),
+                    Text('${model?.category}'),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Model'),
-                    Text('${model.model}'),
+                    Text('${model?.model}'),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Discount'),
-                    Text('${model.discount}%'),
+                    Text('${model?.discount}%'),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Total Price'),
-                    Text('${model.totalPrice} EGP'),
+                    Text('${model?.totalPrice} EGP'),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Car Number'),
-                    Text('${model.carNumber}'),
+                    Text('${model?.carNumber}'),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Type'),
-                    Text('${model.type}'),
+                    Text('${model?.type}'),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Expected Date'),
-                    Text('${model.expectedDate}'),
+                    Text('${(model?.expectedDate?.day)??'-'}/${(model?.expectedDate?.month)??'-'}/${(model?.expectedDate?.year)??'-'}'),
                   ],
                 ),
               ],
@@ -109,28 +109,28 @@ Widget repairItemBuilder(context, RepairData model) {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text('Complete'),
-                  Text('${model.complete.toString()}'),
+                  Text('${model?.complete.toString()}'),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text('Completed Services Ratio'),
-                  Text('${(model.completedServicesRatio)}'),
+                  Text('${(model?.completedServicesRatio)}'),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text('Created At'),
-                  Text('${model.createdAt}'),
+                  Text('${(model?.createdAt?.day)??'-'}/${(model?.createdAt?.month)??'-'}/${(model?.createdAt?.year)??'-'}'),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text('Updated At'),
-                  Text('${model.updatedAt}'),
+                  Text('${(model?.updatedAt?.day)??'-'}/${(model?.updatedAt?.month)??'-'}/${(model?.updatedAt?.year)??'-'}'),
                 ],
               ),
               ],
@@ -146,7 +146,7 @@ Widget repairItemBuilder(context, RepairData model) {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              ...model.services.map((value) {
+              ...?model?.services.map((value) {
                 Icon icon =const Icon(Icons.done,color: Colors.green,) ;
 
                 return Padding(
@@ -186,7 +186,7 @@ Widget repairItemBuilder(context, RepairData model) {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              ...model.additions.map((value) => Padding(
+              ...?model?.additions.map((value) => Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -208,7 +208,7 @@ Widget repairItemBuilder(context, RepairData model) {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              ...model.components.map((value) => Padding(
+              ...?model?.components.map((value) => Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
