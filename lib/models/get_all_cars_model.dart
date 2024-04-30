@@ -39,6 +39,7 @@ class CarData{
   {
     state=json?['State'];
     id=json?['_id'];
+
      ownerName=json?['ownerName'];
      carNumber=json?['carNumber'];
      phoneNumber=json?['phoneNumber'];

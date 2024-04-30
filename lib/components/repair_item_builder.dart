@@ -8,8 +8,10 @@ Widget repairItemBuilder(context, RepairData? model) {
     child: Container(
       width: MediaQuery.sizeOf(context).width * 0.30,
       padding: const EdgeInsets.all(20.0),
-      decoration:ShapeDecoration(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15),side: BorderSide(color: Colors.orange.shade300)),
+      decoration: ShapeDecoration(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+            side: BorderSide(color: Colors.orange.shade300)),
         color: Colors.orange.shade100,
       ),
       child: Column(
@@ -86,13 +88,13 @@ Widget repairItemBuilder(context, RepairData? model) {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Expected Date'),
-                    Text('${(model?.expectedDate?.day)??'-'}/${(model?.expectedDate?.month)??'-'}/${(model?.expectedDate?.year)??'-'}'),
+                    Text(
+                        '${(model?.expectedDate?.day) ?? '-'}/${(model?.expectedDate?.month) ?? '-'}/${(model?.expectedDate?.year) ?? '-'}'),
                   ],
                 ),
               ],
             ),
           ),
-
           const Text(
             'Details',
             style: TextStyle(
@@ -100,39 +102,40 @@ Widget repairItemBuilder(context, RepairData? model) {
               fontWeight: FontWeight.bold,
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Complete'),
-                  Text('${model?.complete.toString()}'),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Completed Services Ratio'),
-                  Text('${(model?.completedServicesRatio)}'),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Created At'),
-                  Text('${(model?.createdAt?.day)??'-'}/${(model?.createdAt?.month)??'-'}/${(model?.createdAt?.year)??'-'}'),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Updated At'),
-                  Text('${(model?.updatedAt?.day)??'-'}/${(model?.updatedAt?.month)??'-'}/${(model?.updatedAt?.year)??'-'}'),
-                ],
-              ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Complete'),
+                    Text('${model?.complete.toString()}'),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Completed Services Ratio'),
+                    Text('${(model?.completedServicesRatio)}'),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Created At'),
+                    Text(
+                        '${(model?.createdAt?.day) ?? '-'}/${(model?.createdAt?.month) ?? '-'}/${(model?.createdAt?.year) ?? '-'}'),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Updated At'),
+                    Text(
+                        '${(model?.updatedAt?.day) ?? '-'}/${(model?.updatedAt?.month) ?? '-'}/${(model?.updatedAt?.year) ?? '-'}'),
+                  ],
+                ),
               ],
             ),
           ),
@@ -147,32 +150,32 @@ Widget repairItemBuilder(context, RepairData? model) {
                 ),
               ),
               ...?model?.services.map((value) {
-                Icon icon =const Icon(Icons.done,color: Colors.green,) ;
-
+                Icon icon = const Icon(
+                  Icons.done,
+                  color: Colors.green,
+                );
                 return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Visibility(
-
-                          visible:  (value.state=='repairing'),
-
-                          child: IconButton(onPressed: (){
-
-                                AppCubit.get(context).changeServiceState(
-                                  context,
-                                  serviceId: value.id!,
-                                  state: 'completed',
-                                );
-
-                            }, icon: icon),
-                        ),
-                        Text('${value.name}'),
-                        Text('${value.price} EGP'),
-                      ],
-                    ),
-              );
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Visibility(
+                        visible: (value.state == 'repairing'),
+                        child: IconButton(
+                            onPressed: () {
+                              AppCubit.get(context).changeServiceState(
+                                context,
+                                serviceId: value.id!,
+                                state: 'completed',
+                              );
+                            },
+                            icon: icon),
+                      ),
+                      Text('${value.name}'),
+                      Text('${value.price} EGP'),
+                    ],
+                  ),
+                );
               }),
             ],
           ),
@@ -187,15 +190,15 @@ Widget repairItemBuilder(context, RepairData? model) {
                 ),
               ),
               ...?model?.additions.map((value) => Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('${value.name}'),
                         Text('${value.price} EGP'),
                       ],
                     ),
-              )),
+                  )),
             ],
           ),
           Column(
@@ -209,15 +212,15 @@ Widget repairItemBuilder(context, RepairData? model) {
                 ),
               ),
               ...?model?.components.map((value) => Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('${value.name}'),
                         Text('${value.price} EGP'),
                       ],
                     ),
-              )),
+                  )),
             ],
           ),
         ],

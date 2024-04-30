@@ -487,7 +487,7 @@ class _TeamPageState extends State<TeamPage> {
             
                                         
                                                 fallback: (context) =>ConditionalBuilder(
-                                                    condition: AppCubit.get(context).getWorkersModel!.users.isEmpty,
+                                                    condition: AppCubit.get(context).getWorkersModel!.workers.isEmpty,
                                                     builder: (context) => Text('No Results',style: TextStyle(fontSize: 50,color: Colors.grey[300]),),
                                                     fallback: (context) => Padding(
                                                       padding:
@@ -502,7 +502,7 @@ class _TeamPageState extends State<TeamPage> {
                                                         itemCount:
                                                         AppCubit.get(context)
                                                             .getWorkersModel
-                                                            ?.users.length,
+                                                            ?.workers.length,
                                                         physics:
                                                         const BouncingScrollPhysics(),
                                                         itemBuilder: (context,
@@ -512,7 +512,7 @@ class _TeamPageState extends State<TeamPage> {
                                                                 AppCubit.get(
                                                                     context)
                                                                     .getWorkersModel!
-                                                                    .users[index]),
+                                                                    .workers[index]),
                                                       ),
                                                     ),
                                                 ),

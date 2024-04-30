@@ -11,9 +11,6 @@ import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
 
 
-Widget AddNewWorkerPage(context) {
-
-
 final _formKey = GlobalKey<FormState>();
 
 var nameController = TextEditingController();
@@ -25,6 +22,9 @@ var IdNumberController = TextEditingController();
 var jobTitleController = TextEditingController();
 
 var salaryController = TextEditingController();
+
+Widget AddNewWorkerPage(context) {
+
 
   return BlocConsumer<AppCubit, AppCubitStates>(
     listener: (context, state) {},
@@ -41,6 +41,17 @@ var salaryController = TextEditingController();
         icon: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
+
+             nameController = TextEditingController();
+
+             phoneNumberController = TextEditingController();
+
+             IdNumberController = TextEditingController();
+
+             jobTitleController = TextEditingController();
+
+             salaryController = TextEditingController();
+
           },
           icon: Icon(Icons.close,color: FlutterFlowTheme.of(context).error,),
           hoverColor: Colors.transparent,

@@ -13,8 +13,6 @@ import '../../cubit/states.dart';
 final _formKey = GlobalKey<FormState>();
 
 
-Widget AddNewCarScreen(context, String userId,) {
-
 
   var carNumberController = TextEditingController();
 
@@ -40,14 +38,18 @@ Widget AddNewCarScreen(context, String userId,) {
 
   var motorNumberController = TextEditingController();
 
+Widget AddNewCarScreen(context, String userId,) {
+
 
 
   return BlocConsumer<AppCubit, AppCubitStates>(
-    listener: (context, state) {},
+    listener: (context, state) {
+
+    },
     builder: (context, state) {
       return AlertDialog(
         alignment: Alignment.topCenter,
-        title: Text(
+        title: const Text(
           'Add Car',
           style: TextStyle(
             fontSize: 25,
@@ -55,6 +57,31 @@ Widget AddNewCarScreen(context, String userId,) {
         ),
         icon:IconButton(
           onPressed: () {
+
+             carNumberController = TextEditingController();
+
+             chassisNumberController = TextEditingController();
+
+             colorController = TextEditingController();
+
+             brandController = TextEditingController();
+
+            categoryController = TextEditingController();
+
+
+             nextRepairDateController = TextEditingController();
+
+             lastRepairDateController = TextEditingController();
+
+             periodicRepairsController = TextEditingController();
+
+             nonPeriodicRepairsController = TextEditingController();
+
+             distanceController = TextEditingController();
+
+             motorNumberController = TextEditingController();
+
+
             Navigator.of(context).pop();
           },
           icon: Icon(Icons.close,color: FlutterFlowTheme.of(context).error,),
@@ -65,7 +92,7 @@ Widget AddNewCarScreen(context, String userId,) {
         actions: [
           ConditionalBuilder(
             condition: state is AppAddCarLoadingState,
-            builder: (context) =>  Center(
+            builder: (context) =>  const Center(
               child: Padding(padding: EdgeInsets.all(40.0),
                  child: CircularProgressIndicator(),
                                             ),),
@@ -94,9 +121,9 @@ Widget AddNewCarScreen(context, String userId,) {
               options: FFButtonOptions(
                 width: MediaQuery.sizeOf(context).width * 0.20,
                 height: MediaQuery.sizeOf(context).height * 0.065,
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                color: Color(0xFFF68B1E),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                color: const Color(0xFFF68B1E),
                 textStyle: FlutterFlowTheme.of(context).titleMedium.override(
                   fontFamily: 'Lexend Deca',
                   color: Colors.white,
@@ -104,7 +131,7 @@ Widget AddNewCarScreen(context, String userId,) {
                   fontWeight: FontWeight.bold,
                 ),
                 elevation: 3,
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Colors.transparent,
                   width: 1,
                 ),
@@ -119,7 +146,7 @@ Widget AddNewCarScreen(context, String userId,) {
             key: _formKey,
             child: SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.all(30),
+                padding: const EdgeInsets.all(30),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -128,7 +155,7 @@ Widget AddNewCarScreen(context, String userId,) {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 30),
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
                           width: MediaQuery.sizeOf(context).width * 0.45,
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -152,7 +179,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                   return null;
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
@@ -173,7 +200,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                   return null;
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
@@ -194,7 +221,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                   return null;
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
@@ -215,7 +242,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                   return null;
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
@@ -236,7 +263,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                   return null;
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 70,
                               ),
 
@@ -244,7 +271,7 @@ Widget AddNewCarScreen(context, String userId,) {
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 30),
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
                           width: MediaQuery.sizeOf(context).width * 0.45,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -275,7 +302,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                     });
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
@@ -294,7 +321,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                   });
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
@@ -311,7 +338,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                 ),
 
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
@@ -329,7 +356,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                 ),
 
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
@@ -352,7 +379,7 @@ Widget AddNewCarScreen(context, String userId,) {
                                   return null;
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               TextFormField(

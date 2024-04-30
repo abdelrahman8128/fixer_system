@@ -7,7 +7,7 @@ class GetSpecificUserModel{
   String? role;
   bool active=false;
   String? phoneNumber;
-  List<SpecificCarData>cars=[];
+  List<SpecificUserCarData>cars=[];
   DateTime? createdAt;
   GetSpecificUserModel.fromJson(Map<String,dynamic>?json){
     json=json?['data'];
@@ -20,25 +20,38 @@ class GetSpecificUserModel{
     phoneNumber=json?['phoneNumber'];
     createdAt=DateTime.tryParse(json?['createdAt']);
     json?['car'].forEach((element) {
-      cars.add(SpecificCarData.fromJson(element));
+      cars.add(SpecificUserCarData.fromJson(element));
     });
   }
 
 
 }
 
-class SpecificCarData {
-  SpecificCarData();
+class SpecificUserCarData {
+  SpecificUserCarData();
   String ? id;
   String ? carCode;
   String ? carNumber;
   String ?brand;
   String ?category ;
   String ?model;
-  SpecificCarData.fromJson(Map<String,dynamic>?json)
+  SpecificUserCarData.fromJson(Map<String,dynamic>?json)
   {
-    id=json?['id'];
-    carCode=json?['carCode'];
+    if (json?['id']!=null)
+      {
+        id=json?['id'];
+
+      }else {
+      id ??= json?['_id'];
+    }
+
+    if (json?['carCode']!=null) {
+      carCode=json?['carCode'];
+    }
+    else {
+      carCode=json?['generatedCode'];
+    }
+
     carNumber=json?['carNumber'];
     brand=json?['brand'];
     category=json?['category'];

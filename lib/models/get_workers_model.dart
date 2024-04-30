@@ -2,11 +2,11 @@
 class GetWorkersModel{
   GetWorkersModel();
   int? results=null;
-  List<Worker>users=[];
+  List<Worker>workers=[];
   GetWorkersModel.fromJson(Map<String,dynamic>?json){
     results=json?['results'];
     json?['data'].forEach((element) {
-      users.add(Worker.fromJson(element));
+      workers.add(Worker.fromJson(element));
     });
   }
 
@@ -26,6 +26,7 @@ class Worker {
   Worker.fromJson(Map<String, dynamic>?json)
   {
     id = json?['_id'];
+
     name = json?['name'];
     phoneNumber=json?['phoneNumber'];
     jobTitle=json?['jobTitle'];

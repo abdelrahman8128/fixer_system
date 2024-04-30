@@ -164,53 +164,7 @@ var searchController=TextEditingController();
                                             ),
                                           ),
                                         ),
-                                        Expanded(
-                                          flex: 3,
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                            children: [
-                                              if (responsiveVisibility(
-                                                context: context,
-                                                phone: false,
-                                              ))
-                                                Padding(
-                                                  padding:
-                                                  const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                      0, 0, 12, 0),
-                                                  child: Container(
-                                                    width: 250,
-                                                    height: 50,
-                                                    child:TextFormField(
-                                                      controller: searchController,
-                                                      obscureText: false,
-                                                      decoration: CustomInputDecoration.customInputDecoration(context,'Search'),
-                                                      style: FlutterFlowTheme.of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                        fontFamily: 'Outfit',
-                                                        color:
-                                                        FlutterFlowTheme.of(context).tertiary,
-                                                      ),
-                                                      onFieldSubmitted: (value) {
-                                                        // if (value.isNotEmpty) {
-                                                        //   AppCubit.get(context).searchUsers(word: value);
-                                                        // }
-                                                        // else
-                                                        // {
-                                                        //   AppCubit.get(context).getUsers();
-                                                        // }
-                                                      },
-                                                    ),
 
-                                                  ),
-                                                ),
-
-                                            ],
-                                          ),
-                                        ),
                                       ],
                                     ),
                                     if (responsiveVisibility(

@@ -14,9 +14,10 @@ import '../components/show_toast_function/show_toast_function.dart';
 import '../models/get_all_cars_model.dart';
 import '../models/get_all_repairs_for_specific_car_model.dart';
 import '../models/get_list_of_inventory_components_model.dart';
+import '../models/get_month_work_model.dart';
 import '../models/get_repairing_cars_model.dart';
-import '../models/get_specific_car_model.dart';
 import '../models/monthly_report_model.dart';
+import 'package:fixer_system/models/get_specific_car_model.dart';
 
 class AppCubit extends Cubit<AppCubitStates> {
   AppCubit() : super(AppInitialState());
@@ -25,12 +26,21 @@ class AppCubit extends Cubit<AppCubitStates> {
   GetWorkersModel? getWorkersModel = GetWorkersModel();
   GetCarsModel?getCarsModel=GetCarsModel();
   GetRepairingCarsModel?getRepairingCarsModel=GetRepairingCarsModel();
-  GetListOfInventoryComponentsModel?getListOfComponentsModel=GetListOfInventoryComponentsModel();
+  GetListOfInventoryComponentsModel?getListOfInventoryComponentsModel=GetListOfInventoryComponentsModel();
   GetSpecificUserModel?getSpecificUserModel=GetSpecificUserModel();
   GetSpecificCarModel?getSpecificCarModel=GetSpecificCarModel();
   GetAllRepairsForSpecificCarModel?getAllRepairsForSpecificCarModel=GetAllRepairsForSpecificCarModel();
   MainPramsModel?mainPramsModel=MainPramsModel();
   GetCompletedRepairsModel?getCompletedRepairsModel=GetCompletedRepairsModel();
+  GetMonthWorkModel?getMonthWorkModel=GetMonthWorkModel();
+  GetListOfInventoryComponentsModel?searchListOfInventoryComponentsModel=GetListOfInventoryComponentsModel();
+
+
+
+
+
+
+
   var time=DateTime.now();
   void changDatePicker(value)
   {
@@ -46,8 +56,6 @@ class AppCubit extends Cubit<AppCubitStates> {
     required String brand,
     required String category,
     required String distance,
-    required String role,
-
     required String chassisNumber,
     required String nextRepairDate,
     required String lastRepairDate,
@@ -71,7 +79,7 @@ class AppCubit extends Cubit<AppCubitStates> {
       'brand': brand,
       'category': category,
       'model': time.year.toString(),
-      "role": role,
+      "role": "user",
       'distances':distance,
       'chassisNumber':chassisNumber,
        'nextRepairDate':nextRepairDate,
@@ -88,20 +96,17 @@ class AppCubit extends Cubit<AppCubitStates> {
     post(Uri.parse(url), headers: headers, body: body).then((response) {
 
       if (response.statusCode==201) {
+
         showToast(context,"User added successfully");
-        getUsersModel?.users.add(User.fromJson(jsonDecode(response.body)));
+        getUsersModel?.users.add(User.fromJson(jsonDecode(response.body)['data']));
+
         emit(AppAddClientSuccessState());
       } else {
         showToast(context ,response.body);
         emit(AppAddClientErrorState());
 
       }
-      // if (forgetPasswordModel!.status != 'fail') {
-      //   emit(AppForgetPasswordSuccessState());
-      //   showToast('password sent to your email');
-      // } else {
-      //   emit(AppForgetPasswordErrorState(forgetPasswordModel?.message ?? ''));
-      // }
+
     });
   }
 
@@ -201,7 +206,8 @@ class AppCubit extends Cubit<AppCubitStates> {
 
       if (response.statusCode==201)
         {
-          showToast(context,'Added Successfully');
+          showToast(context,'Worker Added Successfully');
+          getWorkersModel?.workers.add(Worker.fromJson(jsonDecode(response.body)['data']));
           emit(AppAddWorkerSuccessState());
         }
       else
@@ -267,7 +273,7 @@ class AppCubit extends Cubit<AppCubitStates> {
   void searchWorkers({
     required String word,
 }){
-    getWorkersModel?.users=[];
+    getWorkersModel?.workers=[];
     String url = 'https://fixer-backend-1.onrender.com/api/V1/Worker/search/${word}';
     final headers = {
       'Content-Type': 'application/json',
@@ -361,8 +367,8 @@ class AppCubit extends Cubit<AppCubitStates> {
       Uri.parse(url),
       headers: headers,
     ).then((value) {
-      getListOfComponentsModel = GetListOfInventoryComponentsModel.fromJson(jsonDecode(value));
-      if (getListOfComponentsModel?.results != null) {
+      getListOfInventoryComponentsModel = GetListOfInventoryComponentsModel.fromJson(jsonDecode(value));
+      if (getListOfInventoryComponentsModel?.results != null) {
         emit(AppGetListOfComponentsSuccessState());
       } else {
         emit(AppGetListOfComponentsErrorState());
@@ -396,6 +402,7 @@ class AppCubit extends Cubit<AppCubitStates> {
     post(Uri.parse(url), headers: headers, body: body).then((response) {
 
       if (response.statusCode==201) {
+        getListOfInventoryComponentsModel?.data.add(InventoryComponentData.fromJson(jsonDecode(response.body)['data']));
         showToast(context,"Component added successfully");
         emit(AppAddComponentSuccessState());
       } else {
@@ -543,19 +550,20 @@ class AppCubit extends Cubit<AppCubitStates> {
     post(Uri.parse(url), headers: headers, body: body).then((response) {
 
       if (response.statusCode==201) {
+        print(jsonDecode(response.body)['data']);
         showToast(context,"User added successfully");
+        getSpecificUserModel?.cars.add(SpecificUserCarData.fromJson(jsonDecode(response.body)['data']['newCar']));
+
         emit(AppAddCarSuccessState());
       } else {
         showToast(context ,response.body);
+
         emit(AppAddCarErrorState());
 
       }
-      // if (forgetPasswordModel!.status != 'fail') {
-      //   emit(AppForgetPasswordSuccessState());
-      //   showToast('password sent to your email');
-      // } else {
-      //   emit(AppForgetPasswordErrorState(forgetPasswordModel?.message ?? ''));
-      // }
+
+    }).catchError((onError){
+      print (onError.toString());
     });
   }
 
@@ -893,6 +901,64 @@ class AppCubit extends Cubit<AppCubitStates> {
 
   }
 
+
+
+  void getMonthWork({
+    required String year,
+    required String month,
+  }){
+    getMonthWorkModel=GetMonthWorkModel();
+
+    emit(AppGetMonthWorkLoadingState());
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/MonthlyReport/home/work/${year}_${month}';
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E',
+      'year':year,
+      'month':month,
+    };
+    read(
+      Uri.parse(url),
+      headers: headers,
+
+    ).then((value) {
+      print(value);
+      getMonthWorkModel = GetMonthWorkModel.fromJson(jsonDecode(value));
+      emit(AppGetMonthWorkSuccessState());
+    }).catchError((error){
+      print(error);
+      emit(AppGetMonthWorkErrorState());
+    });
+
+  }
+
+
+  void searchComponents({
+    required String word,
+  }){
+
+    searchListOfInventoryComponentsModel?.data=[];
+    String url = 'https://fixer-backend-1.onrender.com/api/V1/Inventort/search/${word}';
+    final headers = {
+      'Content-Type': 'application/json',
+    };
+    emit(AppSearchComponentsLoadingState());
+    read(
+      Uri.parse(url),
+      headers: headers,
+    ).then((value) {
+      searchListOfInventoryComponentsModel = GetListOfInventoryComponentsModel.fromJson(jsonDecode(value));
+      if (searchListOfInventoryComponentsModel?.results != null) {
+        emit(AppSearchComponentsSuccessState());
+      } else {
+        emit(AppSearchComponentsErrorState());
+      }
+    }).catchError((error){
+      emit(AppSearchComponentsErrorState());
+    });
+
+  }
 
 
 

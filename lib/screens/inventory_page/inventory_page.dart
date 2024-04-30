@@ -396,8 +396,8 @@ class _InventoryPageState extends State<InventoryPage> {
                                                      shrinkWrap: true,
                                                      scrollDirection: Axis.vertical,
                                                      physics: const BouncingScrollPhysics(),
-                                                     itemBuilder:(context, index) =>  componentItemBuilder(context, AppCubit.get(context).getListOfComponentsModel!.data[index]),
-                                                     itemCount:AppCubit.get(context).getListOfComponentsModel!.data.length,
+                                                     itemBuilder:(context, index) =>  componentItemBuilder(context, AppCubit.get(context).getListOfInventoryComponentsModel!.data[index]),
+                                                     itemCount:AppCubit.get(context).getListOfInventoryComponentsModel!.data.length,
                                                    ),
                                                  ),
 
