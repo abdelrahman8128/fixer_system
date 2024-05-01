@@ -67,7 +67,7 @@ Widget UpdateWorkerPage(context,Worker model) {
                     jobTitle: jobTitleController.text,
                     phoneNumber: phoneNumberController.text,
                     salary: salaryController.text,
-                    id:model.id,
+                    id:model.id!,
                   );
                 }
               },

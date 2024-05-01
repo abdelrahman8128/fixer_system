@@ -44,6 +44,12 @@ class AppChangeServiceStateErrorState extends AppCubitStates{
 class AppDatePickerChangeState extends AppCubitStates{}
 
 
+class AppLoginLoadingState extends AppCubitStates{}
+class AppLoginSuccessState extends AppCubitStates{}
+class AppLoginErrorState extends AppCubitStates{}
+class AppLoginVerifyState extends AppCubitStates{}
+
+
 class AppAddWorkerLoadingState extends AppCubitStates{}
 class AppAddWorkerSuccessState extends AppCubitStates{}
 class AppAddWorkerErrorState extends AppCubitStates{}

@@ -11,6 +11,7 @@ import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:http/http.dart';
 
 import '../components/show_toast_function/show_toast_function.dart';
+import '../end_points.dart';
 import '../models/get_all_cars_model.dart';
 import '../models/get_all_repairs_for_specific_car_model.dart';
 import '../models/get_list_of_inventory_components_model.dart';
@@ -22,32 +23,71 @@ import 'package:fixer_system/models/get_specific_car_model.dart';
 class AppCubit extends Cubit<AppCubitStates> {
   AppCubit() : super(AppInitialState());
   static AppCubit get(context) => BlocProvider.of(context);
-  GetUsersModel? getUsersModel =GetUsersModel();
+  GetUsersModel? getUsersModel = GetUsersModel();
   GetWorkersModel? getWorkersModel = GetWorkersModel();
-  GetCarsModel?getCarsModel=GetCarsModel();
-  GetRepairingCarsModel?getRepairingCarsModel=GetRepairingCarsModel();
-  GetListOfInventoryComponentsModel?getListOfInventoryComponentsModel=GetListOfInventoryComponentsModel();
-  GetSpecificUserModel?getSpecificUserModel=GetSpecificUserModel();
-  GetSpecificCarModel?getSpecificCarModel=GetSpecificCarModel();
-  GetAllRepairsForSpecificCarModel?getAllRepairsForSpecificCarModel=GetAllRepairsForSpecificCarModel();
-  MainPramsModel?mainPramsModel=MainPramsModel();
-  GetCompletedRepairsModel?getCompletedRepairsModel=GetCompletedRepairsModel();
-  GetMonthWorkModel?getMonthWorkModel=GetMonthWorkModel();
-  GetListOfInventoryComponentsModel?searchListOfInventoryComponentsModel=GetListOfInventoryComponentsModel();
+  GetCarsModel? getCarsModel = GetCarsModel();
+  GetRepairingCarsModel? getRepairingCarsModel = GetRepairingCarsModel();
+  GetListOfInventoryComponentsModel? getListOfInventoryComponentsModel =
+      GetListOfInventoryComponentsModel();
+  GetSpecificUserModel? getSpecificUserModel = GetSpecificUserModel();
+  GetSpecificCarModel? getSpecificCarModel = GetSpecificCarModel();
+  GetAllRepairsForSpecificCarModel? getAllRepairsForSpecificCarModel =
+      GetAllRepairsForSpecificCarModel();
+  MainPramsModel? mainPramsModel = MainPramsModel();
+  GetCompletedRepairsModel? getCompletedRepairsModel =
+      GetCompletedRepairsModel();
+  GetMonthWorkModel? getMonthWorkModel = GetMonthWorkModel();
+  GetListOfInventoryComponentsModel? searchListOfInventoryComponentsModel =
+      GetListOfInventoryComponentsModel();
 
-
-
-
-
-
-
-  var time=DateTime.now();
-  void changDatePicker(value)
-  {
-    time=value;
+  var time = DateTime.now();
+  void changDatePicker(value) {
+    time = value;
     emit(AppDatePickerChangeState());
   }
-  void addClient(context,{
+
+  void login(
+    context, {
+    required String email,
+    required String password,
+  }) {
+    emit(AppLoginLoadingState());
+
+    final body = jsonEncode({
+      'email': email,
+      'password': password,
+    });
+
+    post(Uri.parse(LOGIN),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: body)
+        .then((response) {
+      print(response.body);
+      if (response.statusCode == 200) {
+        if (jsonDecode(response.body)['message'] != null) {
+          showToast(context, jsonDecode(response.body)['message']);
+          emit(AppLoginVerifyState());
+        } else {
+          headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${jsonDecode(response.body)['token']}',
+          };
+          emit(AppLoginSuccessState());
+        }
+      } else {
+        showToast(context, jsonDecode(response.body)['message']);
+        emit(AppLoginErrorState());
+      }
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(AppLoginErrorState());
+    });
+  }
+
+  void addClient(
+    context, {
     required String name,
     required String email,
     required String carNumber,
@@ -64,12 +104,7 @@ class AppCubit extends Cubit<AppCubitStates> {
     required String motorNumber,
   }) {
     emit(AppAddClientLoadingState());
-    const url = 'https://fixer-backend-1.onrender.com/api/V1/User';
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
-    };
+
     final body = jsonEncode({
       'name': name,
       'email': email,
@@ -80,46 +115,34 @@ class AppCubit extends Cubit<AppCubitStates> {
       'category': category,
       'model': time.year.toString(),
       "role": "user",
-      'distances':distance,
-      'chassisNumber':chassisNumber,
-       'nextRepairDate':nextRepairDate,
-       'lastRepairDate':lastRepairDate,
-       'periodicRepairs':periodicRepairs,
-       'nonPeriodicRepairs':nonPeriodicRepairs,
-       'motorNumber':motorNumber,
+      'distances': distance,
+      'chassisNumber': chassisNumber,
+      'nextRepairDate': nextRepairDate,
+      'lastRepairDate': lastRepairDate,
+      'periodicRepairs': periodicRepairs,
+      'nonPeriodicRepairs': nonPeriodicRepairs,
+      'motorNumber': motorNumber,
       "State": "good",
-
-
-
     });
 
-    post(Uri.parse(url), headers: headers, body: body).then((response) {
-
-      if (response.statusCode==201) {
-
-        showToast(context,"User added successfully");
-        getUsersModel?.users.add(User.fromJson(jsonDecode(response.body)['data']));
+    post(Uri.parse(ADDCLIENT), headers: headers, body: body).then((response) {
+      if (response.statusCode == 201) {
+        showToast(context, "User added successfully");
+        getUsersModel?.users
+            .add(User.fromJson(jsonDecode(response.body)['data']));
 
         emit(AppAddClientSuccessState());
       } else {
-        showToast(context ,response.body);
+        showToast(context, response.body);
         emit(AppAddClientErrorState());
-
       }
-
     });
   }
 
   void getUsers() {
-    const url = 'https://fixer-backend-1.onrender.com/api/V1/User';
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
-    };
     emit(AppGetUsersLoadingState());
     read(
-      Uri.parse(url),
+      Uri.parse(GETUSERS),
       headers: headers,
     ).then((value) {
       getUsersModel = GetUsersModel.fromJson(jsonDecode(value));
@@ -131,30 +154,25 @@ class AppCubit extends Cubit<AppCubitStates> {
     });
   }
 
-
-  void changeServiceState(context,
-      {required String serviceId,
-        required String state,
-      })  {
-    print (serviceId);
+  void changeServiceState(
+    context, {
+    required String serviceId,
+    required String state,
+  }) {
+    print(serviceId);
     emit(AppChangeServiceStateLoadingState());
-    String url ='https://fixer-backend-1.onrender.com/api/V1/repairing/${serviceId}';
-    final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({
       'newState': state,
-
     });
-     put(Uri.parse(url), headers: headers, body:body).then((response) {
+    put(Uri.parse(CHANGESERVICE + serviceId), headers: headers, body: body)
+        .then((response) {
       print(response.body.toString());
-      if (response.statusCode==200){
+      if (response.statusCode == 200) {
         showToast(context, 'service state changed successfully');
         emit(AppChangeServiceStateSuccessState());
-
-      }
-      else{
+      } else {
         emit(AppChangeServiceStateErrorState(''));
         showToast(context, response.body);
-
       }
     }).catchError((error) {
       print(error.toString());
@@ -163,13 +181,9 @@ class AppCubit extends Cubit<AppCubitStates> {
   }
 
   void getWorkers() {
-    const url = 'https://fixer-backend-1.onrender.com/api/V1/Worker';
-    final headers = {
-      'Content-Type': 'application/json',
-    };
     emit(AppGetWorkersLoadingState());
     read(
-      Uri.parse(url),
+      Uri.parse(GETWORKERS),
       headers: headers,
     ).then((value) {
       getWorkersModel = GetWorkersModel.fromJson(jsonDecode(value));
@@ -181,19 +195,15 @@ class AppCubit extends Cubit<AppCubitStates> {
     });
   }
 
-  void addWorker(context ,{
+  void addWorker(
+    context, {
     required String name,
     required String phoneNumber,
     required String jobTitle,
     required String salary,
     required String IDNumber,
-
   }) {
     emit(AppAddWorkerLoadingState());
-    const url = 'https://fixer-backend-1.onrender.com/api/V1/Worker';
-    final headers = {
-      'Content-Type': 'application/json',
-    };
     final body = jsonEncode({
       'name': name,
       'phoneNumber': phoneNumber,
@@ -202,32 +212,23 @@ class AppCubit extends Cubit<AppCubitStates> {
       'IdNumber': IDNumber,
     });
 
-    post(Uri.parse(url), headers: headers, body: body).then((response) {
-
-      if (response.statusCode==201)
-        {
-          showToast(context,'Worker Added Successfully');
-          getWorkersModel?.workers.add(Worker.fromJson(jsonDecode(response.body)['data']));
-          emit(AppAddWorkerSuccessState());
-        }
-      else
-        {
-          showToast(context ,jsonDecode(response.body)['message']);
-          emit(AppAddWorkerErrorState());
-        }
-
+    post(Uri.parse(ADDWORKER), headers: headers, body: body).then((response) {
+      if (response.statusCode == 201) {
+        showToast(context, 'Worker Added Successfully');
+        getWorkersModel?.workers
+            .add(Worker.fromJson(jsonDecode(response.body)['data']));
+        emit(AppAddWorkerSuccessState());
+      } else {
+        showToast(context, jsonDecode(response.body)['message']);
+        emit(AppAddWorkerErrorState());
+      }
     });
   }
 
-
   void getCars() {
-    const url = 'https://fixer-backend-1.onrender.com/api/V1/Garage';
-    final headers = {
-      'Content-Type': 'application/json',
-    };
     emit(AppGetAllCarsLoadingState());
     read(
-      Uri.parse(url),
+      Uri.parse(GETWORKERS),
       headers: headers,
     ).then((value) {
       getCarsModel = GetCarsModel.fromJson(jsonDecode(value));
@@ -241,46 +242,33 @@ class AppCubit extends Cubit<AppCubitStates> {
   }
 
   void getRepairingCars() {
-    const url = 'https://fixer-backend-1.onrender.com/api/V1/Garage/repairing';
-    final headers = {
-      'Content-Type': 'application/json',
-    };
     emit(AppGetRepairingCarsLoadingState());
 
     read(
-      Uri.parse(url),
+      Uri.parse(GETREPAIRINGCARS),
       headers: headers,
     ).then((value) {
-
       //print(value.toString());
 
-        getRepairingCarsModel=GetRepairingCarsModel.fromJson(jsonDecode(value));
-        print(getRepairingCarsModel?.data.toString());
-        print(getRepairingCarsModel?.results);
-        print(getRepairingCarsModel?.data.length);
-        emit(AppGetRepairingCarsSuccessState());
-
-
-    }).catchError((onError)
-      {
-        print(onError.toString());
-        emit(AppGetRepairingCarsErrorState());
-
-      }
-    );
+      getRepairingCarsModel = GetRepairingCarsModel.fromJson(jsonDecode(value));
+      print(getRepairingCarsModel?.data.toString());
+      print(getRepairingCarsModel?.results);
+      print(getRepairingCarsModel?.data.length);
+      emit(AppGetRepairingCarsSuccessState());
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(AppGetRepairingCarsErrorState());
+    });
   }
 
   void searchWorkers({
     required String word,
-}){
-    getWorkersModel?.workers=[];
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/Worker/search/${word}';
-    final headers = {
-      'Content-Type': 'application/json',
-    };
+  }) {
+    getWorkersModel?.workers = [];
+
     emit(AppSearchWorkersLoadingState());
     read(
-      Uri.parse(url),
+      Uri.parse(SEARCHWORKERS + word),
       headers: headers,
     ).then((value) {
       getWorkersModel = GetWorkersModel.fromJson(jsonDecode(value));
@@ -289,26 +277,19 @@ class AppCubit extends Cubit<AppCubitStates> {
       } else {
         emit(AppSearchWorkersErrorState());
       }
-    }).catchError((error){
+    }).catchError((error) {
       emit(AppSearchWorkersErrorState());
     });
-
   }
-
-
 
   void searchCars({
     required String word,
-  }){
+  }) {
+    getCarsModel?.data = [];
 
-    getCarsModel?.data=[];
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/Garage/search/${word}';
-    final headers = {
-      'Content-Type': 'application/json',
-    };
     emit(AppSearchCarsLoadingState());
     read(
-      Uri.parse(url),
+      Uri.parse(SEARCHCARS + word),
       headers: headers,
     ).then((value) {
       getCarsModel = GetCarsModel.fromJson(jsonDecode(value));
@@ -317,27 +298,19 @@ class AppCubit extends Cubit<AppCubitStates> {
       } else {
         emit(AppSearchCarsErrorState());
       }
-    }).catchError((error){
+    }).catchError((error) {
       emit(AppSearchCarsErrorState());
     });
-
   }
 
   void searchUsers({
     required String word,
-}){
-    getUsersModel?.users=[];
-
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/User/search/${word}';
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
-    };
+  }) {
+    getUsersModel?.users = [];
 
     emit(AppSearchUsersLoadingState());
     read(
-      Uri.parse(url),
+      Uri.parse(SEARCHUSERS),
       headers: headers,
     ).then((value) {
       print(value);
@@ -348,84 +321,66 @@ class AppCubit extends Cubit<AppCubitStates> {
       } else {
         emit(AppSearchUsersErrorState());
       }
-    }).catchError((error){
-      print (error);
+    }).catchError((error) {
+      print(error);
       emit(AppSearchUsersErrorState());
     });
-
-
   }
 
-  void getListOfComponents()
-  {
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/Inventort';
-    final headers = {
-      'Content-Type': 'application/json',
-    };
+  void getListOfComponents() {
     emit(AppGetListOfComponentsLoadingState());
     read(
-      Uri.parse(url),
+      Uri.parse(GETLISTOFCOMPONETS),
       headers: headers,
     ).then((value) {
-      getListOfInventoryComponentsModel = GetListOfInventoryComponentsModel.fromJson(jsonDecode(value));
+      getListOfInventoryComponentsModel =
+          GetListOfInventoryComponentsModel.fromJson(jsonDecode(value));
       if (getListOfInventoryComponentsModel?.results != null) {
         emit(AppGetListOfComponentsSuccessState());
       } else {
         emit(AppGetListOfComponentsErrorState());
       }
-    }).catchError((error){
+    }).catchError((error) {
       emit(AppGetListOfComponentsErrorState());
     });
-
   }
 
-
-  void addComponent(context,{
+  void addComponent(
+    context, {
     required String name,
     required String quantity,
     required String price,
-
   }) {
     emit(AppAddComponentLoadingState());
-    const url = 'https://fixer-backend-1.onrender.com/api/V1/Inventort';
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
-    };
+
     final body = jsonEncode({
       'name': name,
       'quantity': quantity,
       'price': price,
     });
 
-    post(Uri.parse(url), headers: headers, body: body).then((response) {
-
-      if (response.statusCode==201) {
-        getListOfInventoryComponentsModel?.data.add(InventoryComponentData.fromJson(jsonDecode(response.body)['data']));
-        showToast(context,"Component added successfully");
+    post(Uri.parse(ADDCOMPONENT), headers: headers, body: body)
+        .then((response) {
+      if (response.statusCode == 201) {
+        getListOfInventoryComponentsModel?.data.add(
+            InventoryComponentData.fromJson(jsonDecode(response.body)['data']));
+        showToast(context, "Component added successfully");
         emit(AppAddComponentSuccessState());
       } else {
-        showToast(context ,response.body);
+        showToast(context, response.body);
         emit(AppAddComponentErrorState());
       }
-
     });
   }
 
-
   void searchRepairingCars({
     required String word,
-  }){
+  }) {
+    getRepairingCarsModel?.data = [];
 
-    getRepairingCarsModel?.data=[];
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/Garage/search/repairing/${word}';
-    final headers = {
-      'Content-Type': 'application/json',
-    };
     emit(AppSearchRepairingCarsLoadingState());
     read(
-      Uri.parse(url),
+      Uri.parse(SEARCHREPAIRINGCARS + word),
       headers: headers,
     ).then((value) {
       getRepairingCarsModel = GetRepairingCarsModel.fromJson(jsonDecode(value));
@@ -434,82 +389,60 @@ class AppCubit extends Cubit<AppCubitStates> {
       } else {
         emit(AppSearchRepairingCarsErrorState());
       }
-    }).catchError((error){
+    }).catchError((error) {
       emit(AppSearchRepairingCarsErrorState());
     });
-
   }
 
-
-
-  void editComponent(context,{
+  void editComponent(
+    context, {
     required String name,
     required String quantity,
     required String price,
     required String id,
   }) {
     emit(AppEditComponentLoadingState());
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/Inventort/${id}';
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
-    };
     final body = jsonEncode({
       'name': name,
       'quantity': quantity,
       'price': price,
     });
 
-    put(Uri.parse(url), headers: headers, body: body).then((response) {
-
-      if (response.statusCode==200) {
-        showToast(context,"Component edited successfully");
+    put(Uri.parse(EDITCOMPONET + id), headers: headers, body: body)
+        .then((response) {
+      if (response.statusCode == 200) {
+        showToast(context, "Component edited successfully");
         emit(AppEditComponentSuccessState());
       } else {
-        showToast(context ,response.body);
+        showToast(context, response.body);
         emit(AppEditComponentErrorState());
       }
     });
   }
 
-
-
   void getSpecificUser({
     required String userId,
-  }){
-
-
+  }) {
     emit(AppGetSpecificUserLoadingState());
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/User/${userId}';
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
-    };
 
     read(
-      Uri.parse(url),
+      Uri.parse(GETSPECIFICUSER + userId),
       headers: headers,
     ).then((value) {
-
       getSpecificUserModel = GetSpecificUserModel.fromJson(jsonDecode(value));
       if (getSpecificUserModel?.name != null) {
         emit(AppGetSpecificUserSuccessState());
       } else {
         emit(AppGetSpecificUserErrorState());
       }
-    }).catchError((error){
+    }).catchError((error) {
       print(error);
       emit(AppGetSpecificUserErrorState());
     });
-
   }
 
-
-
-  void addCar(context,{
-
+  void addCar(
+    context, {
     required String id,
     required String carNumber,
     required String color,
@@ -524,158 +457,118 @@ class AppCubit extends Cubit<AppCubitStates> {
     required String motorNumber,
   }) {
     emit(AppAddCarLoadingState());
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/Garage/add/${id}';
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
-    };
+
     final body = jsonEncode({
       'carNumber': carNumber,
-      'chassisNumber':chassisNumber,
-      'nextRepairDate':nextRepairDate,
-      'lastRepairDate':lastRepairDate,
+      'chassisNumber': chassisNumber,
+      'nextRepairDate': nextRepairDate,
+      'lastRepairDate': lastRepairDate,
       'color': color,
       'brand': brand,
       'category': category,
       'model': time.year.toString(),
-      'distance':distance,
-      'motorNumber':motorNumber,
-      'repairing':false,
+      'distance': distance,
+      'motorNumber': motorNumber,
+      'repairing': false,
       "periodicRepairs": 0,
       "nonPeriodicRepairs": 0,
-
     });
 
-    post(Uri.parse(url), headers: headers, body: body).then((response) {
-
-      if (response.statusCode==201) {
+    post(Uri.parse(ADDCAR + id), headers: headers, body: body).then((response) {
+      if (response.statusCode == 201) {
         print(jsonDecode(response.body)['data']);
-        showToast(context,"User added successfully");
-        getSpecificUserModel?.cars.add(SpecificUserCarData.fromJson(jsonDecode(response.body)['data']['newCar']));
+        showToast(context, "User added successfully");
+        getSpecificUserModel?.cars.add(SpecificUserCarData.fromJson(
+            jsonDecode(response.body)['data']['newCar']));
 
         emit(AppAddCarSuccessState());
       } else {
-        showToast(context ,response.body);
+        showToast(context, response.body);
 
         emit(AppAddCarErrorState());
-
       }
-
-    }).catchError((onError){
-      print (onError.toString());
+    }).catchError((onError) {
+      print(onError.toString());
     });
   }
 
-  void updateUser(context,{
+  void updateUser(
+    context, {
     required String id,
     required String email,
     required String name,
     required String phone,
-}){
+  }) {
     emit(AppUpdateUsersLoadingState());
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/User/${id}';
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
-    };
     final body = jsonEncode({
       'name': name,
-      'email':email,
-      'phoneNumber':phone,
+      'email': email,
+      'phoneNumber': phone,
     });
-    put(Uri.parse(url), headers: headers, body: body).then((value) {
-      if (value.statusCode==200)
-        {
-          showToast(context, 'user updated successfully');
-          emit(AppUpdateUsersSuccessState());
-
-        }
-      else {
-
+    put(Uri.parse(UPDATEUSER + id), headers: headers, body: body).then((value) {
+      if (value.statusCode == 200) {
+        showToast(context, 'user updated successfully');
+        emit(AppUpdateUsersSuccessState());
+      } else {
         emit(AppUpdateUsersErrorState());
       }
-
-
-        }
-    ).catchError((error){
+    }).catchError((error) {
       emit(AppUpdateUsersErrorState());
-
     });
   }
 
   void getSpecificCarById({
     required String carId,
-
-  }){
-    getAllRepairsForSpecificCarModel?.repairs=[];
+  }) {
+    getAllRepairsForSpecificCarModel?.repairs = [];
     emit(AppGetSpecificCarLoadingState());
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/Garage/getCar/${carId}';
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
-    };
 
     read(
-      Uri.parse(url),
+      Uri.parse(GETSPECIFICCARBYID + carId),
       headers: headers,
     ).then((value) {
       getSpecificCarModel = GetSpecificCarModel.fromJson(jsonDecode(value));
-      if (getSpecificCarModel?.carData?.id!= null) {
+      if (getSpecificCarModel?.carData?.id != null) {
         emit(AppGetSpecificCarSuccessState());
         getAllRepairsForSpecificCar(carId: carId);
       } else {
         emit(AppGetSpecificCarSuccessState());
       }
-    }).catchError((error){
+    }).catchError((error) {
       print(error);
       emit(AppGetSpecificCarErrorState());
     });
-
   }
 
-
-
-  void addRepair(context,{
-
+  void addRepair(
+    context, {
     required String carNumber,
-   required List<Map<String,dynamic>>components,
-    required List<Map<String,dynamic>>services,
-    required List<Map<String,dynamic>>additions,
+    required List<Map<String, dynamic>> components,
+    required List<Map<String, dynamic>> services,
+    required List<Map<String, dynamic>> additions,
     required String type,
     required double discount,
     required int daysItTake,
     required String nextPerDate,
-
   }) {
     emit(AppAddRepairLoadingState());
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/repairing';
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
-    };
     final body = jsonEncode({
       'components': components,
-      'services':services,
-      'additions':additions,
-      'carNumber':carNumber,
+      'services': services,
+      'additions': additions,
+      'carNumber': carNumber,
       'type': type,
-      'discount':discount ,
+      'discount': discount,
       'daysItTake': daysItTake,
-      'nextPerDate':nextPerDate,
-
+      'nextPerDate': nextPerDate,
     });
 
-    post(Uri.parse(url), headers: headers, body: body).then((response) {
-
-      if (response.statusCode==200) {
-        showToast(context,"Repair added successfully");
+    post(Uri.parse(ADDREPAIR), headers: headers, body: body).then((response) {
+      if (response.statusCode == 200) {
+        showToast(context, "Repair added successfully");
         emit(AppAddRepairSuccessState());
       } else {
-        showToast(context ,response.body);
+        showToast(context, response.body);
         emit(AppAddRepairErrorState());
       }
       // if (forgetPasswordModel!.status != 'fail') {
@@ -687,40 +580,30 @@ class AppCubit extends Cubit<AppCubitStates> {
     });
   }
 
-
   void getAllRepairsForSpecificCar({
     required String carId,
-  }){
-
-
+  }) {
     emit(AppGetAllRepairsForSpecificCarLoadingState());
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/repairing/getById/${carId}';
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
-    };
 
     read(
-      Uri.parse(url),
+      Uri.parse(GETALLREPAIRSFORSPECIFICAR + carId),
       headers: headers,
     ).then((value) {
-
-      getAllRepairsForSpecificCarModel = GetAllRepairsForSpecificCarModel.fromJson(jsonDecode(value));
+      getAllRepairsForSpecificCarModel =
+          GetAllRepairsForSpecificCarModel.fromJson(jsonDecode(value));
       if (getAllRepairsForSpecificCarModel?.repairs != null) {
         emit(AppGetAllRepairsForSpecificCarSuccessState());
       } else {
         emit(AppGetAllRepairsForSpecificCarErrorState());
       }
-    }).catchError((error){
+    }).catchError((error) {
       print(error);
       emit(AppGetAllRepairsForSpecificCarErrorState());
     });
-
   }
 
-
-  void updateCar(context,{
+  void updateCar(
+    context, {
     required String carNumber,
     required String color,
     required String state,
@@ -732,19 +615,12 @@ class AppCubit extends Cubit<AppCubitStates> {
     required String repairing,
     required String distance,
     required String motorNumber,
-     DateTime? nextRepair,
+    DateTime? nextRepair,
     required String carId,
-     DateTime? lastRepair,
-
-  }){
-    print (nextRepair);
+    DateTime? lastRepair,
+  }) {
+    print(nextRepair);
     emit(AppUpdateCarLoadingState());
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/Garage/update/${carId}';
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
-    };
     final body = jsonEncode({
       '_id': carId,
       "carNumber": carNumber,
@@ -753,8 +629,8 @@ class AppCubit extends Cubit<AppCubitStates> {
       "brand": brand,
       "category": category,
       "model": model,
-       "nextRepairDate": nextRepair.toString(),
-       "lastRepairDate":lastRepair.toString(),
+      "nextRepairDate": nextRepair.toString(),
+      "lastRepairDate": lastRepair.toString(),
       "periodicRepairs": periodicRepairs,
       "nonPeriodicRepairs": nonPeriodicRepairs,
       "repairing": repairing,
@@ -769,48 +645,38 @@ class AppCubit extends Cubit<AppCubitStates> {
       //   }
       // ],
     });
-    put(Uri.parse(url), headers: headers, body: body).then((value) {
-      if (value.statusCode==200)
-      {
+    put(Uri.parse(UPDATECAR + carId), headers: headers, body: body)
+        .then((value) {
+      if (value.statusCode == 200) {
         showToast(context, 'car updated successfully');
         emit(AppUpdateCarSuccessState());
-
-      }
-      else {
-
+      } else {
         emit(AppUpdateCarErrorState());
       }
-
-
-    }
-    ).catchError((error){
-      print (error.toString());
+    }).catchError((error) {
+      print(error.toString());
       emit(AppUpdateCarErrorState());
-
     });
   }
-
-
 
   void getMainPrams({
     required String year,
     required String month,
-  }){
-
-    mainPramsModel=MainPramsModel();
+  }) {
+    mainPramsModel = MainPramsModel();
     emit(AppGetMainPramsLoadingState());
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/MonthlyReport/specific_month_year/${year}_${month}';
+    String url =
+        'https://fixer-backend-1.onrender.com/api/V1/MonthlyReport/specific_month_year/${year}_${month}';
     final headers = {
       'Content-Type': 'application/json',
       'Authorization':
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E',
-      'year':year,
-      'month':month,
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E',
+      'year': year,
+      'month': month,
     };
     read(
-      Uri.parse(url),
+      Uri.parse('$GETMAINPRAMS${year}_$month'),
       headers: headers,
-
     ).then((value) {
       print(value);
       mainPramsModel = MainPramsModel.fromJson(jsonDecode(value));
@@ -819,186 +685,131 @@ class AppCubit extends Cubit<AppCubitStates> {
       } else {
         emit(AppGetMainPramsErrorState());
       }
-    }).catchError((error){
+    }).catchError((error) {
       print(error);
       emit(AppGetMainPramsErrorState());
     });
-
   }
 
-
-
-  void updateWorker(context,{
-    required String? id,
-    required String ?name,
-    required String?phoneNumber,
-    required String?jobTitle,
-    required String?salary,
-    required String?IDNumber,
-
-  }){
+  void updateWorker(
+    context, {
+    required String id,
+    required String? name,
+    required String? phoneNumber,
+    required String? jobTitle,
+    required String? salary,
+    required String? IDNumber,
+  }) {
     emit(AppUpdateWorkerLoadingState());
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/Worker/withoutNID/${id}';
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
-    };
     final body = jsonEncode({
-      'name':name,
-      'phoneNumber':phoneNumber,
-      'jobTitle':jobTitle,
-      'salary':salary,
-      'IdNumber':IDNumber,
+      'name': name,
+      'phoneNumber': phoneNumber,
+      'jobTitle': jobTitle,
+      'salary': salary,
+      'IdNumber': IDNumber,
     });
-    put(Uri.parse(url), headers: headers, body: body).then((value) {
-      if (value.statusCode==200)
-      {
+    put(Uri.parse(UPDATEWORKER + id), headers: headers, body: body)
+        .then((value) {
+      if (value.statusCode == 200) {
         showToast(context, 'Worker updated successfully');
         emit(AppUpdateWorkerSuccessState());
-
-      }
-      else {
-
+      } else {
         emit(AppUpdateWorkerErrorState());
       }
-
-
-    }
-    ).catchError((error){
+    }).catchError((error) {
       emit(AppUpdateUsersErrorState());
-
     });
   }
 
-
-  void getCompletedRepairs()
-  {
-    getCompletedRepairsModel=GetCompletedRepairsModel();
+  void getCompletedRepairs() {
+    getCompletedRepairsModel = GetCompletedRepairsModel();
     emit(AppGetCompletedRepairsLoadingState());
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/repairing';
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E'
-    };
 
     read(
-      Uri.parse(url),
+      Uri.parse(GETCOMPLETEDREPAIRS),
       headers: headers,
     ).then((value) {
-
-      getCompletedRepairsModel = GetCompletedRepairsModel.fromJson(jsonDecode(value));
+      getCompletedRepairsModel =
+          GetCompletedRepairsModel.fromJson(jsonDecode(value));
       if (getCompletedRepairsModel?.results != null) {
         emit(AppGetCompletedRepairsSuccessState());
       } else {
         emit(AppGetCompletedRepairsErrorState());
       }
-    }).catchError((error){
+    }).catchError((error) {
       print(error);
       emit(AppGetCompletedRepairsErrorState());
     });
-
   }
-
-
 
   void getMonthWork({
     required String year,
     required String month,
-  }){
-    getMonthWorkModel=GetMonthWorkModel();
+  }) {
+    getMonthWorkModel = GetMonthWorkModel();
 
     emit(AppGetMonthWorkLoadingState());
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/MonthlyReport/home/work/${year}_${month}';
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E',
-      'year':year,
-      'month':month,
-    };
     read(
-      Uri.parse(url),
+      Uri.parse('$GETMONTHWORK${year}_$month'),
       headers: headers,
-
     ).then((value) {
       print(value);
       getMonthWorkModel = GetMonthWorkModel.fromJson(jsonDecode(value));
       emit(AppGetMonthWorkSuccessState());
-    }).catchError((error){
+    }).catchError((error) {
       print(error);
       emit(AppGetMonthWorkErrorState());
     });
-
   }
-
 
   void searchComponents({
     required String word,
-  }){
+  }) {
+    searchListOfInventoryComponentsModel?.data = [];
 
-    searchListOfInventoryComponentsModel?.data=[];
-    String url = 'https://fixer-backend-1.onrender.com/api/V1/Inventort/search/${word}';
-    final headers = {
-      'Content-Type': 'application/json',
-    };
     emit(AppSearchComponentsLoadingState());
     read(
-      Uri.parse(url),
+      Uri.parse(SEARCHCOMPONENTS + word),
       headers: headers,
     ).then((value) {
-      searchListOfInventoryComponentsModel = GetListOfInventoryComponentsModel.fromJson(jsonDecode(value));
+      searchListOfInventoryComponentsModel =
+          GetListOfInventoryComponentsModel.fromJson(jsonDecode(value));
       if (searchListOfInventoryComponentsModel?.results != null) {
         emit(AppSearchComponentsSuccessState());
       } else {
         emit(AppSearchComponentsErrorState());
       }
-    }).catchError((error){
+    }).catchError((error) {
       emit(AppSearchComponentsErrorState());
     });
-
   }
 
-
-  void addThing(context ,{
+  void addThing(
+    context, {
     required String title,
     required String price,
     required bool plus,
   }) {
     emit(AppAddThingLoadingState());
-    const url = 'https://fixer-backend-1.onrender.com/api/V1/MonthlyReport/addthing';
-    final headers = {
-      'Content-Type': 'application/json',
-    };
     final body = jsonEncode({
       'title': title,
-      'date': '2024-5-1',//'${DateTime.now().year.toString()}-${DateTime.now().month.toString()}-${DateTime.now().day.toString()}',
-      'price': plus?price:'-$price',
-
+      'date':
+          '${DateTime.now().year.toString()}-${DateTime.now().month.toString()}-${DateTime.now().day.toString()}',
+      'price': plus ? price : '-$price',
     });
 
-    post(Uri.parse(url), headers: headers, body: body).then((response) {
-
-        print(response.body);
-      if (response.statusCode==201)
-      {
-        showToast(context,'Thing Added Successfully');
+    post(Uri.parse(ADDTHING), headers: headers, body: body).then((response) {
+      print(response.body);
+      if (response.statusCode == 201) {
+        showToast(context, 'Thing Added Successfully');
         emit(AppAddThingSuccessState());
-      }
-      else
-      {
-        showToast(context ,jsonDecode(response.body)['message']);
+      } else {
+        showToast(context, jsonDecode(response.body)['message']);
         emit(AppAddThingErrorState());
       }
-
-    }).catchError((onError){
+    }).catchError((onError) {
       print(onError.toString());
-    emit(AppAddThingErrorState());
-
+      emit(AppAddThingErrorState());
     });
   }
-
-
-
 }
