@@ -1,6 +1,6 @@
 import 'package:fixer_system/cubit/cubit.dart';
 import 'package:fixer_system/cubit/states.dart';
-import 'package:fixer_system/screens/bills_page/bills_page.dart';
+import 'package:fixer_system/screens/cars_page/cars_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -98,6 +98,7 @@ class _LoginState extends State<Login> {
                             letterSpacing: 0,
                             useGoogleFonts: GoogleFonts.asMap().containsKey(
                                 FlutterFlowTheme.of(context).bodyMediumFamily),
+                            color: FlutterFlowTheme.of(context).primaryText,
                           ),
                           minLines: null,
                           keyboardType: TextInputType.emailAddress,
@@ -126,6 +127,7 @@ class _LoginState extends State<Login> {
                               useGoogleFonts: GoogleFonts.asMap()
                                   .containsKey(FlutterFlowTheme.of(context)
                                   .labelMediumFamily),
+                              color: const Color(0xFFF68B1E),
                             ),
                             hintStyle:
                             FlutterFlowTheme.of(context).labelMedium.override(
@@ -202,7 +204,7 @@ class _LoginState extends State<Login> {
                               type: PageTransitionType.fade,
                               duration: const Duration(milliseconds: 0),
                               reverseDuration: const Duration(milliseconds: 0),
-                              child: const BillsPage(),
+                              child: const CarsPage(),
                             ),
                           );
                         },

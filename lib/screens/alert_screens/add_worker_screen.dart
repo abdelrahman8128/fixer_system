@@ -32,6 +32,8 @@ Widget AddNewWorkerPage(context) {
       return AlertDialog(
 
         alignment: Alignment.topRight,
+        surfaceTintColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         title: const Text(
           'Add Worker',
           style: TextStyle(

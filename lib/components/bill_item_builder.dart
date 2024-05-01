@@ -198,21 +198,18 @@ Widget billItemBuilder(context,CompletedRepairData? model){
                       style:
                       FlutterFlowTheme.of(
                           context)
-                          .titleMedium
+                          .bodyMedium
                           .override(
                         fontFamily: FlutterFlowTheme.of(
                             context)
-                            .titleMediumFamily,
-                        color: FlutterFlowTheme.of(
-                            context)
-                            .primary,
+                            .bodyMediumFamily,
                         letterSpacing:
                         0,
                         useGoogleFonts: GoogleFonts
                             .asMap()
                             .containsKey(
                             FlutterFlowTheme.of(context)
-                                .titleMediumFamily),
+                                .bodyMediumFamily),
                       ),
                     ),
                   ],

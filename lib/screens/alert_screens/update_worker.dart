@@ -34,6 +34,8 @@ Widget UpdateWorkerPage(context,Worker model) {
     builder: (context, state) {
       return AlertDialog(
         alignment: Alignment.topCenter,
+        surfaceTintColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         title:const Text(
           'Update Worker',
           style: TextStyle(

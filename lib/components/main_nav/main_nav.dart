@@ -543,11 +543,13 @@ class _MainNavWidgetState extends State<MainNavWidget>
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             if (!(Theme.of(context).brightness ==
                                 Brightness.dark))
@@ -584,17 +586,12 @@ class _MainNavWidgetState extends State<MainNavWidget>
                                   ),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        24, 12, 24, 12),
+                                        0, 12, 24, 12),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.start,
                                       children: [
-                                        /*Text(
-                                          'Switch to Dark Mode',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),*/
                                         Container(
                                           width: 80,
                                           height: 40,
@@ -705,17 +702,12 @@ class _MainNavWidgetState extends State<MainNavWidget>
                                   ),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        24, 12, 24, 12),
+                                        0, 12, 24, 12),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.start,
                                       children: [
-                                        /*Text(
-                                          'Switch to Light Mode',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),*/
                                         Container(
                                           width: 80,
                                           height: 40,

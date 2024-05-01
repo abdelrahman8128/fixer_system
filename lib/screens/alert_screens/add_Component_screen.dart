@@ -26,6 +26,8 @@ final _formKey = GlobalKey<FormState>();
     builder: (context, state) {
       return AlertDialog(
         alignment: Alignment.topCenter,
+        surfaceTintColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         title:const Text(
           'Add Component',
           style: TextStyle(

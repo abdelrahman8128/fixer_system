@@ -32,18 +32,19 @@ Widget monthRepairItemBuilder(context ,MonthRepair? model)
                   '${(model?.brand)??'-'} ${(model?.category)??'-'}',
                   style: FlutterFlowTheme
                       .of(context)
-                      .bodyMedium
+                      .bodySmall
                       .override(
                     fontFamily: FlutterFlowTheme.of(
                         context)
-                        .bodyMediumFamily,
+                        .bodySmallFamily,
                     letterSpacing:
                     0,
                     useGoogleFonts: GoogleFonts
                         .asMap()
                         .containsKey(
                         FlutterFlowTheme.of(context)
-                            .bodyMediumFamily),
+                            .bodySmallFamily),
+                    color: Colors.white,
                   ),
                 ),
               ],
@@ -72,17 +73,18 @@ Widget monthRepairItemBuilder(context ,MonthRepair? model)
                     '${(model?.createdAt?.day)??'-'}/${(model?.createdAt?.month)??'-'}/${(model?.createdAt?.year)??'-'}',
                     style: FlutterFlowTheme
                         .of(context)
-                        .bodyMedium
+                        .bodySmall
                         .override(
                       fontFamily:
                       FlutterFlowTheme.of(context)
-                          .bodyMediumFamily,
+                          .bodySmallFamily,
                       letterSpacing:
                       0,
                       useGoogleFonts: GoogleFonts
                           .asMap()
                           .containsKey(
-                          FlutterFlowTheme.of(context).bodyMediumFamily),
+                          FlutterFlowTheme.of(context).bodySmallFamily),
+                      color: Colors.white,
                     ),
                   ),
                 ],
@@ -107,21 +109,19 @@ Widget monthRepairItemBuilder(context ,MonthRepair? model)
                   '${(model?.priceAfterDiscount)??'-'} EGP',
                   style: FlutterFlowTheme
                       .of(context)
-                      .titleMedium
+                      .bodySmall
                       .override(
                     fontFamily: FlutterFlowTheme.of(
                         context)
-                        .titleMediumFamily,
-                    color: FlutterFlowTheme.of(
-                        context)
-                        .secondary,
+                        .bodySmallFamily,
+                    color: Colors.white,
                     letterSpacing:
                     0,
                     useGoogleFonts: GoogleFonts
                         .asMap()
                         .containsKey(
                         FlutterFlowTheme.of(context)
-                            .titleMediumFamily),
+                            .bodySmallFamily),
                   ),
                 ),
               ],
@@ -161,18 +161,19 @@ Widget monthWorkerItemBuilder(context ,MonthWorker? model)
                   '${(model?.name)??'-'}',
                   style: FlutterFlowTheme
                       .of(context)
-                      .bodyMedium
+                      .bodySmall
                       .override(
                     fontFamily: FlutterFlowTheme.of(
                         context)
-                        .bodyMediumFamily,
+                        .bodySmallFamily,
+                    color: Colors.white,
                     letterSpacing:
                     0,
                     useGoogleFonts: GoogleFonts
                         .asMap()
                         .containsKey(
                         FlutterFlowTheme.of(context)
-                            .bodyMediumFamily),
+                            .bodySmallFamily),
                   ),
                 ),
               ],
@@ -201,17 +202,18 @@ Widget monthWorkerItemBuilder(context ,MonthWorker? model)
                     '${(model?.salary)??'-'}',
                     style: FlutterFlowTheme
                         .of(context)
-                        .bodyMedium
+                        .bodySmall
                         .override(
                       fontFamily:
                       FlutterFlowTheme.of(context)
-                          .bodyMediumFamily,
+                          .bodySmallFamily,
+                      color: Colors.white,
                       letterSpacing:
                       0,
                       useGoogleFonts: GoogleFonts
                           .asMap()
                           .containsKey(
-                          FlutterFlowTheme.of(context).bodyMediumFamily),
+                          FlutterFlowTheme.of(context).bodySmallFamily),
                     ),
                   ),
                 ],
@@ -253,18 +255,19 @@ Widget monthAdditionItemBuilder(context ,MonthAddition? model)
                   '${(model?.title)??'-'}',
                   style: FlutterFlowTheme
                       .of(context)
-                      .bodyMedium
+                      .bodySmall
                       .override(
                     fontFamily: FlutterFlowTheme.of(
                         context)
-                        .bodyMediumFamily,
+                        .bodySmallFamily,
+                    color: Colors.white,
                     letterSpacing:
                     0,
                     useGoogleFonts: GoogleFonts
                         .asMap()
                         .containsKey(
                         FlutterFlowTheme.of(context)
-                            .bodyMediumFamily),
+                            .bodySmallFamily),
                   ),
                 ),
               ],
@@ -293,17 +296,18 @@ Widget monthAdditionItemBuilder(context ,MonthAddition? model)
                     '${(model?.date?.day)??'-'}/${(model?.date?.month)??'-'}/${(model?.date?.year)??'-'}',
                     style: FlutterFlowTheme
                         .of(context)
-                        .bodyMedium
+                        .bodySmall
                         .override(
                       fontFamily:
                       FlutterFlowTheme.of(context)
-                          .bodyMediumFamily,
+                          .bodySmallFamily,
+                      color: Colors.white,
                       letterSpacing:
                       0,
                       useGoogleFonts: GoogleFonts
                           .asMap()
                           .containsKey(
-                          FlutterFlowTheme.of(context).bodyMediumFamily),
+                          FlutterFlowTheme.of(context).bodySmallFamily),
                     ),
                   ),
                 ],
@@ -328,21 +332,19 @@ Widget monthAdditionItemBuilder(context ,MonthAddition? model)
                   '${(model?.price)??'-'} EGP',
                   style: FlutterFlowTheme
                       .of(context)
-                      .titleMedium
+                      .bodySmall
                       .override(
                     fontFamily: FlutterFlowTheme.of(
                         context)
-                        .titleMediumFamily,
-                    color: FlutterFlowTheme.of(
-                        context)
-                        .secondary,
+                        .bodySmallFamily,
+                    color: Colors.white,
                     letterSpacing:
                     0,
                     useGoogleFonts: GoogleFonts
                         .asMap()
                         .containsKey(
                         FlutterFlowTheme.of(context)
-                            .titleMediumFamily),
+                            .bodySmallFamily),
                   ),
                 ),
               ],

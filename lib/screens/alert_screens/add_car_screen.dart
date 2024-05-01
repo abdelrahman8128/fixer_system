@@ -49,6 +49,8 @@ Widget AddNewCarScreen(context, String userId,) {
     builder: (context, state) {
       return AlertDialog(
         alignment: Alignment.topCenter,
+        surfaceTintColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         title: const Text(
           'Add Car',
           style: TextStyle(

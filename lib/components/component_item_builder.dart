@@ -60,7 +60,7 @@ return  Padding(
                     decoration:
                     BoxDecoration(
                       color: const Color(
-                          0x51FD6570),
+                          0xFFF68B1E),
                       borderRadius:
                       BorderRadius.circular(12),
                     ),
@@ -73,7 +73,7 @@ return  Padding(
                       Icons
                           .electrical_services_rounded,
                       color: FlutterFlowTheme.of(context)
-                          .alternate,
+                          .primaryBackground,
                       size:
                       32,
                     ),

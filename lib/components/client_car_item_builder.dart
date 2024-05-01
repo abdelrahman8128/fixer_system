@@ -16,11 +16,18 @@ Widget clientCarItemBuilder(context,SpecificUserCarData model){
       );
     },
     child: Container(
-      decoration:ShapeDecoration(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15),side: BorderSide(color: Colors.orange.shade300)),
+      decoration:BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Color(0xFFF68B1E).withOpacity(0.5),
+              blurRadius: 20,
+              offset: Offset(5, 10),
+            ),
+          ],
         color: Colors.orange.shade100,
-        shadows: CupertinoContextMenu.kEndBoxShadow
 
+
+        borderRadius: BorderRadius.circular(8)
       ),
       padding: const EdgeInsets.all(5),
       width: MediaQuery.sizeOf(context).width * 0.15,

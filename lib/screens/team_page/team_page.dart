@@ -191,7 +191,7 @@ class _TeamPageState extends State<TeamPage> {
                                                           .override(
                                                         fontFamily: 'Outfit',
                                                         color:
-                                                        FlutterFlowTheme.of(context).tertiary,
+                                                        FlutterFlowTheme.of(context).primaryText,
                                                       ),
                                                       onFieldSubmitted: (value) {
                                                         if (value.isNotEmpty) {

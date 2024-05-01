@@ -198,7 +198,7 @@ class _CarsPageState extends State<CarsPage> {
                                                             .override(
                                                           fontFamily: 'Outfit',
                                                           color:
-                                                          FlutterFlowTheme.of(context).tertiary,
+                                                          FlutterFlowTheme.of(context).primaryText,
                                                         ),
                                                         onFieldSubmitted: (value) {
                                                           if (value.isNotEmpty) {
