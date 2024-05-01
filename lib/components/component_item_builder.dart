@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +59,7 @@ return  Padding(
                     decoration:
                     BoxDecoration(
                       color: const Color(
-                          0x51FD6570),
+                          0xFFF68B1E),
                       borderRadius:
                       BorderRadius.circular(12),
                     ),
@@ -73,7 +72,7 @@ return  Padding(
                       Icons
                           .electrical_services_rounded,
                       color: FlutterFlowTheme.of(context)
-                          .alternate,
+                          .primaryBackground,
                       size:
                       32,
                     ),
@@ -204,7 +203,7 @@ return  Padding(
                         ),
                         onPressed:
                             () async {
-                          showDialog(context: context, builder:(context) =>  EditNewComponentPage(context,model));
+                          showDialog(context: context, builder:(context) =>  editNewComponentPage(context,model));
                         },
                       ),
                     ),

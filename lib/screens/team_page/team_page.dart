@@ -67,7 +67,7 @@ class _TeamPageState extends State<TeamPage> {
                       navTwo: FlutterFlowTheme.of(context).secondaryText,
                       navThree: FlutterFlowTheme.of(context).secondaryText,
                       navFour: FlutterFlowTheme.of(context).secondaryText,
-                      navFive: Color(0xFFF68B1E),
+                      navFive: const Color(0xFFF68B1E),
                       navSix: FlutterFlowTheme.of(context).secondaryText,
                       navSeven: FlutterFlowTheme.of(context).secondaryText,
                     ),
@@ -178,7 +178,7 @@ class _TeamPageState extends State<TeamPage> {
                                                   const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                       0, 0, 12, 0),
-                                                  child: Container(
+                                                  child: SizedBox(
                                                     width: 250,
                                                     height: 50,
                                                     child:TextFormField(
@@ -191,7 +191,7 @@ class _TeamPageState extends State<TeamPage> {
                                                           .override(
                                                         fontFamily: 'Outfit',
                                                         color:
-                                                        FlutterFlowTheme.of(context).tertiary,
+                                                        FlutterFlowTheme.of(context).primaryText,
                                                       ),
                                                       onFieldSubmitted: (value) {
                                                         if (value.isNotEmpty) {
@@ -258,7 +258,7 @@ class _TeamPageState extends State<TeamPage> {
                                                         showDialog(
                                                             context: context,
                                                             builder: (context) =>
-                                                                AddNewWorkerPage(
+                                                                addNewWorkerPage(
                                                                     context));
                                                       },
                                                     ),

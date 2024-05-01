@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +55,7 @@ Widget repairingCarItemBuilder(context, repairingCarData model) {
           ))
             Expanded(
               child: AutoSizeText(
-                '${(model.chassisNumber)??'-'}',
+                (model.chassisNumber)??'-',
                 style: FlutterFlowTheme.of(
                     context)
                     .bodyMedium
@@ -80,7 +79,7 @@ Widget repairingCarItemBuilder(context, repairingCarData model) {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                 child: AutoSizeText(
-                  '${(model.carNumber)??'-'}',
+                  (model.carNumber)??'-',
                   style: FlutterFlowTheme.of(
                       context)
                       .bodyMedium
@@ -97,7 +96,7 @@ Widget repairingCarItemBuilder(context, repairingCarData model) {
             ),
           Expanded(
             child: AutoSizeText(
-              '${(model.ownerName)??'-'}',
+              (model.ownerName)??'-',
               style: FlutterFlowTheme.of(
                   context)
                   .bodyMedium

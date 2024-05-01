@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
-
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 
@@ -11,10 +8,10 @@ import '../../cubit/states.dart';
 import '../../components/custom/box_decoration.dart';
 
 
-Widget AddNewComponentPage(context)
+Widget addNewComponentPage(context)
 {
 
-final _formKey = GlobalKey<FormState>();
+final formKey = GlobalKey<FormState>();
   var nameController = TextEditingController();
 
   var quantityController = TextEditingController();
@@ -26,6 +23,8 @@ final _formKey = GlobalKey<FormState>();
     builder: (context, state) {
       return AlertDialog(
         alignment: Alignment.topCenter,
+        surfaceTintColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         title:const Text(
           'Add Component',
           style: TextStyle(
@@ -52,7 +51,7 @@ final _formKey = GlobalKey<FormState>();
                                         
             fallback: (context) => FFButtonWidget(
               onPressed: () {
-                if (_formKey.currentState!.validate()) {
+                if (formKey.currentState!.validate()) {
                   AppCubit.get(context).addComponent(context,
                       name: nameController.text,
                       quantity: quantityController.text,
@@ -86,7 +85,7 @@ final _formKey = GlobalKey<FormState>();
         content: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Form(
-            key: _formKey,
+            key: formKey,
             child: SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.all(30),

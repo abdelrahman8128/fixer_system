@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../components/custom/box_decoration.dart';
 import 'bills_page_model.dart';
 export 'bills_page_model.dart';
 

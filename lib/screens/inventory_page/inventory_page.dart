@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../alert_screens/add_Component_screen.dart';
+import '../alert_screens/add_component_screen.dart';
 import 'inventory_page_model.dart';
 export 'inventory_page_model.dart';
 
@@ -71,7 +71,7 @@ class _InventoryPageState extends State<InventoryPage> {
                        navFour: FlutterFlowTheme.of(context).secondaryText,
                        navFive: FlutterFlowTheme.of(context).secondaryText,
                        navSix: FlutterFlowTheme.of(context).secondaryText,
-                       navSeven: Color(0xFFF68B1E),
+                       navSeven: const Color(0xFFF68B1E),
                      ),
                    ),
                  Expanded(
@@ -220,7 +220,7 @@ class _InventoryPageState extends State<InventoryPage> {
                                                          size: 24,
                                                        ),
                                                        onPressed: () async {
-                                                         showDialog(context: context, builder: (context) => AddNewComponentPage(context));
+                                                         showDialog(context: context, builder: (context) => addNewComponentPage(context));
 
                                                        },
                                                      ),

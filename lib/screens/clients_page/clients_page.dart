@@ -67,7 +67,7 @@ class _ClientsPageState extends State<ClientsPage> {
                   updateCallback: () => setState(() {}),
                   child: MainNavWidget(
                     navOne: FlutterFlowTheme.of(context).secondaryText,
-                    navTwo: Color(0xFFF68B1E),
+                    navTwo: const Color(0xFFF68B1E),
                     navThree: FlutterFlowTheme.of(context).secondaryText,
                     navFour: FlutterFlowTheme.of(context).secondaryText,
                     navFive: FlutterFlowTheme.of(context).secondaryText,
@@ -181,7 +181,7 @@ class _ClientsPageState extends State<ClientsPage> {
                                                 const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                     0, 0, 12, 0),
-                                                child: Container(
+                                                child: SizedBox(
                                                   width: 250,
                                                   height: 50,
                                                   child:TextFormField(
@@ -193,7 +193,7 @@ class _ClientsPageState extends State<ClientsPage> {
                                                         .override(
                                                       fontFamily: 'Outfit',
                                                       color:
-                                                      FlutterFlowTheme.of(context).tertiary,
+                                                      FlutterFlowTheme.of(context).primaryText,
                                                     ),
                                                     onFieldSubmitted: (value) {
                                                       if (value.isNotEmpty) {
@@ -253,7 +253,7 @@ class _ClientsPageState extends State<ClientsPage> {
                                                       size: 24,
                                                     ),
                                                     onPressed: () async {
-                                                      showDialog(context: context, builder: (context) => AddNewClientScreen(context));
+                                                      showDialog(context: context, builder: (context) => addNewClientScreen(context));
                                                     },
                                                   ),
                                                 ),

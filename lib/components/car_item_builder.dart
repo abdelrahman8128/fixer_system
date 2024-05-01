@@ -1,5 +1,4 @@
 import 'package:fixer_system/models/get_all_cars_model.dart';
-import 'package:flutter/cupertino.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';

@@ -71,7 +71,7 @@ class _CarsPageState extends State<CarsPage> {
                       model: _model.mainNavModel,
                       updateCallback: () => setState(() {}),
                       child: MainNavWidget(
-                        navOne: Color(0xFFF68B1E),
+                        navOne: const Color(0xFFF68B1E),
                         navTwo: FlutterFlowTheme.of(context).secondaryText,
                         navThree: FlutterFlowTheme.of(context).secondaryText,
                         navFour: FlutterFlowTheme.of(context).secondaryText,
@@ -186,7 +186,7 @@ class _CarsPageState extends State<CarsPage> {
                                                     const EdgeInsetsDirectional
                                                         .fromSTEB(
                                                         0, 0, 12, 0),
-                                                    child: Container(
+                                                    child: SizedBox(
                                                       width: 250,
                                                       height: 50,
                                                       child:TextFormField(
@@ -198,7 +198,7 @@ class _CarsPageState extends State<CarsPage> {
                                                             .override(
                                                           fontFamily: 'Outfit',
                                                           color:
-                                                          FlutterFlowTheme.of(context).tertiary,
+                                                          FlutterFlowTheme.of(context).primaryText,
                                                         ),
                                                         onFieldSubmitted: (value) {
                                                           if (value.isNotEmpty) {

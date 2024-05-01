@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -214,11 +213,7 @@ Widget teamMemberBuilder(context,Worker model){
                 mainAxisAlignment:
                 MainAxisAlignment.end,
                 children: [
-                  if (responsiveVisibility(
-                    context: context,
-                    phone: false,
-                  ))
-                    Padding(
+                  Padding(
                       padding:
                       const EdgeInsetsDirectional
                           .fromSTEB(
@@ -265,12 +260,63 @@ Widget teamMemberBuilder(context,Worker model){
                             size: 24,
                           ),
                           onPressed: () async {
-                            showDialog(context: context, builder: (context) => UpdateWorkerPage(context,model),);
+                            showDialog(context: context, builder: (context) => updateWorkerPage(context,model),);
                           },
                         ),
                       ),
                     ),
-
+                  Padding(
+                    padding:
+                    const EdgeInsetsDirectional
+                        .fromSTEB(
+                        12, 0, 0, 0),
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme
+                            .of(context)
+                            .secondaryBackground,
+                        boxShadow: const [
+                          BoxShadow(
+                            blurRadius: 4,
+                            color: Color(
+                                0x33000000),
+                            offset: Offset(
+                              0,
+                              2,
+                            ),
+                          )
+                        ],
+                        borderRadius:
+                        BorderRadius
+                            .circular(16),
+                      ),
+                      child:
+                      FlutterFlowIconButton(
+                        borderColor:
+                        FlutterFlowTheme.of(
+                            context)
+                            .lineColor,
+                        borderRadius: 12,
+                        borderWidth: 1,
+                        buttonSize: 50,
+                        fillColor: FlutterFlowTheme
+                            .of(context)
+                            .secondaryBackground,
+                        icon: Icon(
+                          Icons.close_rounded,
+                          color: FlutterFlowTheme
+                              .of(context)
+                              .secondaryText,
+                          size: 24,
+                        ),
+                        onPressed: () async {
+                          /*showDialog(context: context, builder: (context) => UpdateWorkerPage(context,model),);*/
+                        },
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

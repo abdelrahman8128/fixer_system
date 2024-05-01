@@ -1,8 +1,6 @@
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 
@@ -30,6 +28,8 @@ Widget addThingScreen(context,plus) {
       return AlertDialog(
 
         alignment: Alignment.topRight,
+        surfaceTintColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         title: const Text(
           'Add Thing',
           style: TextStyle(
