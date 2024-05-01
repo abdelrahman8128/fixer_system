@@ -299,418 +299,416 @@ class _CarProfilePageState extends State<CarProfilePage> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: SingleChildScrollView(
-                  child: Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(30),
-                          child: Container(
-                            width: 250,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                const Text(
-                                  "EGYPT           مصر",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 2,
-                                  ),
-                                ),
-                                Container(
-                                  alignment: Alignment.bottomCenter,
-                                  width: 250,
-                                  height: 71,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: const BorderRadius.only(
-                                        bottomLeft: Radius.circular(10),
-                                        bottomRight: Radius.circular(10)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 2,
-                                        blurRadius: 5,
-                                        offset: const Offset(0, 3),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        '${carNumberController.text}',
-                                        style: const TextStyle(
-                                          fontSize: 45,
-                                          fontWeight: FontWeight.bold,
-                                          letterSpacing: 2,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(30),
+                        child: Container(
+                          width: 250,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
                           ),
-                        ),
-
-                        Row(
-                          children: [
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 30),
-                              width: MediaQuery.sizeOf(context).width * 0.45,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(height: 16.0),
-                                  TextFormField(
-                                    controller: carChassisNumberController,
-                                    readOnly:readOnly,
-                                    decoration: CustomInputDecoration.customInputDecoration(context,'Car Chassis Number'),
-                                       
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiary,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                  TextFormField(
-                                    controller: colorController,
-                                    readOnly:readOnly,
-                                    decoration: CustomInputDecoration.customInputDecoration(context,'Color'),
-                                       
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiary,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                  TextFormField(
-                                    controller: stateController,
-                                    readOnly:true,
-                                    decoration: CustomInputDecoration.customInputDecoration(context,'State'),
-                                       
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiary,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                  TextFormField(
-                                    controller: brandController,
-                                    readOnly:readOnly,
-                                    decoration: CustomInputDecoration.customInputDecoration(context,'Brand'),
-                                       
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiary,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                  TextFormField(
-                                    controller: categoryController,
-                                    readOnly:readOnly,
-                                    decoration: CustomInputDecoration.customInputDecoration(context,'Category'),
-                                       
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiary,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                  TextFormField(
-                                    controller: modelController,
-                                    readOnly:readOnly,
-                                    decoration: CustomInputDecoration.customInputDecoration(context,'Model'),
-                                       
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiary,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                  TextFormField(
-                                    controller: generatedCodeController,
-                                    readOnly:true,
-                                    decoration: CustomInputDecoration.customInputDecoration(context,'Generated Code'),
-                                       
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiary,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                  TextFormField(
-                                    controller: generatedPasswordController,
-                                    readOnly:true,
-                                    decoration: CustomInputDecoration.customInputDecoration(context,'Generated Password'),
-                                       
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiary,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 30),
-                              width: MediaQuery.sizeOf(context).width * 0.45,
-                              child: Column(
-                                children: [
-                                 TextFormField(
-                                    controller: periodicRepairsController,
-                                    readOnly:readOnly,
-                                    decoration: CustomInputDecoration.customInputDecoration(context,'Periodic Repairs'),
-                                       
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiary,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                  TextFormField(
-                                    controller: nonPeriodicRepairsController,
-                                    readOnly:readOnly,
-                                    decoration: CustomInputDecoration.customInputDecoration(context,'Non-Periodic Repairs'),
-                                       
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiary,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                  TextFormField(
-                                    controller: repairingController,
-                                    readOnly:true,
-                                    decoration: CustomInputDecoration.customInputDecoration(context,'Repairing'),
-                                       
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiary,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                  TextFormField(
-                                    controller: distanceController,
-                                    readOnly:readOnly,
-                                    decoration: CustomInputDecoration.customInputDecoration(context,'Distance'),
-                                       
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiary,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                  TextFormField(
-                                    controller: motorNumberController,
-                                    readOnly:readOnly,
-                                    decoration: CustomInputDecoration.customInputDecoration(context,'Motor Number'),
-                                       
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiary,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                  TextFormField(
-                                    onTap: () {
-                                      if (readOnly==false)
-                                      {
-                                        showDatePicker(
-                                          context: context,
-                                          firstDate: DateTime.now(),
-                                          lastDate: DateTime(2999),
-                                          initialDate: DateTime.now(),
-                                        ).then((value) {
-                                          setState(() {
-                                            if (value!=null) {
-                                              lastRepairDate=value;
-                                              lastRepairDateController.text =
-                                            '${value.day.toString()}/${value.month.toString()}/${value.year.toString()}';
-                                            }
-                                          });
-                                        });
-                                      }
-                                    },
-                                    controller: lastRepairDateController,
-                                    readOnly:readOnly,
-                                    decoration: CustomInputDecoration.customInputDecoration(context,'last Repair Date'),
-                                       
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiary,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                  TextFormField(
-                                    onTap: () {
-                                      if (readOnly==false)
-                                      {
-                                        showDatePicker(
-                                          context: context,
-                                          firstDate: DateTime.now(),
-                                          lastDate: DateTime.utc(2999,30,24,60,60),
-                                          initialDate: DateTime.now(),
-                                        ).then((value) {
-                                          setState(() {
-                                            if (value!=null) {
-                                              nextRepairDateController.text ='${value.day.toString()}/${value.month.toString()}/${value.year.toString()}';
-                                              nextRepairDate=value;
-                                            }
-                                          });
-                                        });
-                                      }
-                                    },
-
-                                    controller: nextRepairDateController,
-                                    readOnly:readOnly,
-                                    decoration: CustomInputDecoration.customInputDecoration(context,'Next Repair Date'),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Outfit',
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiary,
-                                        ),
-                                  ),
-                                  const SizedBox(height: 16.0),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(35),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.max,
                             children: [
-                              Visibility(
-                                visible: AppCubit.get(context)
-                                        .getSpecificCarModel
-                                        ?.currentRepair
-                                        ?.client !=
-                                    null,
-                                child: const Padding(
-                                  padding: EdgeInsets.all(18.0),
-                                  child: Text(
-                                    'Current Repaires',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                  ),
-                                ),
-                              ),
-                              Visibility(
-                                  visible: AppCubit.get(context)
-                                          .getSpecificCarModel
-                                          ?.currentRepair
-                                          ?.client !=
-                                      null,
-                                  child: repairItemBuilder(
-                                      context,
-                                      AppCubit.get(context)
-                                          .getSpecificCarModel!
-                                          .currentRepair!)),
-                              const Padding(
-                                padding: EdgeInsets.all(18.0),
-                                child: Text(
-                                  'All Repaires',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
+                              const Text(
+                                "EGYPT           مصر",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 2,
                                 ),
                               ),
                               Container(
-                                height: 700,
-                                child: ConditionalBuilder(
-                                  condition: state is AppGetAllCarsLoadingState,
-                                  builder: (context) => const Center(
-                                      child: CircularProgressIndicator()),
-                                  fallback: (context) => ListView.separated(
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder: (context, index) =>
-                                        repairItemBuilder(
-                                            context,
-                                            AppCubit.get(context)
-                                                .getAllRepairsForSpecificCarModel!
-                                                .repairs[index]),
-                                    itemCount: AppCubit.get(context)
-                                        .getAllRepairsForSpecificCarModel!
-                                        .repairs
-                                        .length,
-                                    separatorBuilder: (context, index) =>
-                                        const SizedBox(
-                                      width: 25,
+                                alignment: Alignment.bottomCenter,
+                                width: 250,
+                                height: 71,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: const Offset(0, 3),
                                     ),
-                                  ),
+                                  ],
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      carNumberController.text,
+                                      style: const TextStyle(
+                                        fontSize: 45,
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: 2,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+
+                      Row(
+                        children: [
+                          Container(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 30),
+                            width: MediaQuery.sizeOf(context).width * 0.45,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 16.0),
+                                TextFormField(
+                                  controller: carChassisNumberController,
+                                  readOnly:readOnly,
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Car Chassis Number'),
+
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                      ),
+                                ),
+                                const SizedBox(height: 16.0),
+                                TextFormField(
+                                  controller: colorController,
+                                  readOnly:readOnly,
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Color'),
+
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                      ),
+                                ),
+                                const SizedBox(height: 16.0),
+                                TextFormField(
+                                  controller: stateController,
+                                  readOnly:true,
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'State'),
+
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                      ),
+                                ),
+                                const SizedBox(height: 16.0),
+                                TextFormField(
+                                  controller: brandController,
+                                  readOnly:readOnly,
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Brand'),
+
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                      ),
+                                ),
+                                const SizedBox(height: 16.0),
+                                TextFormField(
+                                  controller: categoryController,
+                                  readOnly:readOnly,
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Category'),
+
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                      ),
+                                ),
+                                const SizedBox(height: 16.0),
+                                TextFormField(
+                                  controller: modelController,
+                                  readOnly:readOnly,
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Model'),
+
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                      ),
+                                ),
+                                const SizedBox(height: 16.0),
+                                TextFormField(
+                                  controller: generatedCodeController,
+                                  readOnly:true,
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Generated Code'),
+
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                      ),
+                                ),
+                                const SizedBox(height: 16.0),
+                                TextFormField(
+                                  controller: generatedPasswordController,
+                                  readOnly:true,
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Generated Password'),
+
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                      ),
+                                ),
+                                const SizedBox(height: 16.0),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 30),
+                            width: MediaQuery.sizeOf(context).width * 0.45,
+                            child: Column(
+                              children: [
+                               TextFormField(
+                                  controller: periodicRepairsController,
+                                  readOnly:readOnly,
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Periodic Repairs'),
+
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                      ),
+                                ),
+                                const SizedBox(height: 16.0),
+                                TextFormField(
+                                  controller: nonPeriodicRepairsController,
+                                  readOnly:readOnly,
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Non-Periodic Repairs'),
+
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                      ),
+                                ),
+                                const SizedBox(height: 16.0),
+                                TextFormField(
+                                  controller: repairingController,
+                                  readOnly:true,
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Repairing'),
+
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                      ),
+                                ),
+                                const SizedBox(height: 16.0),
+                                TextFormField(
+                                  controller: distanceController,
+                                  readOnly:readOnly,
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Distance'),
+
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                      ),
+                                ),
+                                const SizedBox(height: 16.0),
+                                TextFormField(
+                                  controller: motorNumberController,
+                                  readOnly:readOnly,
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Motor Number'),
+
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                      ),
+                                ),
+                                const SizedBox(height: 16.0),
+                                TextFormField(
+                                  onTap: () {
+                                    if (readOnly==false)
+                                    {
+                                      showDatePicker(
+                                        context: context,
+                                        firstDate: DateTime.now(),
+                                        lastDate: DateTime(2999),
+                                        initialDate: DateTime.now(),
+                                      ).then((value) {
+                                        setState(() {
+                                          if (value!=null) {
+                                            lastRepairDate=value;
+                                            lastRepairDateController.text =
+                                          '${value.day.toString()}/${value.month.toString()}/${value.year.toString()}';
+                                          }
+                                        });
+                                      });
+                                    }
+                                  },
+                                  controller: lastRepairDateController,
+                                  readOnly:readOnly,
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'last Repair Date'),
+
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                      ),
+                                ),
+                                const SizedBox(height: 16.0),
+                                TextFormField(
+                                  onTap: () {
+                                    if (readOnly==false)
+                                    {
+                                      showDatePicker(
+                                        context: context,
+                                        firstDate: DateTime.now(),
+                                        lastDate: DateTime.utc(2999,30,24,60,60),
+                                        initialDate: DateTime.now(),
+                                      ).then((value) {
+                                        setState(() {
+                                          if (value!=null) {
+                                            nextRepairDateController.text ='${value.day.toString()}/${value.month.toString()}/${value.year.toString()}';
+                                            nextRepairDate=value;
+                                          }
+                                        });
+                                      });
+                                    }
+                                  },
+
+                                  controller: nextRepairDateController,
+                                  readOnly:readOnly,
+                                  decoration: CustomInputDecoration.customInputDecoration(context,'Next Repair Date'),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                      ),
+                                ),
+                                const SizedBox(height: 16.0),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(35),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Visibility(
+                              visible: AppCubit.get(context)
+                                      .getSpecificCarModel
+                                      ?.currentRepair
+                                      ?.client !=
+                                  null,
+                              child: const Padding(
+                                padding: EdgeInsets.all(18.0),
+                                child: Text(
+                                  'Current Repaires',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                              ),
+                            ),
+                            Visibility(
+                                visible: AppCubit.get(context)
+                                        .getSpecificCarModel
+                                        ?.currentRepair
+                                        ?.client !=
+                                    null,
+                                child: repairItemBuilder(
+                                    context,
+                                    AppCubit.get(context)
+                                        .getSpecificCarModel!
+                                        .currentRepair!)),
+                            const Padding(
+                              padding: EdgeInsets.all(18.0),
+                              child: Text(
+                                'All Repaires',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 700,
+                              child: ConditionalBuilder(
+                                condition: state is AppGetAllCarsLoadingState,
+                                builder: (context) => const Center(
+                                    child: CircularProgressIndicator()),
+                                fallback: (context) => ListView.separated(
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, index) =>
+                                      repairItemBuilder(
+                                          context,
+                                          AppCubit.get(context)
+                                              .getAllRepairsForSpecificCarModel!
+                                              .repairs[index]),
+                                  itemCount: AppCubit.get(context)
+                                      .getAllRepairsForSpecificCarModel!
+                                      .repairs
+                                      .length,
+                                  separatorBuilder: (context, index) =>
+                                      const SizedBox(
+                                    width: 25,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

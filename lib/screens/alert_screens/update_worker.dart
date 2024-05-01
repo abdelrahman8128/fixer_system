@@ -1,6 +1,5 @@
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
@@ -10,15 +9,15 @@ import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
 import '../../models/get_workers_model.dart';
 
-Widget UpdateWorkerPage(context,Worker model) {
+Widget updateWorkerPage(context,Worker model) {
 
-  final _formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   var nameController = TextEditingController();
 
   var phoneNumberController = TextEditingController();
 
-  var IDNumberController = TextEditingController();
+  var idNumberController = TextEditingController();
 
   var jobTitleController=TextEditingController();
 
@@ -26,7 +25,7 @@ Widget UpdateWorkerPage(context,Worker model) {
 
   nameController=TextEditingController(text: model.name);
   phoneNumberController=TextEditingController(text: model.phoneNumber.toString());
-  IDNumberController=TextEditingController(text: model.IDNumber.toString());
+  idNumberController=TextEditingController(text: model.IDNumber.toString());
   jobTitleController=TextEditingController(text: model.jobTitle.toString());
   salaryController=TextEditingController(text:model.salary.toString());
   return BlocConsumer<AppCubit, AppCubitStates>(
@@ -62,10 +61,10 @@ Widget UpdateWorkerPage(context,Worker model) {
                                         
             fallback: (context) => FFButtonWidget(
               onPressed: () {
-                if (_formKey.currentState!.validate()) {
+                if (formKey.currentState!.validate()) {
                   AppCubit.get(context).updateWorker(context,
                     name: nameController.text,
-                    IDNumber: IDNumberController.text,
+                    IDNumber: idNumberController.text,
                     jobTitle: jobTitleController.text,
                     phoneNumber: phoneNumberController.text,
                     salary: salaryController.text,
@@ -99,7 +98,7 @@ Widget UpdateWorkerPage(context,Worker model) {
         content: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Form(
-            key: _formKey,
+            key: formKey,
             child: SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.all(30),
@@ -160,7 +159,7 @@ Widget UpdateWorkerPage(context,Worker model) {
                                 height: 10,
                               ),
                               TextFormField(
-                                controller: IDNumberController,
+                                controller: idNumberController,
                                 obscureText: false,
                                 decoration: CustomInputDecoration.customInputDecoration(context,'price'),
                                 style: FlutterFlowTheme.of(context)

@@ -85,7 +85,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                         navThree: FlutterFlowTheme.of(context).secondaryText,
                         navFour: FlutterFlowTheme.of(context).secondaryText,
                         navFive: FlutterFlowTheme.of(context).secondaryText,
-                        navSix: Color(0xFFF68B1E),
+                        navSix: const Color(0xFFF68B1E),
                         navSeven: FlutterFlowTheme.of(context).secondaryText,
                       ),
                     ),
@@ -468,7 +468,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                   ),
                                                   child: ConditionalBuilder(
                                                       condition: state is AppGetMainPramsLoadingState,
-                                                      builder: (context) => CircularProgressIndicator(),
+                                                      builder: (context) => const CircularProgressIndicator(),
                                                       fallback:(context) => FlutterFlowIconButton(
                                                         borderColor:
                                                         FlutterFlowTheme.of(
@@ -853,18 +853,18 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                             horizontal: isExpanded ? 25 : 0,
                                             vertical: 20,
                                           ),
-                                          padding: EdgeInsets.all(20),
+                                          padding: const EdgeInsets.all(20),
                                           curve: Curves.fastLinearToSlowEaseIn,
-                                          duration: Duration(milliseconds: 1200),
+                                          duration: const Duration(milliseconds: 1200),
                                           decoration: BoxDecoration(
                                             boxShadow: [
                                               BoxShadow(
-                                                color: Color(0xFFF68B1E).withOpacity(0.5),
+                                                color: const Color(0xFFF68B1E).withOpacity(0.5),
                                                 blurRadius: 20,
-                                                offset: Offset(5, 10),
+                                                offset: const Offset(5, 10),
                                               ),
                                             ],
-                                            color: Color(0xFFF68B1E),
+                                            color: const Color(0xFFF68B1E),
                                             borderRadius: BorderRadius.all(
                                               Radius.circular(isExpanded ? 20 : 8),
                                             ),
@@ -874,7 +874,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                               Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
-                                                  Text(
+                                                  const Text(
                                                     'Repairs',
                                                     style: TextStyle(
                                                       color: Colors.white,
@@ -891,9 +891,9 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                   ),
                                                 ],
                                               ),
-                                              isExpanded ? SizedBox() : SizedBox(height: 20),
+                                              isExpanded ? const SizedBox() : const SizedBox(height: 20),
                                               AnimatedCrossFade(
-                                                firstChild: Text(
+                                                firstChild: const Text(
                                                   '',
                                                   style: TextStyle(
                                                     fontSize: 0,
@@ -1060,7 +1060,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                         padding: EdgeInsets.zero,
                                                         shrinkWrap: true,
                                                         scrollDirection: Axis.vertical,
-                                                        physics: BouncingScrollPhysics(),
+                                                        physics: const BouncingScrollPhysics(),
                                                         itemBuilder: (context, index) => monthRepairItemBuilder(context,AppCubit.get(context).getMonthWorkModel?.monthRepairs[index]),
                                                         itemCount: AppCubit.get(context).getMonthWorkModel?.monthRepairs.length,
 
@@ -1071,7 +1071,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                 crossFadeState: isExpanded
                                                     ? CrossFadeState.showFirst
                                                     : CrossFadeState.showSecond,
-                                                duration: Duration(milliseconds: 1200),
+                                                duration: const Duration(milliseconds: 1200),
                                                 reverseDuration: Duration.zero,
                                                 sizeCurve: Curves.fastLinearToSlowEaseIn,
                                               ),
@@ -1098,18 +1098,18 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                             horizontal: isExpanded2 ? 25 : 0,
                                             vertical: 20,
                                           ),
-                                          padding: EdgeInsets.all(20),
+                                          padding: const EdgeInsets.all(20),
                                           curve: Curves.fastLinearToSlowEaseIn,
-                                          duration: Duration(milliseconds: 1200),
+                                          duration: const Duration(milliseconds: 1200),
                                           decoration: BoxDecoration(
                                             boxShadow: [
                                               BoxShadow(
-                                                color: Color(0xFFF68B1E).withOpacity(0.5),
+                                                color: const Color(0xFFF68B1E).withOpacity(0.5),
                                                 blurRadius: 20,
-                                                offset: Offset(5, 10),
+                                                offset: const Offset(5, 10),
                                               ),
                                             ],
-                                            color: Color(0xFFF68B1E),
+                                            color: const Color(0xFFF68B1E),
                                             borderRadius: BorderRadius.all(
                                               Radius.circular(isExpanded2 ? 20 : 8),
                                             ),
@@ -1119,7 +1119,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                               Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
-                                                  Text(
+                                                  const Text(
                                                     'Salaries',
                                                     style: TextStyle(
                                                       color: Colors.white,
@@ -1136,9 +1136,9 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                   ),
                                                 ],
                                               ),
-                                              isExpanded2 ? SizedBox() : SizedBox(height: 20),
+                                              isExpanded2 ? const SizedBox() : const SizedBox(height: 20),
                                               AnimatedCrossFade(
-                                                firstChild: Text(
+                                                firstChild: const Text(
                                                   '',
                                                   style: TextStyle(
                                                     fontSize: 0,
@@ -1262,7 +1262,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                         padding: EdgeInsets.zero,
                                                         shrinkWrap: true,
                                                         scrollDirection: Axis.vertical,
-                                                        physics: BouncingScrollPhysics(),
+                                                        physics: const BouncingScrollPhysics(),
                                                         itemBuilder: (context, index) => monthWorkerItemBuilder(context,AppCubit.get(context).getMonthWorkModel?.monthWorker[index]),
                                                         itemCount: AppCubit.get(context).getMonthWorkModel?.monthWorker.length,
 
@@ -1273,7 +1273,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                 crossFadeState: isExpanded2
                                                     ? CrossFadeState.showFirst
                                                     : CrossFadeState.showSecond,
-                                                duration: Duration(milliseconds: 1200),
+                                                duration: const Duration(milliseconds: 1200),
                                                 reverseDuration: Duration.zero,
                                                 sizeCurve: Curves.fastLinearToSlowEaseIn,
                                               ),
@@ -1300,18 +1300,18 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                             horizontal: isExpanded3 ? 25 : 0,
                                             vertical: 20,
                                           ),
-                                          padding: EdgeInsets.all(20),
+                                          padding: const EdgeInsets.all(20),
                                           curve: Curves.fastLinearToSlowEaseIn,
-                                          duration: Duration(milliseconds: 1200),
+                                          duration: const Duration(milliseconds: 1200),
                                           decoration: BoxDecoration(
                                             boxShadow: [
                                               BoxShadow(
-                                                color: Color(0xFFF68B1E).withOpacity(0.5),
+                                                color: const Color(0xFFF68B1E).withOpacity(0.5),
                                                 blurRadius: 20,
-                                                offset: Offset(5, 10),
+                                                offset: const Offset(5, 10),
                                               ),
                                             ],
-                                            color: Color(0xFFF68B1E),
+                                            color: const Color(0xFFF68B1E),
                                             borderRadius: BorderRadius.all(
                                               Radius.circular(isExpanded3 ? 20 : 8),
                                             ),
@@ -1321,7 +1321,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                               Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
-                                                  Text(
+                                                  const Text(
                                                     'Additions',
                                                     style: TextStyle(
                                                       color: Colors.white,
@@ -1338,9 +1338,9 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                   ),
                                                 ],
                                               ),
-                                              isExpanded3 ? SizedBox() : SizedBox(height: 20),
+                                              isExpanded3 ? const SizedBox() : const SizedBox(height: 20),
                                               AnimatedCrossFade(
-                                                firstChild: Text(
+                                                firstChild: const Text(
                                                   '',
                                                   style: TextStyle(
                                                     fontSize: 0,
@@ -1507,7 +1507,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                         padding: EdgeInsets.zero,
                                                         shrinkWrap: true,
                                                         scrollDirection: Axis.vertical,
-                                                        physics: BouncingScrollPhysics(),
+                                                        physics: const BouncingScrollPhysics(),
                                                         itemBuilder: (context, index) => monthAdditionItemBuilder(context,AppCubit.get(context).getMonthWorkModel?.monthAddition[index]),
                                                         itemCount: AppCubit.get(context).getMonthWorkModel?.monthAddition.length,
 
@@ -1518,7 +1518,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                 crossFadeState: isExpanded3
                                                     ? CrossFadeState.showFirst
                                                     : CrossFadeState.showSecond,
-                                                duration: Duration(milliseconds: 1200),
+                                                duration: const Duration(milliseconds: 1200),
                                                 reverseDuration: Duration.zero,
                                                 sizeCurve: Curves.fastLinearToSlowEaseIn,
                                               ),

@@ -8,11 +8,16 @@ Widget repairItemBuilder(context, RepairData? model) {
     child: Container(
       width: MediaQuery.sizeOf(context).width * 0.30,
       padding: const EdgeInsets.all(20.0),
-      decoration: ShapeDecoration(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-            side: BorderSide(color: Colors.orange.shade300)),
+      decoration: BoxDecoration(
         color: Colors.orange.shade100,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFFF68B1E).withOpacity(0.5),
+            blurRadius: 20,
+            offset: const Offset(5, 10),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

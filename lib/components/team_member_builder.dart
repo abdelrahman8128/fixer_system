@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -261,7 +260,7 @@ Widget teamMemberBuilder(context,Worker model){
                             size: 24,
                           ),
                           onPressed: () async {
-                            showDialog(context: context, builder: (context) => UpdateWorkerPage(context,model),);
+                            showDialog(context: context, builder: (context) => updateWorkerPage(context,model),);
                           },
                         ),
                       ),

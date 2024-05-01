@@ -1,9 +1,7 @@
 import 'package:fixer_system/models/get_list_of_inventory_components_model.dart';
-import 'package:flutter/cupertino.dart';
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 
@@ -11,9 +9,9 @@ import '../../components/custom/box_decoration.dart';
 import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
 
-Widget EditNewComponentPage(context,InventoryComponentData model) {
+Widget editNewComponentPage(context,InventoryComponentData model) {
 
-final _formKey = GlobalKey<FormState>();
+final formKey = GlobalKey<FormState>();
 
 var nameController = TextEditingController();
 
@@ -56,7 +54,7 @@ var priceController = TextEditingController();
                                         
             fallback: (context) => FFButtonWidget(
               onPressed: () {
-                if (_formKey.currentState!.validate()) {
+                if (formKey.currentState!.validate()) {
                   AppCubit.get(context).editComponent(context,
                     name: nameController.text,
                     quantity: quantityController.text,
@@ -91,7 +89,7 @@ var priceController = TextEditingController();
         content: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Form(
-            key: _formKey,
+            key: formKey,
             child: SingleChildScrollView(
               child: Container(
                 padding: const EdgeInsets.all(30),

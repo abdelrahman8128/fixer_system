@@ -43,7 +43,7 @@ Widget clientItemBuilder(context, User model) {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     AutoSizeText(
-                      '${model.name ?? '-'}',
+                      model.name ?? '-',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily:
                                 FlutterFlowTheme.of(context).bodyMediumFamily,
@@ -62,7 +62,7 @@ Widget clientItemBuilder(context, User model) {
               ))
                 Expanded(
                   child: AutoSizeText(
-                    '${model.phone??'-'}',
+                    model.phone??'-',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily:
                               FlutterFlowTheme.of(context).bodyMediumFamily,

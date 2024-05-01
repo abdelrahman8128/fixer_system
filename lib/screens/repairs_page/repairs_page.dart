@@ -9,10 +9,10 @@ import 'repairs_model.dart';
 export 'repairs_model.dart';
 
 class RepairsPage extends StatefulWidget {
-  const RepairsPage({Key? key}) : super(key: key);
+  const RepairsPage({super.key});
 
   @override
-  _RepairsPageState createState() => _RepairsPageState();
+  State<RepairsPage> createState() => _RepairsPageState();
 }
 
 class _RepairsPageState extends State<RepairsPage> {
@@ -51,7 +51,7 @@ class _RepairsPageState extends State<RepairsPage> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        endDrawer: Container(
+        endDrawer: SizedBox(
           width: 350,
           child: Drawer(
             elevation: 16,
@@ -901,7 +901,7 @@ class _RepairsPageState extends State<RepairsPage> {
                                               size: 24,
                                             ),
                                             onPressed: () {
-                                              print('IconButton pressed ...');
+                                              /// todo: add search logic for repairs
                                             },
                                           ),
                                         ),

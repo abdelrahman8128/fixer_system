@@ -82,7 +82,7 @@ Widget billItemBuilder(context,CompletedRepairData? model){
                         .start,
                     children: [
                       AutoSizeText(
-                        '${(model?.carCode)??'-'}',
+                        (model?.carCode)??'-',
                         style:
                         FlutterFlowTheme.of(
                             context)
@@ -121,7 +121,7 @@ Widget billItemBuilder(context,CompletedRepairData? model){
                         .start,
                     children: [
                       AutoSizeText(
-                        '${(model?.client)??'-'}',
+                        (model?.client)??'-',
                         style:
                         FlutterFlowTheme.of(
                             context)

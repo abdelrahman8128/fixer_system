@@ -13,10 +13,12 @@ class ProjectsModel extends FlutterFlowModel<RepairsPage> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     mainNavModel = createModel(context, () => MainNavModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     mainNavModel.dispose();

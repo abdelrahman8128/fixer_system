@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 
@@ -19,9 +18,9 @@ Widget clientCarItemBuilder(context,SpecificUserCarData model){
       decoration:BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Color(0xFFF68B1E).withOpacity(0.5),
+              color: const Color(0xFFF68B1E).withOpacity(0.5),
               blurRadius: 20,
-              offset: Offset(5, 10),
+              offset: const Offset(5, 10),
             ),
           ],
         color: Colors.orange.shade100,
@@ -57,7 +56,7 @@ Widget clientCarItemBuilder(context,SpecificUserCarData model){
                     fontSize: 12,
                   ),
                 ),
-                Text('${(model.carNumber)??'-'}',
+                Text((model.carNumber)??'-',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -101,7 +100,7 @@ Widget clientCarItemBuilder(context,SpecificUserCarData model){
                     fontSize: 12,
                   ),
                 ),
-                Text('${(model.model)??'-'}',
+                Text((model.model)??'-',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -123,7 +122,7 @@ Widget clientCarItemBuilder(context,SpecificUserCarData model){
                     fontSize: 12,
                   ),
                 ),
-                Text('${(model.carCode)??'-'}',
+                Text((model.carCode)??'-',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(

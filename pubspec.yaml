@@ -21,6 +21,7 @@ dependencies:
   paginated_search_bar: ^1.1.2
   material_floating_search_bar_2: ^0.5.0
   icons_launcher: ^2.1.7
+  url_launcher: ^6.2.6
 
 
 #dependency_overrides:
@@ -42,3 +43,10 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+
+icons_launcher:
+  image_path: "assets/images/51.png"
+  platforms:
+    windows:
+      enable: true
+      image_path: "assets/images/51.png"

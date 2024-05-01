@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -158,7 +157,7 @@ Widget monthWorkerItemBuilder(context ,MonthWorker? model)
                   .start,
               children: [
                 Text(
-                  '${(model?.name)??'-'}',
+                  (model?.name)??'-',
                   style: FlutterFlowTheme
                       .of(context)
                       .bodySmall
@@ -252,7 +251,7 @@ Widget monthAdditionItemBuilder(context ,MonthAddition? model)
                   .start,
               children: [
                 Text(
-                  '${(model?.title)??'-'}',
+                  (model?.title)??'-',
                   style: FlutterFlowTheme
                       .of(context)
                       .bodySmall

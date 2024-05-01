@@ -11,6 +11,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'main_nav_model.dart';
 export 'main_nav_model.dart';
@@ -42,6 +43,7 @@ class MainNavWidget extends StatefulWidget {
 class _MainNavWidgetState extends State<MainNavWidget>
     with TickerProviderStateMixin {
   late MainNavModel _model;
+  bool isHover = false;
 
   var hasContainerTriggered1 = false;
   var hasContainerTriggered2 = false;
@@ -539,14 +541,14 @@ class _MainNavWidgetState extends State<MainNavWidget>
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -569,7 +571,7 @@ class _MainNavWidgetState extends State<MainNavWidget>
                                     animationsMap[
                                     'containerOnActionTriggerAnimation2']!
                                         .controller
-                                        .duration = Duration(milliseconds: 350);
+                                        .duration = const Duration(milliseconds: 350);
                                     SchedulerBinding.instance
                                         .addPostFrameCallback((_) async =>
                                     await animationsMap[
@@ -585,7 +587,7 @@ class _MainNavWidgetState extends State<MainNavWidget>
                                         .secondaryBackground,
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0, 12, 24, 12),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -604,9 +606,9 @@ class _MainNavWidgetState extends State<MainNavWidget>
                                           ),
                                           child: Stack(
                                             alignment:
-                                            AlignmentDirectional(0, 0),
+                                            const AlignmentDirectional(0, 0),
                                             children: [
-                                              Align(
+                                              const Align(
                                                 alignment:
                                                 AlignmentDirectional(
                                                     0.95, 0),
@@ -624,7 +626,7 @@ class _MainNavWidgetState extends State<MainNavWidget>
                                               ),
                                               Align(
                                                 alignment:
-                                                AlignmentDirectional(
+                                                const AlignmentDirectional(
                                                     -0.85, 0),
                                                 child: Container(
                                                   width: 36,
@@ -633,7 +635,7 @@ class _MainNavWidgetState extends State<MainNavWidget>
                                                     color: FlutterFlowTheme
                                                         .of(context)
                                                         .secondaryBackground,
-                                                    boxShadow: [
+                                                    boxShadow: const [
                                                       BoxShadow(
                                                         blurRadius: 4,
                                                         color:
@@ -676,7 +678,7 @@ class _MainNavWidgetState extends State<MainNavWidget>
                                     animationsMap[
                                     'containerOnActionTriggerAnimation1']!
                                         .controller
-                                        .duration = Duration(milliseconds: 350);
+                                        .duration = const Duration(milliseconds: 350);
                                     setState(
                                             () => hasContainerTriggered1 = true);
                                     SchedulerBinding.instance
@@ -692,7 +694,7 @@ class _MainNavWidgetState extends State<MainNavWidget>
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
-                                    boxShadow: [
+                                    boxShadow: const [
                                       BoxShadow(
                                         blurRadius: 1,
                                         color: Color(0xFF1A1F24),
@@ -701,7 +703,7 @@ class _MainNavWidgetState extends State<MainNavWidget>
                                     ],
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0, 12, 24, 12),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -712,15 +714,15 @@ class _MainNavWidgetState extends State<MainNavWidget>
                                           width: 80,
                                           height: 40,
                                           decoration: BoxDecoration(
-                                            color: Color(0xFF1D2429),
+                                            color: const Color(0xFF1D2429),
                                             borderRadius:
                                             BorderRadius.circular(20),
                                           ),
                                           child: Stack(
                                             alignment:
-                                            AlignmentDirectional(0, 0),
+                                            const AlignmentDirectional(0, 0),
                                             children: [
-                                              Align(
+                                              const Align(
                                                 alignment:
                                                 AlignmentDirectional(
                                                     -0.9, 0),
@@ -738,14 +740,14 @@ class _MainNavWidgetState extends State<MainNavWidget>
                                               ),
                                               Align(
                                                 alignment:
-                                                AlignmentDirectional(
+                                                const AlignmentDirectional(
                                                     0.9, 0),
                                                 child: Container(
                                                   width: 36,
                                                   height: 36,
                                                   decoration: BoxDecoration(
-                                                    color: Color(0xFF14181B),
-                                                    boxShadow: [
+                                                    color: const Color(0xFF14181B),
+                                                    boxShadow: const [
                                                       BoxShadow(
                                                         blurRadius: 4,
                                                         color:
@@ -777,6 +779,7 @@ class _MainNavWidgetState extends State<MainNavWidget>
                       ),
                       Row(
                         mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
@@ -791,17 +794,31 @@ class _MainNavWidgetState extends State<MainNavWidget>
                               ),
                             ),
                           ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(
-                              'assets/images/ei_1693592425619-removebg-preview.png',
-                              width: 35,
-                              height: 35,
-                              fit: BoxFit.cover,
+                          InkWell(
+                            onHover: (bool hovering) {
+                              setState(() {
+                                isHover = hovering;
+                              });
+                            },
+                            onTap: () {
+                              launchUrl(Uri.parse('https://cominde.onrender.com'));
+                            },
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: Image.asset(
+                                'assets/images/ei_1693592425619-removebg-preview.png',
+                                width: isHover?60:40,
+                                height: isHover?60:40,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),

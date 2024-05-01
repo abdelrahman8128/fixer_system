@@ -1,6 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 
@@ -45,7 +44,6 @@ class _ClientDetailsState extends State<ClientProfilePage> {
   var passwordController = TextEditingController();
 
   int? _radioSelected = 1;
-  bool? _radioVal;
   bool readOnly = true;
   @override
   Widget build(BuildContext context) {
@@ -133,7 +131,7 @@ class _ClientDetailsState extends State<ClientProfilePage> {
                         showDialog(
                             context: context,
                             builder: (context) =>
-                                AddNewCarScreen(context, widget.userId));
+                                addNewCarScreen(context, widget.userId));
                       },
                     ),
                   ),
@@ -274,7 +272,6 @@ class _ClientDetailsState extends State<ClientProfilePage> {
                                           if (readOnly == false) {
                                             setState(() {
                                               _radioSelected = value;
-                                              _radioVal = true;
                                             });
                                           }
                                         },
@@ -290,7 +287,6 @@ class _ClientDetailsState extends State<ClientProfilePage> {
                                           if (readOnly == false) {
                                             setState(() {
                                               _radioSelected = value;
-                                              _radioVal = false;
                                             });
                                           }
                                         },
@@ -318,7 +314,7 @@ class _ClientDetailsState extends State<ClientProfilePage> {
                             fallback: (context) => Expanded(
                               child: Padding(
                                 padding: const EdgeInsetsDirectional.all(25),
-                                child: Container(
+                                child: SizedBox(
                                   height: 250,
                                   child: ListView.separated(
                                     padding: EdgeInsets.zero,

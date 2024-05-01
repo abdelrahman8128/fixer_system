@@ -1,8 +1,6 @@
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 
@@ -17,13 +15,13 @@ var nameController = TextEditingController();
 
 var phoneNumberController = TextEditingController();
 
-var IdNumberController = TextEditingController();
+var idNumberController = TextEditingController();
 
 var jobTitleController = TextEditingController();
 
 var salaryController = TextEditingController();
 
-Widget AddNewWorkerPage(context) {
+Widget addNewWorkerPage(context) {
 
 
   return BlocConsumer<AppCubit, AppCubitStates>(
@@ -48,7 +46,7 @@ Widget AddNewWorkerPage(context) {
 
              phoneNumberController = TextEditingController();
 
-             IdNumberController = TextEditingController();
+             idNumberController = TextEditingController();
 
              jobTitleController = TextEditingController();
 
@@ -79,7 +77,7 @@ Widget AddNewWorkerPage(context) {
                       phoneNumber: phoneNumberController.text,
                       jobTitle: jobTitleController.text,
                       salary: salaryController.text,
-                      IDNumber: IdNumberController.text,
+                      IDNumber: idNumberController.text,
                   );
                 }
               },
@@ -173,7 +171,7 @@ Widget AddNewWorkerPage(context) {
                                 height: 10,
                               ),
                               TextFormField(
-                                controller: IdNumberController,
+                                controller: idNumberController,
                                 obscureText: false,
                                 decoration: CustomInputDecoration.customInputDecoration(context,'ID number'),
                                 style: FlutterFlowTheme.of(context)

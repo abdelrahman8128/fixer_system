@@ -9,18 +9,16 @@ import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
 
 class AddRepairScreen extends StatefulWidget {
-  String carNumber;
-  AddRepairScreen(this.carNumber);
+  final String carNumber;
+  const AddRepairScreen(this.carNumber, {super.key});
 
   @override
-  _AddRepairScreenState createState() => _AddRepairScreenState(carNumber);
+  State<AddRepairScreen> createState() => _AddRepairScreenState();
 }
 
 
 
 class _AddRepairScreenState extends State<AddRepairScreen> {
-  String carNumber;
-  _AddRepairScreenState(this.carNumber);
 
   final _formKey = GlobalKey<FormState>();
   List<Map<String, dynamic>> components = [
@@ -67,7 +65,7 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                   if (_formKey.currentState!.validate()) {
                     AppCubit.get(context).addRepair(
                       context,
-                      carNumber: carNumber,
+                      carNumber: widget.carNumber,
                       additions: additions,
                       components: components,
                       daysItTake: daysItTake,
@@ -168,7 +166,7 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    '${carNumber}',
+                                    widget.carNumber,
                                     style: const TextStyle(
                                       fontSize: 45,
                                       fontWeight: FontWeight.bold,
@@ -242,18 +240,19 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   FloatingActionButton(
-                                    child: const Icon(Icons.remove,
-                                        color: Colors.white),
                                     mini: true,
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(20)),
                                     onPressed: () {
                                       setState(() {
-                                        if (components[index]['quantity'] > 1)
+                                        if (components[index]['quantity'] > 1) {
                                           components[index]['quantity']--;
+                                        }
                                       });
                                     },
+                                    child: const Icon(Icons.remove,
+                                        color: Colors.white),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
@@ -262,8 +261,6 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                                         style: const TextStyle(fontSize: 30)),
                                   ),
                                   FloatingActionButton(
-                                    child: const Icon(Icons.add,
-                                        color: Colors.white),
                                     mini: true,
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
@@ -273,6 +270,8 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                                         components[index]['quantity'] += 1;
                                       });
                                     },
+                                    child: const Icon(Icons.add,
+                                        color: Colors.white),
                                   ),
                                 ],
                               ),
@@ -486,7 +485,7 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                       const SizedBox(height: 16.0),
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                             width: MediaQuery.sizeOf(context).width * 0.45,
                             child: Column(
                               children: [
@@ -547,7 +546,7 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                           SizedBox(
                             width: MediaQuery.sizeOf(context).width * 0.025,
                           ),
-                          Container(
+                          SizedBox(
                             width: MediaQuery.sizeOf(context).width * 0.45,
                             child: Column(
                               children: [

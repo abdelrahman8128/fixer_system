@@ -146,7 +146,7 @@ class _LoginState extends State<Login> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0xFFF68B1E),
                                 width: 2,
                               ),
@@ -213,7 +213,7 @@ class _LoginState extends State<Login> {
                           height: 40,
                           padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
                           iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                          color: Color(0xFFF68B1E),
+                          color: const Color(0xFFF68B1E),
                           textStyle: FlutterFlowTheme.of(context)
                               .titleSmall
                               .override(
