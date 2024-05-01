@@ -961,6 +961,44 @@ class AppCubit extends Cubit<AppCubitStates> {
   }
 
 
+  void addThing(context ,{
+    required String title,
+    required String price,
+    required bool plus,
+  }) {
+    emit(AppAddThingLoadingState());
+    const url = 'https://fixer-backend-1.onrender.com/api/V1/MonthlyReport/addthing';
+    final headers = {
+      'Content-Type': 'application/json',
+    };
+    final body = jsonEncode({
+      'title': title,
+      'date': '2024-5-1',//'${DateTime.now().year.toString()}-${DateTime.now().month.toString()}-${DateTime.now().day.toString()}',
+      'price': plus?price:'-$price',
+
+    });
+
+    post(Uri.parse(url), headers: headers, body: body).then((response) {
+
+        print(response.body);
+      if (response.statusCode==201)
+      {
+        showToast(context,'Thing Added Successfully');
+        emit(AppAddThingSuccessState());
+      }
+      else
+      {
+        showToast(context ,jsonDecode(response.body)['message']);
+        emit(AppAddThingErrorState());
+      }
+
+    }).catchError((onError){
+      print(onError.toString());
+    emit(AppAddThingErrorState());
+
+    });
+  }
+
 
 
 }

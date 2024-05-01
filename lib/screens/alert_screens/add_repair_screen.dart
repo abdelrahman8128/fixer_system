@@ -2,11 +2,11 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
+import 'package:paginated_search_bar/paginated_search_bar.dart';
 
 import '../../components/custom/box_decoration.dart';
 import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
-import '../../models/get_list_of_inventory_components_model.dart';
 
 class AddRepairScreen extends StatefulWidget {
   String carNumber;
@@ -34,6 +34,8 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
   ];
   String serviceType = 'nonPeriodic';
   String serviceState = 'repairing';
+  String searchValue = '';
+
 
   double discount = 0;
   int daysItTake = 0;
@@ -43,12 +45,7 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
 
   @override
   Widget build(BuildContext context) {
-   List<String> _options=[];
-    AppCubit.get(context).getListOfComponents();
 
-    AppCubit.get(context).getListOfInventoryComponentsModel?.data.forEach((element) {
-      _options.add(element.name!);
-    });
 
     return BlocConsumer<AppCubit, AppCubitStates>(
         listener: (context, state) {},
@@ -191,71 +188,53 @@ class _AddRepairScreenState extends State<AddRepairScreen> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: components.length,
                         itemBuilder: (context, index) {
+                          var controller=TextEditingController();
                           return Row(
                             children: [
                               Expanded(
-                                child: LayoutBuilder(
-                                  builder: (context, constraints) => InputDecorator(
-                                    decoration: const InputDecoration(
-                                      icon: Icon(Icons.style),
-                                      border: InputBorder.none,
-                                    ),
-                                    child: RawAutocomplete<String>(
-                                      optionsBuilder:
-                                          (TextEditingValue textEditingValue) {
-                                        return _options.where((String option) {
-                                          return option.contains(
-                                              textEditingValue.text.toLowerCase());
-                                        });
-                                      },
-                                      fieldViewBuilder: (BuildContext context,
-                                          TextEditingController textEditingController,
-                                          FocusNode focusNode,
-                                          VoidCallback onFieldSubmitted) {
-                                        return TextFormField(
-                                          decoration: CustomInputDecoration.customInputDecoration(context, 'component name'),
-                                          controller: textEditingController,
-                                          focusNode: focusNode,
-                                          onFieldSubmitted: (String value) {
-                                            onFieldSubmitted();
-                                          },
-                                        );
-                                      },
-                                      optionsViewBuilder: (BuildContext context,
-                                          AutocompleteOnSelected<String> onSelected,
-                                          Iterable<String> options) {
-                                        return Align(
-                                          alignment: Alignment.topLeft,
-                                          child: Material(
-                                            elevation: 4.0,
-                                            color: Colors.blueAccent,
-                                            child: SizedBox(
-                                              height: 200.0,
-                                              // set width based on you need
-                                              width: constraints.biggest.width * 0.8,
-                                              child: ListView.builder(
-                                                padding: const EdgeInsets.all(8.0),
-                                                itemCount: options.length,
-                                                itemBuilder:
-                                                    (BuildContext context, int index) {
-                                                  final String option =
-                                                  options.elementAt(index);
-                                                  return GestureDetector(
-                                                    onTap: () {
-                                                      onSelected(option);
-                                                    },
-                                                    child: ListTile(
-                                                      title: Text(option),
-                                                    ),
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
+
+                                child:PaginatedSearchBar<String>(
+                                  maxHeight: 300,
+                                  hintText: 'Search',
+                                  minSearchLength: 1,
+                                  inputDecoration: CustomInputDecoration.customInputDecoration(context, 'search'),
+                                  emptyBuilder: (context) {
+                                    return const Text("No Results");
+                                  },
+                                  onSearch: ({
+                                    required pageIndex,
+                                    required pageSize,
+                                    required searchQuery,
+                                  }) async {
+                                    AppCubit.get(context).searchComponents(word: searchQuery);
+                                    return Future.delayed(const Duration(milliseconds: 1000), () {
+                                      if (searchQuery == "empty") {
+                                        return [];
+                                      }
+                                      return AppCubit.get(context).searchListOfInventoryComponentsModel!.data.map((e) => e.name!).toList();
+                                    });
+                                  },
+
+                                  itemBuilder: (
+                                      context, {
+                                        required item,
+                                        required index,
+                                      }) {
+                                    return Text(item);
+                                  },
+
+                                  onSubmit: ({required item, required searchQuery}) {
+                                    components[index]['id']=AppCubit.get(context).searchListOfInventoryComponentsModel?.data.first.id;
+                                    setState(() {
+                                      controller.text= '${components[index]['id']}';
+                                    });
+                                    },
+                                    inputController: controller,
+
+
+
+
+
                                 ),
                               ),
                               const SizedBox(width: 16.0),

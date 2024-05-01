@@ -201,6 +201,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  endless:
+    dependency: transitive
+    description:
+      name: endless
+      sha256: "2016ce4df3cb44ac8ea505207b8954f46a3400ce8ba8026a914607499cae3bb2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.6.3"
   equatable:
     dependency: transitive
     description:
@@ -209,22 +217,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.5"
-  expand_widget:
-    dependency: "direct main"
-    description:
-      name: expand_widget
-      sha256: "5634e34d796cfad75fb75489ccfba4c1db2536cce61d3626914eed23aecf6939"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.1"
-  expandable:
-    dependency: "direct main"
-    description:
-      name: expandable
-      sha256: "9604d612d4d1146dafa96c6d8eec9c2ff0994658d6d09fed720ab788c7f5afc2"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.0.1"
   fake_async:
     dependency: transitive
     description:
@@ -511,6 +503,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.8.0"
+  material_floating_search_bar_2:
+    dependency: "direct main"
+    description:
+      name: material_floating_search_bar_2
+      sha256: ab0c6d209d9491f98dd4c72f2641d0ba1dd35c87effca1f23d8679bece43add0
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.0"
   maybe_just_nothing:
     dependency: transitive
     description:
@@ -559,6 +559,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  paginated_search_bar:
+    dependency: "direct main"
+    description:
+      name: paginated_search_bar
+      sha256: "61ad88426b55586e688b7f650a57f560b04ea8f89fd57fbb52aafa62b007dd97"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.2"
   path:
     dependency: transitive
     description:
@@ -820,6 +828,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.1"
+  state_property:
+    dependency: transitive
+    description:
+      name: state_property
+      sha256: "9762a86f4f0c30c264734069cc10899a211ab4869a392289ac4eddb8f3dbf6dc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
   stream_channel:
     dependency: transitive
     description:

@@ -1,6 +1,4 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:expand_widget/expand_widget.dart';
-import 'package:expandable/expandable.dart';
 import 'package:fixer_system/components/main_nav/main_nav.dart';
 import 'package:fixer_system/cubit/states.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../components/month_work_item_builder.dart';
 import '../../cubit/cubit.dart';
+import '../alert_screens/add_thing_screen.dart';
 import 'monthly_profit_page_model.dart';
 export 'monthly_profit_page_model.dart';
 
@@ -237,7 +236,10 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                               .secondaryText,
                                                           size: 24,
                                                         ),
-                                                        onPressed: () async {},
+                                                        onPressed: () async {
+                                                          showDialog(context: context, builder: (context) => addThingScreen(context,false),);
+
+                                                        },
                                                       ),
                                                     ),
                                                   ),
@@ -291,7 +293,10 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                               .secondaryText,
                                                           size: 24,
                                                         ),
-                                                        onPressed: () async {},
+                                                        onPressed: () async {
+                                                          showDialog(context: context, builder: (context) => addThingScreen(context,true),);
+
+                                                        },
                                                       ),
                                                     ),
                                                   ),
@@ -696,7 +701,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                                   .fromSTEB(
                                                                   0, 16, 0, 0),
                                                           child: Text(
-                                                            '${(AppCubit.get(context).mainPramsModel?.salaries) ?? "-"} EGP',
+                                                            '${(AppCubit.get(context).mainPramsModel?.outCome) ?? "-"} EGP',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .displaySmall
@@ -779,7 +784,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                                                   .fromSTEB(
                                                                   0, 16, 0, 0),
                                                           child: Text(
-                                                            '${(AppCubit.get(context).mainPramsModel?.totalOutcome) ?? '-'} EGP',
+                                                            '${(AppCubit.get(context).mainPramsModel?.totalGain) ?? '-'} EGP',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .displaySmall

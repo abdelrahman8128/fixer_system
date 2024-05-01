@@ -147,3 +147,7 @@ class AppSearchComponentsLoadingState extends AppCubitStates{}
 class AppSearchComponentsSuccessState extends AppCubitStates{}
 class AppSearchComponentsErrorState extends AppCubitStates{}
 
+
+class AppAddThingLoadingState extends AppCubitStates{}
+class AppAddThingSuccessState extends AppCubitStates{}
+class AppAddThingErrorState extends AppCubitStates{}
