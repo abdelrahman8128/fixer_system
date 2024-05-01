@@ -168,7 +168,7 @@ class AppCubit extends Cubit<AppCubitStates> {
         .then((response) {
       print(response.body.toString());
       if (response.statusCode == 200) {
-        showToast(context, 'service state changed successfully');
+        showToast(context, 'Service state changed successfully');
         emit(AppChangeServiceStateSuccessState());
       } else {
         emit(AppChangeServiceStateErrorState(''));
@@ -665,15 +665,7 @@ class AppCubit extends Cubit<AppCubitStates> {
   }) {
     mainPramsModel = MainPramsModel();
     emit(AppGetMainPramsLoadingState());
-    String url =
-        'https://fixer-backend-1.onrender.com/api/V1/MonthlyReport/specific_month_year/${year}_${month}';
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFlYzZiMDk1MWQ1Y2Q0MWFiZWExN2QiLCJpYXQiOjE3MTMyOTMwNTMsImV4cCI6MTcyMTA2OTA1M30.x-fjAnDSKaEt4kgQANO3X3iEMvoR9QmuZyYJ0gSfw_E',
-      'year': year,
-      'month': month,
-    };
+
     read(
       Uri.parse('$GETMAINPRAMS${year}_$month'),
       headers: headers,
