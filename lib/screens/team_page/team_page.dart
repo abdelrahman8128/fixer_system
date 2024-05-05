@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../components/custom/box_decoration.dart';
 import '../../components/team_member_builder.dart';
 import '../../cubit/cubit.dart';
-import '../alert_screens/add_worker_screen.dart';
+import 'add_worker_screen.dart';
 import 'team_page_model.dart';
 export 'team_page_model.dart';
 
@@ -38,7 +38,8 @@ class _TeamPageState extends State<TeamPage> {
 
     super.dispose();
   }
- var searchController=TextEditingController();
+
+  var searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppCubitStates>(
@@ -175,100 +176,104 @@ class _TeamPageState extends State<TeamPage> {
                                               ))
                                                 Padding(
                                                   padding:
-                                                  const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                      0, 0, 12, 0),
-                                                  child: SizedBox(
-                                                    width: 250,
-                                                    height: 50,
-                                                    child:TextFormField(
-                                                      controller: searchController,
-                                                      obscureText: false,
-                                                      decoration: CustomInputDecoration.customInputDecoration(context,'Search'),
-
-                                                      style: FlutterFlowTheme.of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                        fontFamily: 'Outfit',
-                                                        color:
-                                                        FlutterFlowTheme.of(context).primaryText,
-                                                      ),
-                                                      onFieldSubmitted: (value) {
-                                                        if (value.isNotEmpty) {
-                                                          AppCubit.get(context).searchWorkers(word: value);
-                                                        }
-                                                        else
-                                                        {
-                                                          AppCubit.get(context).getWorkers();
-                                                        }
-                                                      },
-                                                    ),
-
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
                                                       const EdgeInsetsDirectional
                                                           .fromSTEB(
                                                           0, 0, 12, 0),
-                                                  child: Container(
-                                                    width: 50,
+                                                  child: SizedBox(
+                                                    width: 250,
                                                     height: 50,
-                                                    decoration: BoxDecoration(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                      boxShadow: const [
-                                                        BoxShadow(
-                                                          blurRadius: 4,
-                                                          color:
-                                                              Color(0x33000000),
-                                                          offset: Offset(
-                                                            0,
-                                                            2,
-                                                          ),
-                                                        )
-                                                      ],
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              16),
-                                                    ),
-                                                    child:
-                                                        FlutterFlowIconButton(
-                                                      borderColor:
+                                                    child: TextFormField(
+                                                      controller:
+                                                          searchController,
+                                                      obscureText: false,
+                                                      decoration:
+                                                          CustomInputDecoration
+                                                              .customInputDecoration(
+                                                                  context,
+                                                                  'Search'),
+                                                      style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .lineColor,
-                                                      borderRadius: 12,
-                                                      borderWidth: 1,
-                                                      buttonSize: 50,
-                                                      fillColor: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                      icon: Icon(
-                                                        Icons
-                                                            .person_add_rounded,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                        size: 24,
-                                                      ),
-                                                      onPressed: () async {
-                                                        showDialog(
-                                                            context: context,
-                                                            builder: (context) =>
-                                                                addNewWorkerPage(
-                                                                    context));
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Outfit',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
+                                                              ),
+                                                      onFieldSubmitted:
+                                                          (value) {
+                                                        if (value.isNotEmpty) {
+                                                          AppCubit.get(context)
+                                                              .searchWorkers(
+                                                                  word: value);
+                                                        } else {
+                                                          AppCubit.get(context)
+                                                              .getWorkers();
+                                                        }
                                                       },
                                                     ),
                                                   ),
                                                 ),
-
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(0, 0, 12, 0),
+                                                child: Container(
+                                                  width: 50,
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryBackground,
+                                                    boxShadow: const [
+                                                      BoxShadow(
+                                                        blurRadius: 4,
+                                                        color:
+                                                            Color(0x33000000),
+                                                        offset: Offset(
+                                                          0,
+                                                          2,
+                                                        ),
+                                                      )
+                                                    ],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
+                                                  ),
+                                                  child: FlutterFlowIconButton(
+                                                    borderColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .lineColor,
+                                                    borderRadius: 12,
+                                                    borderWidth: 1,
+                                                    buttonSize: 50,
+                                                    fillColor: FlutterFlowTheme
+                                                            .of(context)
+                                                        .secondaryBackground,
+                                                    icon: Icon(
+                                                      Icons.person_add_rounded,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      size: 24,
+                                                    ),
+                                                    onPressed: () async {
+                                                      showDialog(
+                                                          context: context,
+                                                          builder: (context) =>
+                                                              addNewWorkerPage(
+                                                                  context));
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),
-
                                       ],
                                     ),
                                     if (responsiveVisibility(
@@ -310,43 +315,43 @@ class _TeamPageState extends State<TeamPage> {
                                             width: 1,
                                           ),
                                         ),
-
                                         child: Padding(
                                           padding: const EdgeInsetsDirectional
                                               .fromSTEB(0, 0, 0, 12),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                                CrossAxisAlignment.center,
                                             children: [
                                               Padding(
                                                 padding:
-                                                const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                    12, 12, 12, 0),
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                        12, 12, 12, 0),
                                                 child: Row(
                                                   mainAxisSize:
-                                                  MainAxisSize.max,
+                                                      MainAxisSize.max,
                                                   children: [
                                                     Expanded(
                                                       flex: 2,
                                                       child: Text(
                                                         'Name',
-                                                        style: FlutterFlowTheme
-                                                            .of(context)
-                                                            .bodySmall
-                                                            .override(
-                                                          fontFamily: FlutterFlowTheme.of(
-                                                              context)
-                                                              .bodySmallFamily,
-                                                          letterSpacing:
-                                                          0,
-                                                          useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                              .containsKey(
-                                                              FlutterFlowTheme.of(context)
-                                                                  .bodySmallFamily),
-                                                        ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodySmall
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodySmallFamily,
+                                                                  letterSpacing:
+                                                                      0,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodySmallFamily),
+                                                                ),
                                                       ),
                                                     ),
                                                     if (responsiveVisibility(
@@ -355,23 +360,25 @@ class _TeamPageState extends State<TeamPage> {
                                                       tablet: false,
                                                     ))
                                                       Expanded(
+                                                        flex:2,
+
                                                         child: Text(
                                                           'National ID',
                                                           style: FlutterFlowTheme
-                                                              .of(context)
+                                                                  .of(context)
                                                               .bodySmall
                                                               .override(
-                                                            fontFamily: FlutterFlowTheme.of(
-                                                                context)
-                                                                .bodySmallFamily,
-                                                            letterSpacing:
-                                                            0,
-                                                            useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                                .containsKey(
-                                                                FlutterFlowTheme.of(context)
-                                                                    .bodySmallFamily),
-                                                          ),
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodySmallFamily,
+                                                                letterSpacing:
+                                                                    0,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodySmallFamily),
+                                                              ),
                                                         ),
                                                       ),
                                                     if (responsiveVisibility(
@@ -379,23 +386,24 @@ class _TeamPageState extends State<TeamPage> {
                                                       phone: false,
                                                     ))
                                                       Expanded(
+                                                        flex:2,
                                                         child: Text(
                                                           'Phone Number',
                                                           style: FlutterFlowTheme
-                                                              .of(context)
+                                                                  .of(context)
                                                               .bodySmall
                                                               .override(
-                                                            fontFamily: FlutterFlowTheme.of(
-                                                                context)
-                                                                .bodySmallFamily,
-                                                            letterSpacing:
-                                                            0,
-                                                            useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                                .containsKey(
-                                                                FlutterFlowTheme.of(context)
-                                                                    .bodySmallFamily),
-                                                          ),
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodySmallFamily,
+                                                                letterSpacing:
+                                                                    0,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodySmallFamily),
+                                                              ),
                                                         ),
                                                       ),
                                                     if (responsiveVisibility(
@@ -404,74 +412,78 @@ class _TeamPageState extends State<TeamPage> {
                                                       tablet: false,
                                                     ))
                                                       Expanded(
+                                                        flex:2,
+
                                                         child: Text(
                                                           'Job Title',
                                                           style: FlutterFlowTheme
-                                                              .of(context)
+                                                                  .of(context)
                                                               .bodySmall
                                                               .override(
-                                                            fontFamily: FlutterFlowTheme.of(
-                                                                context)
-                                                                .bodySmallFamily,
-                                                            letterSpacing:
-                                                            0,
-                                                            useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                                .containsKey(
-                                                                FlutterFlowTheme.of(context)
-                                                                    .bodySmallFamily),
-                                                          ),
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodySmallFamily,
+                                                                letterSpacing:
+                                                                    0,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodySmallFamily),
+                                                              ),
                                                         ),
                                                       ),
                                                     Expanded(
+                                                      flex:2,
                                                       child: Align(
                                                         alignment:
-                                                        const AlignmentDirectional(
-                                                            -1, 0),
+                                                            const AlignmentDirectional(
+                                                                -1, 0),
                                                         child: Text(
                                                           'Salary',
                                                           textAlign:
-                                                          TextAlign.end,
+                                                              TextAlign.end,
                                                           style: FlutterFlowTheme
-                                                              .of(context)
+                                                                  .of(context)
                                                               .bodySmall
                                                               .override(
-                                                            fontFamily: FlutterFlowTheme.of(
-                                                                context)
-                                                                .bodySmallFamily,
-                                                            letterSpacing:
-                                                            0,
-                                                            useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                                .containsKey(
-                                                                FlutterFlowTheme.of(context)
-                                                                    .bodySmallFamily),
-                                                          ),
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodySmallFamily,
+                                                                letterSpacing:
+                                                                    0,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodySmallFamily),
+                                                              ),
                                                         ),
                                                       ),
                                                     ),
                                                     Expanded(
+                                                      flex: 3,
                                                       child: Align(
                                                         alignment:
-                                                        const AlignmentDirectional(
-                                                            1, 0),
+                                                            const AlignmentDirectional(
+                                                                1, 0),
                                                         child: Text(
                                                           'Operations',
                                                           style: FlutterFlowTheme
-                                                              .of(context)
+                                                                  .of(context)
                                                               .bodyMedium
                                                               .override(
-                                                            fontFamily: FlutterFlowTheme.of(
-                                                                context)
-                                                                .bodyMediumFamily,
-                                                            letterSpacing:
-                                                            0,
-                                                            useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                                .containsKey(
-                                                                FlutterFlowTheme.of(context)
-                                                                    .bodyMediumFamily),
-                                                          ),
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily,
+                                                                letterSpacing:
+                                                                    0,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyMediumFamily),
+                                                              ),
                                                         ),
                                                       ),
                                                     ),
@@ -479,49 +491,66 @@ class _TeamPageState extends State<TeamPage> {
                                                 ),
                                               ),
                                               ConditionalBuilder(
-                                                condition: state is AppGetWorkersLoadingState||state is AppSearchWorkersLoadingState,
-                                                builder: (context) => const  Center(
-              child: Padding(padding: EdgeInsets.all(40.0),
-                 child: CircularProgressIndicator(),
-                                            ),),
-            
-                                        
-                                                fallback: (context) =>ConditionalBuilder(
-                                                    condition: AppCubit.get(context).getWorkersModel!.workers.isEmpty,
-                                                    builder: (context) => Text('No Results',style: TextStyle(fontSize: 50,color: Colors.grey[300]),),
-                                                    fallback: (context) => Padding(
-                                                      padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(
-                                                          0, 16, 0, 0),
-                                                      child: ListView.builder(
-                                                        padding: EdgeInsets.zero,
-                                                        shrinkWrap: true,
-                                                        scrollDirection:
-                                                        Axis.vertical,
-                                                        itemCount:
-                                                        AppCubit.get(context)
-                                                            .getWorkersModel
-                                                            ?.workers.length,
-                                                        physics:
-                                                        const BouncingScrollPhysics(),
-                                                        itemBuilder: (context,
-                                                            index) =>
-                                                            teamMemberBuilder(
-                                                                context,
-                                                                AppCubit.get(
-                                                                    context)
-                                                                    .getWorkersModel!
-                                                                    .workers[index]),
-                                                      ),
+                                                condition: state
+                                                        is AppGetWorkersLoadingState ||
+                                                    state
+                                                        is AppSearchWorkersLoadingState,
+                                                builder: (context) =>
+                                                    const Center(
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsets.all(40.0),
+                                                    child:
+                                                        CircularProgressIndicator(),
+                                                  ),
+                                                ),
+                                                fallback: (context) =>
+                                                    ConditionalBuilder(
+                                                  condition:
+                                                      AppCubit.get(context)
+                                                          .getWorkersModel!
+                                                          .workers
+                                                          .isEmpty,
+                                                  builder: (context) => Text(
+                                                    'No Results',
+                                                    style: TextStyle(
+                                                        fontSize: 50,
+                                                        color:
+                                                            Colors.grey[300]),
+                                                  ),
+                                                  fallback: (context) =>
+                                                      Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                            0, 16, 0, 0),
+                                                    child: ListView.builder(
+                                                      padding: EdgeInsets.zero,
+                                                      shrinkWrap: true,
+                                                      scrollDirection:
+                                                          Axis.vertical,
+                                                      itemCount:
+                                                          AppCubit.get(context)
+                                                              .getWorkersModel
+                                                              ?.workers
+                                                              .length,
+                                                      physics:
+                                                          const BouncingScrollPhysics(),
+                                                      itemBuilder: (context,
+                                                              index) =>
+                                                          teamMemberBuilder(
+                                                              context,
+                                                              AppCubit.get(
+                                                                      context)
+                                                                  .getWorkersModel!
+                                                                  .workers[index]),
                                                     ),
+                                                  ),
                                                 ),
                                               ),
-
                                             ],
                                           ),
                                         ),
-
                                       ),
                                     ),
                                   ],

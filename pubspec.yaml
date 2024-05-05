@@ -22,6 +22,8 @@ dependencies:
   material_floating_search_bar_2: ^0.5.0
   icons_launcher: ^2.1.7
   url_launcher: ^6.2.6
+  fluttertoast: ^8.2.5
+  dropdown_search: ^5.0.6
 
 
 #dependency_overrides:

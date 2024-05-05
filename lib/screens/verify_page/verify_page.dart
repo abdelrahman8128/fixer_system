@@ -2,12 +2,14 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:fixer_system/components/show_toast_function/show_toast_function.dart';
 import 'package:fixer_system/cubit/states.dart';
 import 'package:fixer_system/screens/bills_page/bills_page.dart';
+import 'package:fixer_system/screens/cars_page/cars_page.dart';
 import 'package:fixer_system/screens/login/login_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 
 import '../../cubit/cubit.dart';
+import '../login/login.dart';
 
 class verifyPage extends StatefulWidget {
    LoginModel _model;
@@ -36,7 +38,7 @@ class _verifyPageState extends State<verifyPage> {
                       type: PageTransitionType.fade,
                       duration: const Duration(milliseconds: 0),
                       reverseDuration: const Duration(milliseconds: 0),
-                      child: const BillsPage(),
+                      child: const CarsPage(),
                     ),
                 );
               }
@@ -47,7 +49,41 @@ class _verifyPageState extends State<verifyPage> {
         },
         builder:(context, state) {
           return Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              leading: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FlutterFlowIconButton(
+                  borderColor:
+                  FlutterFlowTheme.of(
+                      context)
+                      .lineColor,
+                  borderRadius: 12,
+                  borderWidth: 1,
+                  buttonSize: 50,
+                  fillColor: FlutterFlowTheme
+                      .of(context)
+                      .secondaryBackground,
+                  icon: Icon(
+                    Icons.arrow_back_rounded,
+                    color:
+                    FlutterFlowTheme.of(
+                        context)
+                        .secondaryText,
+                    size: 24,
+                  ),
+                  onPressed: () {
+                    Navigator.pushReplacement(context, PageTransition(
+                      type: PageTransitionType.fade,
+                      duration: const Duration(milliseconds: 0),
+                      reverseDuration: const Duration(milliseconds: 0),
+                      child: const Login(),
+                    ),
+                    );
+
+                  },
+                ),
+              ),
+            ),
             body:  Center(
               heightFactor: double.infinity,
               child: Column(

@@ -48,6 +48,27 @@ class AppLoginLoadingState extends AppCubitStates{}
 class AppLoginSuccessState extends AppCubitStates{}
 class AppLoginErrorState extends AppCubitStates{}
 class AppLoginVerifyState extends AppCubitStates{}
+class AppLoginFirstTimeState extends AppCubitStates{}
+
+
+
+
+class AppSetFirstTimeLoadingState extends AppCubitStates{}
+class AppSetFirstTimeSuccessState extends AppCubitStates{}
+class AppSetFirstTimeErrorState extends AppCubitStates{}
+
+
+
+
+class AppForgetPasswordLoadingState extends AppCubitStates{}
+class AppForgetPasswordSuccessState extends AppCubitStates{}
+class AppForgetPasswordErrorState extends AppCubitStates{}
+
+
+class AppResetPasswordLoadingState extends AppCubitStates{}
+class AppResetPasswordSuccessState extends AppCubitStates{}
+class AppResetPasswordErrorState extends AppCubitStates{}
+
 
 
 class AppAddWorkerLoadingState extends AppCubitStates{}
@@ -157,3 +178,18 @@ class AppSearchComponentsErrorState extends AppCubitStates{}
 class AppAddThingLoadingState extends AppCubitStates{}
 class AppAddThingSuccessState extends AppCubitStates{}
 class AppAddThingErrorState extends AppCubitStates{}
+
+
+class AppAddConstantLoadingState extends AppCubitStates{}
+class AppAddConstantSuccessState extends AppCubitStates{}
+class AppAddConstantErrorState extends AppCubitStates{}
+
+
+class AppDeleteWorkerLoadingState extends AppCubitStates{}
+class AppDeleteWorkerSuccessState extends AppCubitStates{}
+class AppDeleteWorkerErrorState extends AppCubitStates{}
+
+
+class AppAddRewardOrLoansLoadingState extends AppCubitStates{}
+class AppAddRewardOrLoansSuccessState extends AppCubitStates{}
+class AppAddRewardOrLoansErrorState extends AppCubitStates{}

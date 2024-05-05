@@ -3,7 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../models/get_list_of_inventory_components_model.dart';
-import '../screens/alert_screens/edit_inventory_component_item.dart';
+import '../screens/inventory_page/edit_inventory_component_item.dart';
 
 Widget componentItemBuilder(context,InventoryComponentData model){
 return  Padding(

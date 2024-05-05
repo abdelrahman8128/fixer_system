@@ -7,7 +7,7 @@ import '../../components/client_car_item_builder.dart';
 import '../../components/custom/box_decoration.dart';
 import '../../cubit/cubit.dart';
 import '../../cubit/states.dart';
-import '../alert_screens/add_car_screen.dart';
+import 'add_car_screen.dart';
 
 class ClientProfilePage extends StatefulWidget {
   const ClientProfilePage(this.userId, {super.key});
@@ -174,127 +174,151 @@ class _ClientDetailsState extends State<ClientProfilePage> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 30),
-                            width: MediaQuery.sizeOf(context).width * 0.45,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                TextFormField(
-                                  readOnly: readOnly,
-                                  controller: nameController,
-                                  obscureText: false,
-                                  decoration: CustomInputDecoration
-                                      .customInputDecoration(context, 'name'),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        color: FlutterFlowTheme.of(context)
-                                            .tertiary,
-                                      ),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'please enter the name';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                TextFormField(
-                                  readOnly: readOnly,
-                                  controller: emailController,
-                                  obscureText: false,
-                                  decoration: CustomInputDecoration
-                                      .customInputDecoration(context, 'Email'),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        color: FlutterFlowTheme.of(context)
-                                            .tertiary,
-                                      ),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'please enter the Email';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ],
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 30),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  TextFormField(
+                                    readOnly: readOnly,
+                                    controller: nameController,
+                                    obscureText: false,
+                                    decoration: CustomInputDecoration
+                                        .customInputDecoration(context, 'name'),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          color: FlutterFlowTheme.of(context)
+                                              .tertiary,
+                                        ),
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'please enter the name';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextFormField(
+                                    readOnly: readOnly,
+                                    controller: emailController,
+                                    obscureText: false,
+                                    decoration: CustomInputDecoration
+                                        .customInputDecoration(context, 'Email'),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          color: FlutterFlowTheme.of(context)
+                                              .tertiary,
+                                        ),
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'please enter the Email';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 30),
-                            width: MediaQuery.sizeOf(context).width * 0.45,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.max,
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 30),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+
+                                  TextFormField(
+                                    readOnly: readOnly,
+                                    controller: phoneNumberController,
+                                    obscureText: false,
+                                    decoration: CustomInputDecoration
+                                        .customInputDecoration(
+                                            context, 'phone number'),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          color: FlutterFlowTheme.of(context)
+                                              .tertiary,
+                                        ),
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'please enter the phone number';
+                                      } else if (value.length < 10) {
+                                        return 'The phone number is to short';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextFormField(
+                                    readOnly: true,
+                                    controller: passwordController,
+                                    obscureText: false,
+                                    decoration: CustomInputDecoration
+                                        .customInputDecoration(
+                                        context, 'Password'),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                      fontFamily: 'Outfit',
+                                      color: FlutterFlowTheme.of(context)
+                                          .tertiary,
+                                    ),
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'please enter the Password';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(25),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                TextFormField(
-                                  readOnly: readOnly,
-                                  controller: phoneNumberController,
-                                  obscureText: false,
-                                  decoration: CustomInputDecoration
-                                      .customInputDecoration(
-                                          context, 'phone number'),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        color: FlutterFlowTheme.of(context)
-                                            .tertiary,
-                                      ),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'please enter the phone number';
-                                    } else if (value.length < 10) {
-                                      return 'The phone number is to short';
+                                Radio(
+                                  value: 1,
+                                  groupValue: _radioSelected,
+                                  onChanged: (value) {
+                                    if (readOnly == false) {
+                                      setState(() {
+                                        _radioSelected = value;
+                                      });
                                     }
-                                    return null;
                                   },
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(25),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Radio(
-                                        value: 1,
-                                        groupValue: _radioSelected,
-                                        onChanged: (value) {
-                                          if (readOnly == false) {
-                                            setState(() {
-                                              _radioSelected = value;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                      const Text('Active'),
-                                      const SizedBox(
-                                        width: 20,
-                                      ),
-                                      Radio(
-                                        value: 2,
-                                        groupValue: _radioSelected,
-                                        onChanged: (value) {
-                                          if (readOnly == false) {
-                                            setState(() {
-                                              _radioSelected = value;
-                                            });
-                                          }
-                                        },
-                                      ),
-                                      const Text('Not Active'),
-                                    ],
-                                  ),
+                                const Text('Active'),
+                                const SizedBox(
+                                  width: 20,
                                 ),
+                                Radio(
+                                  value: 2,
+                                  groupValue: _radioSelected,
+                                  onChanged: (value) {
+                                    if (readOnly == false) {
+                                      setState(() {
+                                        _radioSelected = value;
+                                      });
+                                    }
+                                  },
+                                ),
+                                const Text('Not Active'),
                               ],
                             ),
                           ),

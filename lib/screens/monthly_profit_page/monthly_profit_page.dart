@@ -1,6 +1,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:fixer_system/components/main_nav/main_nav.dart';
 import 'package:fixer_system/cubit/states.dart';
+import 'package:fixer_system/screens/monthly_profit_page/add_constants_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
@@ -8,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../components/month_work_item_builder.dart';
 import '../../cubit/cubit.dart';
-import '../alert_screens/add_thing_screen.dart';
+import 'add_thing_screen.dart';
 import 'monthly_profit_page_model.dart';
 export 'monthly_profit_page_model.dart';
 
@@ -51,12 +52,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppCubitStates>(
       listener: (context, state) {
-        if (state==AppGetMainPramsSuccessState)
-          {
-            setState(() {
 
-            });
-          }
       },
       builder: (context, state) {
         return GestureDetector(
@@ -111,7 +107,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                         tabletLandscape: false,
                                         desktop: false,
                                       ))
-                                        Container(
+                                      Container(
                                           width: double.infinity,
                                           height: 44,
                                           decoration: BoxDecoration(
@@ -190,6 +186,63 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
                                               children: [
+                                                if (responsiveVisibility(
+                                                  context: context,
+                                                  phone: false,
+                                                ))
+                                                  Padding(
+                                                    padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                        0, 0, 12, 0),
+                                                    child: Container(
+                                                      width: 50,
+                                                      height: 50,
+                                                      decoration: BoxDecoration(
+                                                        color: FlutterFlowTheme
+                                                            .of(context)
+                                                            .secondaryBackground,
+                                                        boxShadow: const [
+                                                          BoxShadow(
+                                                            blurRadius: 4,
+                                                            color: Color(
+                                                                0x33000000),
+                                                            offset: Offset(
+                                                              0,
+                                                              2,
+                                                            ),
+                                                          )
+                                                        ],
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(16),
+                                                      ),
+                                                      child:
+                                                      FlutterFlowIconButton(
+                                                        borderColor:
+                                                        FlutterFlowTheme.of(
+                                                            context)
+                                                            .lineColor,
+                                                        borderRadius: 12,
+                                                        borderWidth: 1,
+                                                        buttonSize: 50,
+                                                        fillColor: FlutterFlowTheme
+                                                            .of(context)
+                                                            .secondaryBackground,
+                                                        icon: Icon(
+                                                          Icons.receipt_long_rounded,
+                                                          color: FlutterFlowTheme
+                                                              .of(context)
+                                                              .secondaryText,
+                                                          size: 24,
+                                                        ),
+                                                        onPressed: () async {
+                                                           addConstantsScreen(context, _model.dropDownValue1!.toString(),  _model.dropDownValue2!.toString());
+
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
                                                 if (responsiveVisibility(
                                                   context: context,
                                                   phone: false,
@@ -516,7 +569,7 @@ class _MonthlyProfitPageState extends State<MonthlyProfitPage> {
                                         tabletLandscape: false,
                                         desktop: false,
                                       ))
-                                        Divider(
+                                      Divider(
                                           height: 24,
                                           thickness: 1,
                                           color: FlutterFlowTheme.of(context)

@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../alert_screens/add_component_screen.dart';
+import 'add_component_screen.dart';
 import 'inventory_page_model.dart';
 export 'inventory_page_model.dart';
 

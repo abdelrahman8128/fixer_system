@@ -193,12 +193,6 @@ Widget addNewClientScreen(context) {
                                   color:
                                   FlutterFlowTheme.of(context).tertiary,
                                 ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'please enter the Email';
-                                  }
-                                  return null;
-                                },
                               ),
                               const SizedBox(
                                 height: 10,

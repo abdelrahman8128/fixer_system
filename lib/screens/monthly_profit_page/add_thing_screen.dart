@@ -13,8 +13,7 @@ final _formKey = GlobalKey<FormState>();
 
 var titleController = TextEditingController();
 
-
-var dateController = TextEditingController();
+var dateController= TextEditingController();
 
 var priceController = TextEditingController();
 
@@ -42,8 +41,7 @@ Widget addThingScreen(context,plus) {
 
             titleController = TextEditingController();
 
-
-            dateController = TextEditingController();
+            dateController=TextEditingController();
 
             priceController = TextEditingController();
 
@@ -70,8 +68,9 @@ Widget addThingScreen(context,plus) {
                   AppCubit.get(context).addThing(
                     context,
                     title: titleController.text,
-                    price: priceController.text,
+                    price: int.parse(priceController.text),
                     plus: plus,
+                    date:dateController.text,
                   );
                 }
               },
@@ -145,7 +144,7 @@ Widget addThingScreen(context,plus) {
                               TextFormField(
                                 controller: priceController,
                                 obscureText: false,
-                                decoration: CustomInputDecoration.customInputDecoration(context,'price '),
+                                decoration: CustomInputDecoration.customInputDecoration(context,'Price'),
 
 
 
@@ -163,7 +162,41 @@ Widget addThingScreen(context,plus) {
                                   return null;
                                 },
                               ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              TextFormField(
+                                controller: dateController,
+                                obscureText: false,
+                                decoration: CustomInputDecoration.customInputDecoration(context,'Date '),
 
+
+
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                  fontFamily: 'Outfit',
+                                  color:
+                                  FlutterFlowTheme.of(context).tertiary,
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'please enter the date';
+                                  }
+                                  return null;
+                                },
+                                onTap:() {
+                                  showDatePicker(
+                                    context: context,
+                                    firstDate: DateTime(2024),
+                                    lastDate: DateTime(2999),
+                                    initialDate: DateTime.now(),
+                                  ).then((value) {
+                                    dateController.text =
+                                        '${value?.year.toString()}-${value?.month.toString()}-${value?.day.toString()}';
+                                  });
+                                },
+                              ),
                             ],
                           ),
                         ),

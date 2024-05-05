@@ -1,5 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:fixer_system/screens/alert_screens/add_repair_screen.dart';
+import 'package:fixer_system/screens/car_profile_page/add_repair_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
@@ -38,8 +38,6 @@ class _CarProfilePageState extends State<CarProfilePage> {
 
   TextEditingController generatedCodeController = TextEditingController();
 
-  TextEditingController generatedPasswordController = TextEditingController();
-
   TextEditingController periodicRepairsController = TextEditingController();
 
   TextEditingController nonPeriodicRepairsController = TextEditingController();
@@ -76,7 +74,6 @@ class _CarProfilePageState extends State<CarProfilePage> {
     categoryController.dispose();
     modelController.dispose();
     generatedCodeController.dispose();
-    generatedPasswordController.dispose();
     periodicRepairsController.dispose();
     nonPeriodicRepairsController.dispose();
     repairingController.dispose();
@@ -116,11 +113,7 @@ class _CarProfilePageState extends State<CarProfilePage> {
                 .getSpecificCarModel
                 ?.carData
                 ?.generatedCode);
-        generatedPasswordController = TextEditingController(
-            text: AppCubit.get(context)
-                .getSpecificCarModel
-                ?.carData
-                ?.generatedPassword);
+
         periodicRepairsController = TextEditingController(
             text: AppCubit.get(context)
                 .getSpecificCarModel
@@ -166,6 +159,12 @@ class _CarProfilePageState extends State<CarProfilePage> {
           readOnly=true;
           });
         }
+      else if (state is AppChangeServiceStateSuccessState){
+        setState(() {
+
+        });
+
+          }
     },
         builder: (context, state) {
       return Scaffold(
@@ -248,7 +247,10 @@ class _CarProfilePageState extends State<CarProfilePage> {
                       builder: (context) => AddRepairScreen(AppCubit.get(context)
                           .getSpecificCarModel!
                           .carData!
-                          .carNumber!),
+                          .carNumber!,AppCubit.get(context)
+                          .getSpecificCarModel!
+                          .carData!
+                          .id!),
                     ),
                   );
                 },
@@ -329,6 +331,7 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   letterSpacing: 2,
+                                  color: Colors.black,
                                 ),
                               ),
                               Container(
@@ -358,6 +361,8 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                         fontSize: 45,
                                         fontWeight: FontWeight.bold,
                                         letterSpacing: 2,
+                                        color: Colors.black,
+
                                       ),
                                     ),
                                   ],
@@ -377,7 +382,6 @@ class _CarProfilePageState extends State<CarProfilePage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const SizedBox(height: 16.0),
                                 TextFormField(
                                   controller: carChassisNumberController,
                                   readOnly:readOnly,
@@ -476,20 +480,7 @@ class _CarProfilePageState extends State<CarProfilePage> {
                                       ),
                                 ),
                                 const SizedBox(height: 16.0),
-                                TextFormField(
-                                  controller: generatedPasswordController,
-                                  readOnly:true,
-                                  decoration: CustomInputDecoration.customInputDecoration(context,'Generated Password'),
 
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        color: FlutterFlowTheme.of(context)
-                                            .tertiary,
-                                      ),
-                                ),
-                                const SizedBox(height: 16.0),
                               ],
                             ),
                           ),
@@ -644,33 +635,7 @@ class _CarProfilePageState extends State<CarProfilePage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Visibility(
-                              visible: AppCubit.get(context)
-                                      .getSpecificCarModel
-                                      ?.currentRepair
-                                      ?.client !=
-                                  null,
-                              child: const Padding(
-                                padding: EdgeInsets.all(18.0),
-                                child: Text(
-                                  'Current Repaires',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
-                                ),
-                              ),
-                            ),
-                            Visibility(
-                                visible: AppCubit.get(context)
-                                        .getSpecificCarModel
-                                        ?.currentRepair
-                                        ?.client !=
-                                    null,
-                                child: repairItemBuilder(
-                                    context,
-                                    AppCubit.get(context)
-                                        .getSpecificCarModel!
-                                        .currentRepair!)),
+
                             const Padding(
                               padding: EdgeInsets.all(18.0),
                               child: Text(

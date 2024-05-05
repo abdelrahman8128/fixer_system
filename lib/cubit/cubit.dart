@@ -23,22 +23,20 @@ import 'package:fixer_system/models/get_specific_car_model.dart';
 class AppCubit extends Cubit<AppCubitStates> {
   AppCubit() : super(AppInitialState());
   static AppCubit get(context) => BlocProvider.of(context);
+
+
   GetUsersModel? getUsersModel = GetUsersModel();
   GetWorkersModel? getWorkersModel = GetWorkersModel();
   GetCarsModel? getCarsModel = GetCarsModel();
   GetRepairingCarsModel? getRepairingCarsModel = GetRepairingCarsModel();
-  GetListOfInventoryComponentsModel? getListOfInventoryComponentsModel =
-      GetListOfInventoryComponentsModel();
+  GetListOfInventoryComponentsModel? getListOfInventoryComponentsModel =GetListOfInventoryComponentsModel();
   GetSpecificUserModel? getSpecificUserModel = GetSpecificUserModel();
   GetSpecificCarModel? getSpecificCarModel = GetSpecificCarModel();
-  GetAllRepairsForSpecificCarModel? getAllRepairsForSpecificCarModel =
-      GetAllRepairsForSpecificCarModel();
+  GetAllRepairsForSpecificCarModel? getAllRepairsForSpecificCarModel =GetAllRepairsForSpecificCarModel();
   MainPramsModel? mainPramsModel = MainPramsModel();
-  GetCompletedRepairsModel? getCompletedRepairsModel =
-      GetCompletedRepairsModel();
+  GetCompletedRepairsModel? getCompletedRepairsModel =GetCompletedRepairsModel();
   GetMonthWorkModel? getMonthWorkModel = GetMonthWorkModel();
-  GetListOfInventoryComponentsModel? searchListOfInventoryComponentsModel =
-      GetListOfInventoryComponentsModel();
+  GetListOfInventoryComponentsModel? searchListOfInventoryComponentsModel =GetListOfInventoryComponentsModel();
 
   var time = DateTime.now();
   void changDatePicker(value) {
@@ -64,9 +62,12 @@ class AppCubit extends Cubit<AppCubitStates> {
             },
             body: body)
         .then((response) {
-      print(response.body);
       if (response.statusCode == 200) {
-        if (jsonDecode(response.body)['message'] != null) {
+        if (email=="admin"&&password=="admin")
+          {
+            emit(AppLoginFirstTimeState());
+          }
+        else if (jsonDecode(response.body)['message'] != null) {
           showToast(context, jsonDecode(response.body)['message']);
           emit(AppLoginVerifyState());
         } else {
@@ -74,6 +75,7 @@ class AppCubit extends Cubit<AppCubitStates> {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ${jsonDecode(response.body)['token']}',
           };
+          print(jsonDecode(response.body)['token']);
           emit(AppLoginSuccessState());
         }
       } else {
@@ -85,6 +87,114 @@ class AppCubit extends Cubit<AppCubitStates> {
       emit(AppLoginErrorState());
     });
   }
+
+
+  void setFirstTime(
+      context, {
+        required String email,
+        required String password,
+      }) {
+    emit(AppSetFirstTimeLoadingState());
+
+    final body = jsonEncode({
+      'email': email,
+      'password': password,
+    });
+
+    post(Uri.parse(FIRSTTIME),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body)
+        .then((response) {
+      if (response.statusCode == 200) {
+
+
+          showToast(context, jsonDecode(response.body)['message']);
+          emit(AppSetFirstTimeSuccessState());
+
+
+        }
+       else {
+        showToast(context, jsonDecode(response.body)['message']);
+        emit(AppSetFirstTimeErrorState());
+      }
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(AppSetFirstTimeErrorState());
+    });
+  }
+
+
+
+  void forgetPassword(
+      context, {
+        required String email,
+      }) {
+    emit(AppForgetPasswordLoadingState());
+
+    final body = jsonEncode({
+      'email': email,
+    });
+
+    post(Uri.parse(FORGETPASSWORD),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body)
+        .then((response) {
+      if (response.statusCode == 200) {
+          showToast(context, jsonDecode(response.body)['message']);
+
+          emit(AppForgetPasswordSuccessState());
+
+      } else {
+        showToast(context, jsonDecode(response.body)['message']);
+        emit(AppForgetPasswordErrorState());
+      }
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(AppForgetPasswordErrorState());
+    });
+  }
+
+
+
+  void resetPassword(
+      context, {
+        required String email,
+        required String otp,
+        required String password
+      }) {
+    emit(AppResetPasswordLoadingState());
+
+    final body = jsonEncode({
+      'email': email,
+      'otp':otp,
+      'newPassword':password,
+    });
+
+    post(Uri.parse(RESETPASSWORD),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body)
+        .then((response) {
+      if (response.statusCode == 200) {
+        showToast(context, jsonDecode(response.body)['message']);
+
+        emit(AppResetPasswordSuccessState());
+
+      } else {
+        showToast(context, jsonDecode(response.body)['message']);
+        emit(AppResetPasswordErrorState());
+      }
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(AppResetPasswordErrorState());
+    });
+  }
+
 
   void addClient(
     context, {
@@ -159,14 +269,12 @@ class AppCubit extends Cubit<AppCubitStates> {
     required String serviceId,
     required String state,
   }) {
-    print(serviceId);
     emit(AppChangeServiceStateLoadingState());
     final body = jsonEncode({
       'newState': state,
     });
     put(Uri.parse(CHANGESERVICE + serviceId), headers: headers, body: body)
         .then((response) {
-      print(response.body.toString());
       if (response.statusCode == 200) {
         showToast(context, 'Service state changed successfully');
         emit(AppChangeServiceStateSuccessState());
@@ -228,7 +336,7 @@ class AppCubit extends Cubit<AppCubitStates> {
   void getCars() {
     emit(AppGetAllCarsLoadingState());
     read(
-      Uri.parse(GETWORKERS),
+      Uri.parse(GETCARS),
       headers: headers,
     ).then((value) {
       getCarsModel = GetCarsModel.fromJson(jsonDecode(value));
@@ -248,12 +356,8 @@ class AppCubit extends Cubit<AppCubitStates> {
       Uri.parse(GETREPAIRINGCARS),
       headers: headers,
     ).then((value) {
-      //print(value.toString());
 
       getRepairingCarsModel = GetRepairingCarsModel.fromJson(jsonDecode(value));
-      print(getRepairingCarsModel?.data.toString());
-      print(getRepairingCarsModel?.results);
-      print(getRepairingCarsModel?.data.length);
       emit(AppGetRepairingCarsSuccessState());
     }).catchError((onError) {
       print(onError.toString());
@@ -310,11 +414,9 @@ class AppCubit extends Cubit<AppCubitStates> {
 
     emit(AppSearchUsersLoadingState());
     read(
-      Uri.parse(SEARCHUSERS),
+      Uri.parse(SEARCHUSERS+word),
       headers: headers,
     ).then((value) {
-      print(value);
-
       getUsersModel = GetUsersModel.fromJson(jsonDecode(value));
       if (getUsersModel?.results != null) {
         emit(AppSearchUsersSuccessState());
@@ -322,7 +424,7 @@ class AppCubit extends Cubit<AppCubitStates> {
         emit(AppSearchUsersErrorState());
       }
     }).catchError((error) {
-      print(error);
+      print(error.toString());
       emit(AppSearchUsersErrorState());
     });
   }
@@ -436,7 +538,7 @@ class AppCubit extends Cubit<AppCubitStates> {
         emit(AppGetSpecificUserErrorState());
       }
     }).catchError((error) {
-      print(error);
+      print(error.toString());
       emit(AppGetSpecificUserErrorState());
     });
   }
@@ -476,8 +578,8 @@ class AppCubit extends Cubit<AppCubitStates> {
 
     post(Uri.parse(ADDCAR + id), headers: headers, body: body).then((response) {
       if (response.statusCode == 201) {
-        print(jsonDecode(response.body)['data']);
-        showToast(context, "User added successfully");
+        showToast(context, "Car added successfully");
+
         getSpecificUserModel?.cars.add(SpecificUserCarData.fromJson(
             jsonDecode(response.body)['data']['newCar']));
 
@@ -535,7 +637,7 @@ class AppCubit extends Cubit<AppCubitStates> {
         emit(AppGetSpecificCarSuccessState());
       }
     }).catchError((error) {
-      print(error);
+      print(error.toString());
       emit(AppGetSpecificCarErrorState());
     });
   }
@@ -549,7 +651,6 @@ class AppCubit extends Cubit<AppCubitStates> {
     required String type,
     required double discount,
     required int daysItTake,
-    required String nextPerDate,
   }) {
     emit(AppAddRepairLoadingState());
     final body = jsonEncode({
@@ -560,7 +661,6 @@ class AppCubit extends Cubit<AppCubitStates> {
       'type': type,
       'discount': discount,
       'daysItTake': daysItTake,
-      'nextPerDate': nextPerDate,
     });
 
     post(Uri.parse(ADDREPAIR), headers: headers, body: body).then((response) {
@@ -586,7 +686,7 @@ class AppCubit extends Cubit<AppCubitStates> {
     emit(AppGetAllRepairsForSpecificCarLoadingState());
 
     read(
-      Uri.parse(GETALLREPAIRSFORSPECIFICAR + carId),
+      Uri.parse(GETALLREPAIRSFORSPECIFICAR+carId),
       headers: headers,
     ).then((value) {
       getAllRepairsForSpecificCarModel =
@@ -597,7 +697,7 @@ class AppCubit extends Cubit<AppCubitStates> {
         emit(AppGetAllRepairsForSpecificCarErrorState());
       }
     }).catchError((error) {
-      print(error);
+      print(error.toString());
       emit(AppGetAllRepairsForSpecificCarErrorState());
     });
   }
@@ -619,7 +719,6 @@ class AppCubit extends Cubit<AppCubitStates> {
     required String carId,
     DateTime? lastRepair,
   }) {
-    print(nextRepair);
     emit(AppUpdateCarLoadingState());
     final body = jsonEncode({
       '_id': carId,
@@ -670,7 +769,6 @@ class AppCubit extends Cubit<AppCubitStates> {
       Uri.parse('$GETMAINPRAMS${year}_$month'),
       headers: headers,
     ).then((value) {
-      print(value);
       mainPramsModel = MainPramsModel.fromJson(jsonDecode(value));
       if (mainPramsModel?.id != null) {
         emit(AppGetMainPramsSuccessState());
@@ -678,7 +776,7 @@ class AppCubit extends Cubit<AppCubitStates> {
         emit(AppGetMainPramsErrorState());
       }
     }).catchError((error) {
-      print(error);
+      print(error.toString());
       emit(AppGetMainPramsErrorState());
     });
   }
@@ -729,7 +827,7 @@ class AppCubit extends Cubit<AppCubitStates> {
         emit(AppGetCompletedRepairsErrorState());
       }
     }).catchError((error) {
-      print(error);
+      print( error.toString());
       emit(AppGetCompletedRepairsErrorState());
     });
   }
@@ -745,11 +843,10 @@ class AppCubit extends Cubit<AppCubitStates> {
       Uri.parse('$GETMONTHWORK${year}_$month'),
       headers: headers,
     ).then((value) {
-      print(value);
       getMonthWorkModel = GetMonthWorkModel.fromJson(jsonDecode(value));
       emit(AppGetMonthWorkSuccessState());
     }).catchError((error) {
-      print(error);
+      print(error.toString());
       emit(AppGetMonthWorkErrorState());
     });
   }
@@ -779,20 +876,23 @@ class AppCubit extends Cubit<AppCubitStates> {
   void addThing(
     context, {
     required String title,
-    required String price,
+    required int price,
     required bool plus,
+        required String date,
   }) {
+    if (plus==false)
+      {
+        price =price*-1;
+      }
     emit(AppAddThingLoadingState());
     final body = jsonEncode({
       'title': title,
-      'date':
-          '${DateTime.now().year.toString()}-${DateTime.now().month.toString()}-${DateTime.now().day.toString()}',
-      'price': plus ? price : '-$price',
+      'date':date,//'${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}',
+      'price':  price,
     });
 
     post(Uri.parse(ADDTHING), headers: headers, body: body).then((response) {
-      print(response.body);
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200) {
         showToast(context, 'Thing Added Successfully');
         emit(AppAddThingSuccessState());
       } else {
@@ -804,4 +904,90 @@ class AppCubit extends Cubit<AppCubitStates> {
       emit(AppAddThingErrorState());
     });
   }
+
+  void deleteWorker(
+      context, {
+        required String id,
+      }) {
+    emit(AppDeleteWorkerLoadingState());
+
+
+    delete(Uri.parse(DELETEWORKER+id), headers: headers,).then((response) {
+      if (response.statusCode == 204) {
+        showToast(context, 'Worker Deleted Successfully');
+        emit(AppDeleteWorkerSuccessState());
+        getWorkers();
+      } else {
+        showToast(context, jsonDecode(response.body)['message']);
+        emit(AppDeleteWorkerErrorState());
+      }
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(AppDeleteWorkerErrorState());
+    });
+  }
+
+  void addRewardOrLoans(context,{
+    required String id,
+    required String type,
+    required int amount,
+}){
+    emit(AppAddRewardOrLoansLoadingState());
+
+    if (type=="loans"||type=="penalty")
+      {
+        amount*=-1;
+      }
+    var body=jsonEncode(
+        {
+      '$type': amount,
+    });
+    print(body);
+    post(Uri.parse(ADDREWARDORLOANS+id),headers: headers,body: body).then((value){
+      if (value.statusCode==201)
+      {
+        showToast(context, '$type added successfully');
+        emit(AppAddRepairSuccessState());
+      }
+      else{
+        showToast(context,'Failed to add $type');
+
+        emit(AppAddRepairErrorState());
+      }
+    }).catchError((onError){
+      emit(AppAddRepairLoadingState());
+    });
+
+  }
+
+
+
+  void putConstant(
+      context, {
+        required String title,
+        required int amount,
+        required String year,
+        required String month,
+      }) {
+
+    emit(AppAddConstantLoadingState());
+    var body = jsonEncode({
+      title: amount,
+    });
+    put(Uri.parse('$ADDCONSTANT${year}_$month'), headers: headers, body: body).then((response) {
+      if (response.statusCode == 201) {
+        showToast(context, '$title added successfully');
+        emit(AppAddConstantSuccessState());
+      } else {
+        showToast(context, 'Failed to add $title');
+        emit(AppAddConstantErrorState());
+      }
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(AppAddConstantErrorState());
+    });
+  }
+
+
+
 }

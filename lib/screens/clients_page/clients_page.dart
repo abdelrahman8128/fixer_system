@@ -2,7 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:fixer_system/components/client_item_builder.dart';
 import 'package:fixer_system/components/custom/box_decoration.dart';
 import 'package:fixer_system/components/main_nav/main_nav.dart';
-import 'package:fixer_system/screens/alert_screens/add_client_screen.dart';
+import 'package:fixer_system/screens/clients_page/add_client_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';

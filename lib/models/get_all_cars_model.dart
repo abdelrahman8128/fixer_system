@@ -16,7 +16,7 @@ class CarData{
   String? id;
   String? ownerName;
   String? carNumber;
-  int? phoneNumber;
+  String? phoneNumber;
   String? email;
   String? carIdNumber;
   String? color;
@@ -31,15 +31,18 @@ class CarData{
   bool? repairing;
   int? distance;
   String?motorNumber;
-  List<dynamic>componentState=[];
+  var componentState;
   DateTime?nextRepairDate;
   double?repairingPercentage;
 
   CarData.fromJson(Map<String,dynamic>?json)
   {
-    state=json?['State'];
-    id=json?['_id'];
 
+    state=json?['State'];
+
+    id=json?['_id'];
+    print(json?['_id']);
+    print (id);
      ownerName=json?['ownerName'];
      carNumber=json?['carNumber'];
      phoneNumber=json?['phoneNumber'];
@@ -55,7 +58,7 @@ class CarData{
     periodicRepairs=json?['periodicRepairs'];
     nonPeriodicRepairs=json?['nonPeriodicRepairs'];
     repairing=json?['repairing'];
-    componentState.addAll(json?['componentState']);
+   // componentState=(json?['componentState']);
     distance=json?['distances'];
     motorNumber=json?['motorNumber'];
     if (json?['nextRepairDate']!=null) {
@@ -67,5 +70,6 @@ class CarData{
 
 
   }
+
 
 }

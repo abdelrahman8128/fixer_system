@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../screens/car_profile_page/car_profile_page.dart';
 
 Widget carItemBuilder(context, CarData model) {
-  return GestureDetector(
+  return InkWell(
     onTap: () {
       Navigator.push(
         context,

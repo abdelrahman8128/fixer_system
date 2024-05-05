@@ -5,7 +5,7 @@ import '../models/get_specific_user_model.dart';
 import '../screens/car_profile_page/car_profile_page.dart';
 
 Widget clientCarItemBuilder(context,SpecificUserCarData model){
-  return GestureDetector(
+  return InkWell(
     onTap: (){
       Navigator.push(
         context,

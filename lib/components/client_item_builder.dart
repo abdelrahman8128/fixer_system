@@ -7,7 +7,7 @@ import '../models/get_users_model.dart';
 import '../screens/client_profile_page/client_profile_page.dart';
 
 Widget clientItemBuilder(context, User model) {
-  return GestureDetector (
+  return InkWell (
     onTap: (){
       Navigator.push(
         context,

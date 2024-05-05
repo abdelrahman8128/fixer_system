@@ -7,7 +7,7 @@ import '../models/get_repairing_cars_model.dart';
 import '../screens/car_profile_page/car_profile_page.dart';
 
 Widget repairingCarItemBuilder(context, repairingCarData model) {
-  return GestureDetector(
+  return InkWell(
     onTap: (){
       Navigator.push(
         context,

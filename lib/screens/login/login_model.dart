@@ -14,6 +14,11 @@ class LoginModel extends FlutterFlowModel<Login> {
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;
+  FocusNode? textFieldFocusNode3;
+
+  TextEditingController? textController3;
+  String? Function(BuildContext, String?)? textController3Validator;
+  // State field(s) for TextField widget.
   late bool passwordVisibility;
   String? Function(BuildContext, String?)? textController2Validator;
 
