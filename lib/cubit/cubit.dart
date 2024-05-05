@@ -765,12 +765,17 @@ class AppCubit extends Cubit<AppCubitStates> {
     mainPramsModel = MainPramsModel();
     emit(AppGetMainPramsLoadingState());
 
-    read(
-      Uri.parse('$GETMAINPRAMS${year}_$month'),
+    var body=jsonEncode({
+      "year": year,
+      "month": month,
+    });
+    post(
+      Uri.parse('$GETMAINPRAMS'),
       headers: headers,
+      body: body,
     ).then((value) {
-      mainPramsModel = MainPramsModel.fromJson(jsonDecode(value));
-      if (mainPramsModel?.id != null) {
+      mainPramsModel = MainPramsModel.fromJson(jsonDecode(value.body));
+      if (value.statusCode==201) {
         emit(AppGetMainPramsSuccessState());
       } else {
         emit(AppGetMainPramsErrorState());
